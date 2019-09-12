@@ -7,6 +7,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DefaultRationale
 import com.android.shuizu.myutillibrary.utils.PermissionSetting
@@ -60,39 +61,39 @@ fun Context.sp2px(sp:Float):Float{
     return TypedValue.applyDimension (TypedValue.COMPLEX_UNIT_SP, sp, resources.displayMetrics)
 }
 
-//fun AppCompatActivity.initActionBar(act: AppCompatActivity, title: String, showBack: Boolean = true, rightBtn: String? = null, isAdd: Boolean = false,
-//                                    rightClick: View.OnClickListener? = null, leftBtn: String? = null,
-//                                    leftClick: View.OnClickListener? = null) {
-//    act.setSupportActionBar(toolbar)
-//    act.supportActionBar?.setDisplayHomeAsUpEnabled(showBack)
-//    act.toolbarTitle.text = title
-//    act.title = ""
-//    if (leftBtn != null) {
-//        act.toolbarLeftBtn.visibility = View.VISIBLE
-//        act.toolbarLeftBtn.text = leftBtn
-//        act.toolbarLeftBtn.setOnClickListener(leftClick)
-//    } else {
-//        act.toolbarLeftBtn.visibility = View.GONE
-//    }
-//    if (rightBtn != null) {
-//        act.toolbarRightBtn.visibility = View.VISIBLE
-//        act.toolbarRightBtn.text = rightBtn
-//        act.toolbarRightBtn.setOnClickListener(rightClick)
-//    } else {
-//        act.toolbarRightBtn.visibility = View.GONE
-//        if (rightClick != null) {
-//            if (isAdd) {
-//                act.toolbarRightImg.setImageResource(R.mipmap.icon_add)
-//            } else {
-//                act.toolbarRightImg.setImageResource(R.mipmap.icon_set)
-//            }
-//            act.toolbarRightImg.visibility = View.VISIBLE
-//            act.toolbarRightImg.setOnClickListener(rightClick)
-//        } else {
-//            act.toolbarRightImg.visibility = View.GONE
-//        }
-//    }
-//}
+fun AppCompatActivity.initActionBar(act: AppCompatActivity, title: String, showBack: Boolean = true, rightBtn: String? = null, isAdd: Boolean = false,
+                                    rightClick: View.OnClickListener? = null, leftBtn: String? = null,
+                                    leftClick: View.OnClickListener? = null) {
+    act.setSupportActionBar(toolbar)
+    act.supportActionBar?.setDisplayHomeAsUpEnabled(showBack)
+    act.toolbarTitle.text = title
+    act.title = ""
+    if (leftBtn != null) {
+        act.toolbarLeftBtn.visibility = View.VISIBLE
+        act.toolbarLeftBtn.text = leftBtn
+        act.toolbarLeftBtn.setOnClickListener(leftClick)
+    } else {
+        act.toolbarLeftBtn.visibility = View.GONE
+    }
+    if (rightBtn != null) {
+        act.toolbarRightBtn.visibility = View.VISIBLE
+        act.toolbarRightBtn.text = rightBtn
+        act.toolbarRightBtn.setOnClickListener(rightClick)
+    } else {
+        act.toolbarRightBtn.visibility = View.GONE
+        if (rightClick != null) {
+            if (isAdd) {
+                act.toolbarRightImg.setImageResource(R.mipmap.icon_add)
+            } else {
+                act.toolbarRightImg.setImageResource(R.mipmap.icon_set)
+            }
+            act.toolbarRightImg.visibility = View.VISIBLE
+            act.toolbarRightImg.setOnClickListener(rightClick)
+        } else {
+            act.toolbarRightImg.visibility = View.GONE
+        }
+    }
+}
 
 fun Context.requestPermission(onAccepted: ((permissions: Array<String>) -> Unit)? = null,
                               onDenied: ((permissions: List<String>) -> Unit)? = null) {

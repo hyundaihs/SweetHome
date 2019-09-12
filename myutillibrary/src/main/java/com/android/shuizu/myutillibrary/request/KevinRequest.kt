@@ -118,7 +118,7 @@ class KevinRequest private constructor(val context: Context) {
             //请求加入调度
             val response = call.execute()
             if (response.isSuccessful) {
-                val string = response.body().string()
+                val string = response.body()!!.string()
                 getSession(response)
                 D("requestResult = $string")
                 uiThread {
@@ -142,7 +142,7 @@ class KevinRequest private constructor(val context: Context) {
             //请求加入调度
             val response = call.execute()
             if (response.isSuccessful) {
-                val string = response.body().string()
+                val string = response.body()!!.string()
                 D("requestResult = $string")
                 getSession(response)
                 val res = Gson().fromJson(string, RequestResult::class.java)
@@ -183,7 +183,7 @@ class KevinRequest private constructor(val context: Context) {
             try {
                 val response = mOkHttpClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val string = response.body().string()
+                    val string = response.body()!!.string()
                     D("requestResult = $string")
                     getSession(response)
                     val res: RequestResult = Gson().fromJson(string, RequestResult::class.java)
@@ -242,7 +242,7 @@ class KevinRequest private constructor(val context: Context) {
             try {
                 val response = mOkHttpClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val string = response.body().string()
+                    val string = response.body()!!.string()
                     getSession(response)
                     val res: RequestResult = Gson().fromJson(string, RequestResult::class.java)
                     if (res.retInt == 1) {
@@ -297,8 +297,8 @@ class KevinRequest private constructor(val context: Context) {
                     // 储存下载文件的目录
 //                val savePath = isExistDir(destFileDir)
                     try {
-                        ips = response.body().byteStream()
-                        val total = response.body().contentLength()
+                        ips = response.body()!!.byteStream()
+                        val total = response.body()!!.contentLength()
                         val file = File(destFileDir)
                         fos = FileOutputStream(file)
                         if (ips == null) {
