@@ -14,7 +14,7 @@ abstract class MyBaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_base)
-        setBackup()
+        setBackup(true)
     }
 
     fun setContentBaseView(res:Int){
@@ -25,9 +25,9 @@ abstract class MyBaseActivity : AppCompatActivity() {
         toolbarTitle.text = text
     }
 
-    fun setBackup(showBack: Boolean = true) {
+    fun setBackup(showBack: Boolean) {
         if(showBack) {
-            addLeftImageBtn(R.mipmap.icon_back, View.OnClickListener {
+            addLeftImageBtn(R.mipmap.back, View.OnClickListener {
                 finish()
             })
         }else{

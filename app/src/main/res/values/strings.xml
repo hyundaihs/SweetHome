@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">和谐家园</string>
+    <string name="text1">点击登录即表示您已同意</string>
+    <string name="text2">《和谐家园用户协议》</string>
+    <string name="text3">输入验证码</string>
+    <string name="text4">输入手机号码</string>
+    <string name="text5">登录</string>
+    <string name="text6">获取验证码</string>
+    <string name="open_door">一键开门</string>
+    <string name="self_pay">自助缴费</string>
+    <string name="house_sale">房租租售</string>
+    <string name="volun_apply">志愿者申请</string>
+    <string name="submit_info">党员信息提报</string>
+    <string name="get_help">帮帮忙</string>
+    <string name="praise">表扬物业</string>
+    <string name="feedback">意见反馈</string>
+    <string name="home">家事</string>
+    <string name="community">社区</string>
+    <string name="mine">我的</string>
+    <string name="report_order">报事工单</string>
+    <string name="evaluate">待评价</string>
+    <string name="processing">处理中</string>
+    <string name="order_receiveing">待接单</string>
+    <string name="work_order">全部工单</string>
 </resources>

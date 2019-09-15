@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color11"
+        android:orientation="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color12"/>
+
+    <RadioGroup
+        android:id="@+id/bottomTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:background="@android:color/white"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tabHome"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:drawableTop="@drawable/home_tab_home_image"
+            android:textColor="@color/home_tab_text_color"
+            android:checked="true"
+            android:text="@string/home" />
+
+        <RadioButton
+            android:id="@+id/tabCommunity"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:drawableTop="@drawable/home_tab_heart_image"
+            android:textColor="@color/home_tab_text_color"
+            android:text="@string/community" />
+
+        <RadioButton
+            android:id="@+id/tabMine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:drawableTop="@drawable/home_tab_mine_image"
+            android:textColor="@color/home_tab_text_color"
+            android:text="@string/mine" />
+    </RadioGroup>
+
+</LinearLayout>
