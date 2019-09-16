@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cyf.sweethome" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +27,9 @@
         <activity android:name=".activities.MyHouseActivity" />
         <activity android:name=".activities.CheckRoomLogActivity" />
         <activity android:name=".activities.CheckRoomActivity" />
+        <activity android:name=".activities.CheckRoomDetailsActivity" />
+        <activity android:name=".activities.SubmitRepairActivity" />
+        <activity android:name=".activities.WorkOrderListActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
     </application>
 

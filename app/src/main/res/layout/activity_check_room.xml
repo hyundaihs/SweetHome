@@ -1,50 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/transparent"
-    app:cardCornerRadius="10dp"
-    android:orientation="vertical">
-
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical">
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rect_ffffff_white_corner_10"
+            android:elevation="1dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="验房时间"
-                android:textColor="@color/color20"
-                android:textSize="12sp"/>
+                android:orientation="vertical"
+                android:padding="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2018-09-26"
-                android:textColor="@color/color20"
-                android:textSize="12sp" />
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="验房时间"
+                        android:textColor="@color/color_393939"
+                        android:textSize="12sp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2018-09-26"
+                        android:textColor="@color/color_393939"
+                        android:textSize="12sp" />
+            </LinearLayout>
+
+            <EditText
+                    android:id="@+id/roomRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="请在此输入验房备注..."
+                    android:minLines="3"
+                    android:textColor="@color/color_121212"
+                    android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/uploadRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+
         </LinearLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:hint="请在此输入验房备注..."
-            android:minLines="5"
-            android:gravity="top"
-            android:background="@android:color/transparent"
-            android:textColor="@color/color3"/>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+    <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    <TextView
+            android:id="@+id/passBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_red_bg_corner_5"
+            android:text="@string/pass"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    <TextView
+            android:id="@+id/nopassBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_white_bg_corner_5"
+            android:text="@string/decline"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+</LinearLayout>

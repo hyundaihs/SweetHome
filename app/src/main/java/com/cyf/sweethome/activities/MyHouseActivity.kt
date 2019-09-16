@@ -47,7 +47,7 @@ class MyHouseActivity : MyBaseActivity() {
                 resources.getColor(android.R.color.transparent)
             )
         )
-        myHouse.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
+        //myHouse.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
         myHouse.itemAnimator = DefaultItemAnimator()
         myHouse.isNestedScrollingEnabled = false
         myHouse.setEmptyView(listEmptyView)

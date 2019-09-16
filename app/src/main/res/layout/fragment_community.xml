@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="@color/color3"
+        android:textColor="@color/color_121212"
         android:gravity="center"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -26,8 +26,8 @@
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorAccent"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/color3"
-        app:tabTextColor="@color/color3"
+        app:tabSelectedTextColor="@color/color_121212"
+        app:tabTextColor="@color/color_121212"
         app:tabIndicatorFullWidth="false"/>
 
     <androidx.viewpager.widget.ViewPager

@@ -29,7 +29,7 @@
             android:paddingEnd="15dp"
             android:paddingBottom="10dp"
             android:text="大华南湖公园世家4栋302"
-            android:textColor="@color/color3"
+            android:textColor="@color/color_121212"
             android:textSize="18sp" />
 
         <View

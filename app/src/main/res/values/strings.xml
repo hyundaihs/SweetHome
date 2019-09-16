@@ -22,4 +22,17 @@
     <string name="processing">处理中</string>
     <string name="order_receiveing">待接单</string>
     <string name="work_order">全部工单</string>
+    <string name="pass">通过</string>
+    <string name="decline">不通过</string>
+    <string name="check_room_man">验房人</string>
+    <string name="phone_number">联系电话</string>
+    <string name="repair_type">报事报修类型</string>
+    <string name="repair_tip">请选择正确的类型，以便我们更快响应您的诉求</string>
+    <string name="repair_time">（最快将在{15:00 - 16:00}为您服务）</string>
+    <string name="repair_contact">报事联系人</string>
+    <string name="submit">提交</string>
+    <string name="repair_hint">请在此输入您遇到的问题，我们将尽快为您提供服务。</string>
+    <string name="immediately">立即处理</string>
+    <string name="reservation">预约处理</string>
+    <string name="click_choose_time">点击选择预约时间</string>
 </resources>

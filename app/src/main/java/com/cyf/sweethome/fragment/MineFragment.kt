@@ -1,11 +1,21 @@
 package com.cyf.sweethome.fragment
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.activities.WorkOrderListActivity
+import com.cyf.sweethome.entity.GDSL
+import com.cyf.sweethome.entity.WorkOrderNumListRes
+import com.cyf.sweethome.entity.getInterface
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
  * ChaYin
@@ -22,6 +32,49 @@ class MineFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        initViews()
+        getWorkOrderNum()
+    }
 
+    private fun initViews() {
+        workOrder.setOnClickListener {
+            startActivity(Intent(it.context, WorkOrderListActivity::class.java))
+        }
+        orderReceiveing.setOnClickListener {
+
+        }
+        processing.setOnClickListener {
+
+        }
+        evaluate.setOnClickListener {
+
+        }
+    }
+
+    private fun getWorkOrderNum() {
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(GDSL.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val workOrderNumListRes =
+                        Gson().fromJson(result, WorkOrderNumListRes::class.java)
+                    fillWorkOrder(workOrderNumListRes.retRes)
+                }
+
+            })
+            setDialog()
+            postRequest()
+        }
+    }
+
+    private fun fillWorkOrder(map: Map<Int, String>) {
+        orderReceiveingNum.text = map[1]
+        processingNum.text = map[2]
+        evaluateNum.text = map[3]
     }
 }

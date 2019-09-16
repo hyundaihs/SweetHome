@@ -24,7 +24,7 @@ class CheckRoomLogsAdapter(val data: ArrayList<CheckRoomLog>) :
             )
         )
         holder.itemView.house_relation.text =
-            CalendarUtil(checkRoomLog.create_time, true).format(CalendarUtil.YY_MM_DD_HH_MM)
+            CalendarUtil(checkRoomLog.create_time, true).format(CalendarUtil.YYYY_MM_DD_HH_MM)
     }
 
     override fun getItemCount(): Int = data.size

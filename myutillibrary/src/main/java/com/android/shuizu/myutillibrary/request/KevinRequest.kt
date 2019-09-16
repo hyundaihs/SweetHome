@@ -4,8 +4,12 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.hardware.Camera
 import android.os.Environment
 import com.android.shuizu.myutillibrary.D
+import com.android.shuizu.myutillibrary.utils.getLoadigDialog
+import com.android.shuizu.myutillibrary.utils.getLoginErrDialog
+import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import okhttp3.*
 import org.jetbrains.anko.doAsync
@@ -65,7 +69,7 @@ class KevinRequest private constructor(val context: Context) {
     }
 
     fun setDialog(): KevinRequest {
-//        dialog = getLoadingDialog(context)
+        dialog = getLoadigDialog(context)
         return this
     }
 
@@ -87,10 +91,17 @@ class KevinRequest private constructor(val context: Context) {
     fun openLoginErrCallback(cls: Class<*>) {
         setLoginErrCallback(object : KevinRequest.LoginErrCallback {
             override fun onLoginErr(context: Context) {
-//                getLoginErrDialog(context, SweetAlertDialog.OnSweetClickListener {
-//                    context.startActivity(Intent(context, cls))
-//                    (context as Activity).finish()
-//                })
+                getLoginErrDialog(context, object : DialogUIListener() {
+                    override fun onNegative() {
+
+                    }
+
+                    override fun onPositive() {
+                        context.startActivity(Intent(context, cls))
+                        (context as Activity).finish()
+                    }
+                })
+
             }
         })
     }

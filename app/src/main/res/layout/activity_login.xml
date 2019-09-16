@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/text5"
         android:layout_marginTop="200dp"
-        android:textColor="@color/color3"
+        android:textColor="@color/color_121212"
         android:textSize="18sp" />
 
     <EditText
@@ -36,7 +36,7 @@
         android:textSize="14sp"
         android:inputType="phone"
         android:text="17139061224"
-        android:textColor="@color/color3"
+        android:textColor="@color/color_121212"
         android:background="@drawable/login_input_bg"
         android:hint="@string/text4"/>
 
@@ -54,7 +54,7 @@
         android:textSize="14sp"
         android:inputType="phone"
         android:text="5974338250"
-        android:textColor="@color/color3"
+        android:textColor="@color/color_121212"
         android:background="@drawable/login_input_bg"
         android:hint="@string/text3" />
 
@@ -105,7 +105,7 @@
             android:text="@string/text1"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/color1"
+            android:textColor="@color/color_A0A0A0"
             android:textSize="12sp" />
 
         <TextView
@@ -114,7 +114,7 @@
             android:text="@string/text2"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/color2"
+            android:textColor="@color/color_515C6F"
             android:textSize="12sp" />
 
     </LinearLayout>

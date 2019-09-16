@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/color11"
+        android:background="@color/color_F6F6F8"
         android:orientation="vertical" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/color12"/>
+        android:background="@color/color_EAEAEA"/>
 
     <RadioGroup
         android:id="@+id/bottomTab"

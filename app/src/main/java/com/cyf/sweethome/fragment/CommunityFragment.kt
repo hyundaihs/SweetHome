@@ -44,8 +44,11 @@ class CommunityFragment : BaseFragment() {
         comTabLayout.setupWithViewPager(comViewPager)//此方法就是让tablayout和ViewPager联动
     }
 
-    private class MyPagerAdapter(fm: FragmentManager, val fragments: List<Fragment>, val titles: List<String>) :
-        FragmentPagerAdapter(fm) {
+    private class MyPagerAdapter(
+        fm: FragmentManager,
+        val fragments: List<Fragment>,
+        val titles: List<String>
+    ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount(): Int {
             return fragments.size

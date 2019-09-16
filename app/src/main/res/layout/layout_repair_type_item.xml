@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <CheckBox
+            android:id="@+id/typeName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/repair_type_list_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="10dp"
+            android:text="环境范德萨"
+            android:textColor="@color/repair_radio_button_text"
+            android:textSize="14sp" />
+
+</LinearLayout>

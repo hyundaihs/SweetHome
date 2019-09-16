@@ -9,6 +9,7 @@ import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.cyf.sweethome.R
 import com.cyf.sweethome.activities.CheckRoomLogActivity
 import com.cyf.sweethome.activities.MyHouseActivity
+import com.cyf.sweethome.activities.SubmitRepairActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -35,6 +36,9 @@ class HomeFragment : BaseFragment() {
         }
         ownerCheckRoom.setOnClickListener {
             startActivity(Intent(activity, CheckRoomLogActivity::class.java))
+        }
+        callRepair.setOnClickListener {
+            startActivity(Intent(activity, SubmitRepairActivity::class.java))
         }
     }
 }

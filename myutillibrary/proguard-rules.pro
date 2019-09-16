@@ -23,3 +23,4 @@
 -keep class com.dou361.** {
 *;
 }
+-dontwarn com.squareup.picasso.**
