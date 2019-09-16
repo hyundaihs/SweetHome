@@ -63,7 +63,6 @@ class CheckRoomLogActivity : MyBaseActivity() {
                 resources.getColor(android.R.color.transparent)
             )
         )
-        //checkRoomLogs.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
         checkRoomLogs.itemAnimator = DefaultItemAnimator()
         checkRoomLogs.isNestedScrollingEnabled = false
         checkRoomLogs.setEmptyView(listEmptyView)

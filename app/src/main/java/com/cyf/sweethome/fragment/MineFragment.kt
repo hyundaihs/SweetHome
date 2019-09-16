@@ -37,17 +37,22 @@ class MineFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        val intent = Intent(context, WorkOrderListActivity::class.java)
         workOrder.setOnClickListener {
-            startActivity(Intent(it.context, WorkOrderListActivity::class.java))
+            intent.putExtra("page",0)
+            startActivity(intent)
         }
         orderReceiveing.setOnClickListener {
-
+            intent.putExtra("page",1)
+            startActivity(intent)
         }
         processing.setOnClickListener {
-
+            intent.putExtra("page",2)
+            startActivity(intent)
         }
         evaluate.setOnClickListener {
-
+            intent.putExtra("page",3)
+            startActivity(intent)
         }
     }
 

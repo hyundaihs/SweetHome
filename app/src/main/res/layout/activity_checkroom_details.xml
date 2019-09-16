@@ -48,7 +48,6 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:gravity="top"
-                    android:minLines="2"
                     android:textColor="@color/color_121212"
                     android:textSize="12sp" />
 
@@ -64,7 +63,6 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:gravity="top"
-                    android:minLines="2"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/color_A0A0A0"
                     android:textSize="12sp" />

@@ -1,24 +1,10 @@
 package com.android.shuizu.myutillibrary
 
-import android.content.ComponentName
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.util.Log
 import android.util.TypedValue
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
-import com.android.shuizu.myutillibrary.utils.DefaultRationale
-import com.android.shuizu.myutillibrary.utils.PermissionSetting
-import com.android.shuizu.myutillibrary.utils.WxUtil
-import com.yanzhenjie.permission.Action
-import com.yanzhenjie.permission.AndPermission
-import com.yanzhenjie.permission.Permission
-import kotlinx.android.synthetic.main.layout_toolbar.*
-import org.jetbrains.anko.toast
 
 
 /**

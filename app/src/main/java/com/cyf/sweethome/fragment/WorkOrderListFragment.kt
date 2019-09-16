@@ -1,6 +1,7 @@
 package com.cyf.sweethome.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.cyf.sweethome.R
+import com.cyf.sweethome.activities.WorkOrderDetailsActivity
 import com.cyf.sweethome.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_work_order_list.*
@@ -60,8 +62,8 @@ class WorkOrderListFragment(val type: Int) : BaseFragment() {
         )
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
-        listView.setEmptyView(listEmptyView)
         listView.adapter = workOrderAdapter
+        listView.setEmptyView(listEmptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()
@@ -71,6 +73,13 @@ class WorkOrderListFragment(val type: Int) : BaseFragment() {
                 loadMore(currPage)
             }
         })
+        workOrderAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                val intent = Intent(context, WorkOrderDetailsActivity::class.java)
+                intent.putExtra("id", workOrderList[position].id)
+                startActivity(intent)
+            }
+        }
         refresh()
     }
 

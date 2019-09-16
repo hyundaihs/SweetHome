@@ -64,4 +64,5 @@ const val WDLXR = "wdlxr"//我的联系人列表
 const val TJBSBX = "tjbsbx"//提交报事保修
 const val GDSL = "gdsl"//工单数量
 const val BSBXLISTS = "bsbxlists"//报事保修列表
+const val BSBXINFO = "bsbxinfo"//报事保修详情
 

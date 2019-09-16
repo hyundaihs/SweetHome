@@ -134,3 +134,29 @@ data class WorkOrderListItem(
 )
 
 data class WorkOrderListRes(var retRes: ArrayList<WorkOrderListItem>) : RequestResult()
+
+data class OperatingRecord(//操作记录
+    var xqbsbx_id: String, // 报事保修id
+    var title: String, // 报事已被提交，正在安排服务人员。
+    var sh_status: Int, // 状态（1：待接单 2：待处理 3：待评价 4：已完成 0或不传为所有）
+    var xqyg_title: String, // 服务人员姓名
+    var xqyg_phone: String, // 服务人员电话
+    var xqyg_file_url: String, // 服务人员头像
+    var create_time: Long // 创建时间戳（1568510942）
+)
+
+data class WorkOrderDetails(
+    var id: String, // 报事保修id
+    var xqbsbxlx_title: String, // 绿化养护
+    var title: String, // 报修人
+    var phone: String, // 联系电话
+    var contents: String, // 内容（灯坏了
+    var yy_time: String, // 预约时间（2019-09-15 10:08）\
+    var sh_status: Int, // 状态（1：待接单 2：待处理 3：待评价 4：已完成 0或不传为所有）
+    var create_time: Long, // 创建时间戳（1568510942）
+    var fw_title: String, // 周店1栋1单元101
+    var img_lists: ArrayList<ImageInfo>, // Array(图片列表)
+    var log_lists: ArrayList<OperatingRecord>// Array（操作记录）
+)
+
+data class WorkOrderDetailsRes(var retRes: WorkOrderDetails) : RequestResult()

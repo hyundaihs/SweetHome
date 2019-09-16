@@ -12,6 +12,7 @@ import com.android.shuizu.myutillibrary.utils.getLoginErrDialog
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.io.File
@@ -36,7 +37,7 @@ class KevinRequest private constructor(val context: Context) {
         var sessionId: String = ""
 
         private val MEDIA_TYPE_JSON =
-            MediaType.parse("application/x-www-form-urlencoded charset=utf-8")//mdiatype 这个需要和服务端保持一致
+            "application/x-www-form-urlencoded charset=utf-8".toMediaTypeOrNull()//mdiatype 这个需要和服务端保持一致
 
         const val LOGINERR = "loginerr"//需要重新登录错误信息
 
@@ -129,7 +130,7 @@ class KevinRequest private constructor(val context: Context) {
             //请求加入调度
             val response = call.execute()
             if (response.isSuccessful) {
-                val string = response.body()!!.string()
+                val string = response.body!!.string()
                 getSession(response)
                 D("requestResult = $string")
                 uiThread {
@@ -139,7 +140,7 @@ class KevinRequest private constructor(val context: Context) {
             } else {
                 uiThread {
                     dialog?.dismiss()
-                    errorCallback?.onError(context, response.message())
+                    errorCallback?.onError(context, response.message)
                 }
             }
         }
@@ -153,7 +154,7 @@ class KevinRequest private constructor(val context: Context) {
             //请求加入调度
             val response = call.execute()
             if (response.isSuccessful) {
-                val string = response.body()!!.string()
+                val string = response.body!!.string()
                 D("requestResult = $string")
                 getSession(response)
                 val res = Gson().fromJson(string, RequestResult::class.java)
@@ -178,7 +179,7 @@ class KevinRequest private constructor(val context: Context) {
             } else {
                 uiThread {
                     dialog?.dismiss()
-                    errorCallback?.onError(context, response.message())
+                    errorCallback?.onError(context, response.message)
                 }
             }
         }
@@ -194,7 +195,7 @@ class KevinRequest private constructor(val context: Context) {
             try {
                 val response = mOkHttpClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val string = response.body()!!.string()
+                    val string = response.body!!.string()
                     D("requestResult = $string")
                     getSession(response)
                     val res: RequestResult = Gson().fromJson(string, RequestResult::class.java)
@@ -219,7 +220,7 @@ class KevinRequest private constructor(val context: Context) {
                 } else {
                     uiThread {
                         dialog?.dismiss()
-                        errorCallback?.onError(context, response.message())
+                        errorCallback?.onError(context, response.message)
                     }
                 }
             } catch (e: Exception) {
@@ -242,7 +243,7 @@ class KevinRequest private constructor(val context: Context) {
             val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
             for (i in 0 until files.size) {
                 val file = File(files[i])
-                val fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file)
+                val fileBody = RequestBody.create("application/octet-stream".toMediaTypeOrNull(), file)
                 requestBodyBuilder.addFormDataPart(name, files[i].substring(files[i].lastIndexOf("/")), fileBody)
             }
             val requestBody = requestBodyBuilder.build()
@@ -253,7 +254,7 @@ class KevinRequest private constructor(val context: Context) {
             try {
                 val response = mOkHttpClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val string = response.body()!!.string()
+                    val string = response.body!!.string()
                     getSession(response)
                     val res: RequestResult = Gson().fromJson(string, RequestResult::class.java)
                     if (res.retInt == 1) {
@@ -277,7 +278,7 @@ class KevinRequest private constructor(val context: Context) {
                 } else {
                     uiThread {
                         dialog?.dismiss()
-                        errorCallback?.onError(context, "无响应:" + response.message())
+                        errorCallback?.onError(context, "无响应:" + response.message)
                     }
                 }
             } catch (e: Exception) {
@@ -293,13 +294,13 @@ class KevinRequest private constructor(val context: Context) {
         doAsync {
             val request = Request.Builder().url(requestUrl).addHeader("cookie", sessionId).build()
             mOkHttpClient.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call?, e: IOException?) {
+                override fun onFailure(call: Call, e: IOException) {
                     uiThread {
                         errorCallback?.onError(context, e.toString())
                     }
                 }
 
-                override fun onResponse(call: Call?, response: Response) {
+                override fun onResponse(call: Call, response: Response) {
                     var ips: InputStream? = null
                     val buf = ByteArray(2048)
                     var len = 0
@@ -308,16 +309,10 @@ class KevinRequest private constructor(val context: Context) {
                     // 储存下载文件的目录
 //                val savePath = isExistDir(destFileDir)
                     try {
-                        ips = response.body()!!.byteStream()
-                        val total = response.body()!!.contentLength()
+                        ips = response.body!!.byteStream()
+                        val total = response.body!!.contentLength()
                         val file = File(destFileDir)
                         fos = FileOutputStream(file)
-                        if (ips == null) {
-                            uiThread {
-                                errorCallback?.onError(context, "数据获取失败")
-                            }
-                            return
-                        }
                         var sum = 0
                         while (true) {
                             len = ips.read(buf)
@@ -375,7 +370,7 @@ class KevinRequest private constructor(val context: Context) {
     }
 
     private fun getSession(response: Response) {
-        val headers = response.headers()
+        val headers = response.headers
         val cookies = headers.values("Set-Cookie")
         if (cookies.isEmpty()) {
             return

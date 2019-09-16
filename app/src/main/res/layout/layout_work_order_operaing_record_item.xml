@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/lineDot"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/check_dot"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="@id/status"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/status" />
+
+    <View
+        android:id="@+id/lineTop"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_EAEAEA"
+        app:layout_constraintBottom_toTopOf="@id/lineDot"
+        app:layout_constraintLeft_toLeftOf="@id/lineDot"
+        app:layout_constraintRight_toRightOf="@id/lineDot"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_EAEAEA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/lineDot"
+        app:layout_constraintRight_toRightOf="@id/lineDot"
+        app:layout_constraintTop_toBottomOf="@id/lineDot" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="待接单"
+        android:textColor="@color/color_121212"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@id/lineDot"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="15dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status" />
+
+    <TextView
+        android:id="@+id/contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="待接fds范德萨范德萨单"
+        android:textColor="@color/color_393939"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/status"
+        app:layout_constraintTop_toTopOf="@id/photo"
+        app:layout_constraintBottom_toBottomOf="@id/photo"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018-*09-78 13256"
+        android:textColor="@color/color_A0A0A0"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/status"
+        app:layout_constraintTop_toBottomOf="@id/photo" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_EAEAEA"
+        app:layout_constraintLeft_toLeftOf="@id/status"
+        app:layout_constraintRight_toRightOf="@id/photo"
+        app:layout_constraintTop_toBottomOf="@id/time"
+        android:layout_marginTop="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

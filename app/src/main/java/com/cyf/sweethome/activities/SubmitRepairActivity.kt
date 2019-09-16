@@ -304,7 +304,7 @@ class SubmitRepairActivity : MyBaseActivity() {
                 holder.itemView.uploadImage.setImageResource(R.mipmap.add_pic)
                 holder.itemView.uploadDelete.visibility = View.GONE
             } else {
-                Picasso.with(holder.itemView.context).load(File(data[position])).resize(300, 300)
+                Picasso.get().load(File(data[position])).resize(300, 300)
                     .into(holder.itemView.uploadImage)
                 holder.itemView.uploadDelete.visibility = View.VISIBLE
             }

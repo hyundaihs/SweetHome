@@ -18,10 +18,11 @@ class WorkOrderListActivity : MyBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentBaseView(R.layout.activity_work_order_list)
         setTitle("报事工单")
-        initViews()
+        val page = intent.getIntExtra("page", 0)
+        initViews(page)
     }
 
-    private fun initViews() {
+    private fun initViews(page: Int) {
         val titles = ArrayList<String>()
         titles.add("全部工单")
         titles.add("待接单")
@@ -36,6 +37,7 @@ class WorkOrderListActivity : MyBaseActivity() {
 
         workOrderViewPager.adapter = MyPagerAdapter(supportFragmentManager, fragments, titles)
         workOrderTabLayout.setupWithViewPager(workOrderViewPager)//此方法就是让tablayout和ViewPager联动
+        workOrderViewPager.setCurrentItem(page, true)
     }
 
     private class MyPagerAdapter(

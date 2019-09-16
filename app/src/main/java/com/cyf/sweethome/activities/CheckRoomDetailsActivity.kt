@@ -96,7 +96,7 @@ class CheckRoomDetailsActivity : MyBaseActivity() {
             super.onBindViewHolder(holder, position)
             val imageInfo = data[position]
             holder.itemView.uploadDelete.visibility = View.GONE
-            Picasso.with(holder.itemView.context).load(imageInfo.resize_file_url.getImageUrl())
+            Picasso.get().load(imageInfo.resize_file_url.getImageUrl())
                 .resize(300, 300)
                 .into(holder.itemView.uploadImage)
         }

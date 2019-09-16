@@ -30,6 +30,7 @@
         <activity android:name=".activities.CheckRoomDetailsActivity" />
         <activity android:name=".activities.SubmitRepairActivity" />
         <activity android:name=".activities.WorkOrderListActivity" />
+        <activity android:name=".activities.WorkOrderDetailsActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
     </application>
 
