@@ -117,7 +117,8 @@ class LoginActivity : MyBaseActivity() {
             .addRequestCode(SUCCESSCODE)
             .permissions(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
             ) .request()
     }
 

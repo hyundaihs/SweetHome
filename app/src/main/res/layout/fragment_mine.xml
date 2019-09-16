@@ -1,384 +1,378 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
     <LinearLayout
-            android:id="@+id/bgTop"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@mipmap/mine_bg_top"
-            android:orientation="vertical"
-            app:layout_constraintDimensionRatio="26:10"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/bgTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@mipmap/mine_bg_top"
+        android:orientation="vertical"
+        app:layout_constraintDimensionRatio="26:10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/photo"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:src="@mipmap/ic_launcher"
-            app:civ_border_color="@color/color_80FFFFFF"
-            app:civ_border_width="1dp"
-            app:layout_constraintBottom_toBottomOf="@id/bgTop"
-            app:layout_constraintLeft_toLeftOf="@id/bgTop"
-            app:layout_constraintTop_toTopOf="@id/bgTop" />
+        android:id="@+id/photo"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="@color/color_80FFFFFF"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/bgTop"
+        app:layout_constraintLeft_toLeftOf="@id/bgTop"
+        app:layout_constraintTop_toTopOf="@id/bgTop" />
 
     <TextView
-            android:id="@+id/account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="3dp"
-            android:text="185442326"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toRightOf="@id/photo"
-            app:layout_constraintTop_toTopOf="@id/photo" />
+        android:id="@+id/account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="3dp"
+        android:text="185442326"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/photo"
+        app:layout_constraintTop_toTopOf="@id/photo" />
 
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:background="@drawable/rect_white_bg_corner_10"
-            android:gravity="center"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:text="编辑资料"
-            android:textColor="@android:color/white"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@id/photo"
-            app:layout_constraintLeft_toLeftOf="@id/account" />
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:background="@drawable/rect_white_bg_corner_10"
+        android:gravity="center"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="编辑资料"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/photo"
+        app:layout_constraintLeft_toLeftOf="@id/account" />
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/layout1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="15dp"
-            android:background="@android:color/white"
-            android:elevation="5dp"
-            android:orientation="horizontal"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bgTop">
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rect_ffffff_white_corner_10"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bgTop">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/report_order"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/report_order"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/workOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                <LinearLayout
-                        android:id="@+id/workOrder"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/work_order" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/work_order" />
 
                     <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:maxLines="1"
-                                android:text="@string/work_order"
-                                android:textColor="@android:color/black"
-                                android:textSize="12sp" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/work_order"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
 
-<!--                        <TextView-->
-<!--                                android:id="@+id/workOrderNum"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginStart="5dp"-->
-<!--                                android:maxLines="1"-->
-<!--                                android:textColor="@color/colorAccent"-->
-<!--                                android:textSize="12sp" />-->
+                        <!--                        <TextView-->
+                        <!--                                android:id="@+id/workOrderNum"-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_marginStart="5dp"-->
+                        <!--                                android:maxLines="1"-->
+                        <!--                                android:textColor="@color/colorAccent"-->
+                        <!--                                android:textSize="12sp" />-->
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                        android:id="@+id/orderReceiveing"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    android:id="@+id/orderReceiveing"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/order_receiveing" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/order_receiveing" />
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                            android:maxLines="1"
+                            android:text="@string/order_receiveing"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:maxLines="1"
-                                android:text="@string/order_receiveing"
-                                android:textColor="@android:color/black"
-                                android:textSize="12sp" />
-
-                        <TextView
-                                android:id="@+id/orderReceiveingNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:maxLines="1"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="12sp" />
+                            android:id="@+id/orderReceiveingNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:maxLines="1"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
-                        android:id="@+id/processing"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    android:id="@+id/processing"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/processing" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/processing" />
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                            android:maxLines="1"
+                            android:text="@string/processing"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:maxLines="1"
-                                android:text="@string/processing"
-                                android:textColor="@android:color/black"
-                                android:textSize="12sp" />
-
-                        <TextView
-                                android:id="@+id/processingNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:maxLines="1"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="12sp" />
+                            android:id="@+id/processingNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:maxLines="1"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                        android:id="@+id/evaluate"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    android:id="@+id/evaluate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@mipmap/evaluate" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@mipmap/evaluate" />
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                            android:maxLines="1"
+                            android:text="@string/evaluate"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
 
                         <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:maxLines="1"
-                                android:text="@string/evaluate"
-                                android:textColor="@android:color/black"
-                                android:textSize="12sp" />
-
-                        <TextView
-                                android:id="@+id/evaluateNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:maxLines="1"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="12sp" />
+                            android:id="@+id/evaluateNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:maxLines="1"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/layout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="15dp"
-            android:background="@android:color/white"
-            android:elevation="5dp"
-            android:orientation="horizontal"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout1">
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rect_ffffff_white_corner_10"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout1">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@mipmap/right_arrow"
-                    android:padding="15dp"
-                    android:text="我的房屋"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:drawableEnd="@mipmap/arrow"
+                android:padding="15dp"
+                android:text="我的房屋"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
             <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@color/color_90727C8E" />
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/color_90727C8E" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@mipmap/right_arrow"
-                    android:padding="15dp"
-                    android:text="我的活动"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/arrow"
+                android:padding="15dp"
+                android:text="我的活动"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
             <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@color/color_90727C8E" />
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/color_90727C8E" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@mipmap/right_arrow"
-                    android:padding="15dp"
-                    android:text="健康档案"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/arrow"
+                android:padding="15dp"
+                android:text="健康档案"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
             <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@color/color_90727C8E" />
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/color_90727C8E" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@mipmap/right_arrow"
-                    android:padding="15dp"
-                    android:text="推广码"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/arrow"
+                android:padding="15dp"
+                android:text="推广码"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/layout3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="15dp"
-            android:background="@android:color/white"
-            android:elevation="5dp"
-            android:orientation="horizontal"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout2">
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rect_ffffff_white_corner_10"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout2">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@mipmap/right_arrow"
-                    android:padding="15dp"
-                    android:text="设置"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:drawableEnd="@mipmap/arrow"
+                android:padding="15dp"
+                android:text="设置"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
             <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@color/color_90727C8E" />
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/color_90727C8E" />
 
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@mipmap/right_arrow"
-                    android:padding="15dp"
-                    android:text="关于我们"
-                    android:textColor="@color/color_515C6F"
-                    android:textSize="15sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/arrow"
+                android:padding="15dp"
+                android:text="关于我们"
+                android:textColor="@color/color_515C6F"
+                android:textSize="15sp" />
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

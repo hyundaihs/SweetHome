@@ -1,13 +1,19 @@
 package com.cyf.sweethome.activities
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
@@ -27,10 +33,12 @@ import com.squareup.picasso.Picasso
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.PicassoEngine
+import com.zhihu.matisse.internal.entity.CaptureStrategy
 import kotlinx.android.synthetic.main.activity_check_room.*
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
 import org.jetbrains.anko.toast
 import java.io.File
+import com.zhihu.matisse.internal.utils.MediaStoreCompat
 
 
 /**
@@ -40,11 +48,12 @@ import java.io.File
 class CheckRoomActivity : MyBaseActivity() {
 
     val REQUEST_CODE_CHOOSE = 10
-    val MAX_IMAGE = 9
+    val MAX_IMAGE = 5
 
     private val imageData = ArrayList<String>()
     private val imageAdapter = ImageAdapter(imageData)
     private val submitUrl = ArrayList<String>()
+//    private val mThumbViewInfoList = ArrayList<ThumbViewInfo>()
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -52,8 +61,14 @@ class CheckRoomActivity : MyBaseActivity() {
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
             val selectList = Matisse.obtainResult(data)
             for (i in 0 until selectList.size) {
-                val file = getPathFromUri(this, selectList[i])
-                uploadPhoto(file)
+                var file = getPathFromUri(this, selectList[i])
+                if (file != null) {
+                    uploadPhoto(file)
+                } else {
+                    file =
+                        "/storage/emulated/0/${Environment.DIRECTORY_PICTURES}/${selectList[i].lastPathSegment}"
+                    uploadPhoto(file)
+                }
             }
         }
     }
@@ -82,6 +97,17 @@ class CheckRoomActivity : MyBaseActivity() {
                     choosePic(MAX_IMAGE - imageData.size)
                 } else {
                     //ShowImageDialog(File(images[position]))
+                    //打开预览界面
+//                    GPreviewBuilder.from(this@CheckRoomActivity)
+//                        //是否使用自定义预览界面，当然8.0之后因为配置问题，必须要使用
+//                        .to(GPreviewActivity::class.java)
+//                        .setData(mThumbViewInfoList)
+//                        .setCurrentIndex(position)
+//                        .setSingleFling(true)
+//                        .setType(GPreviewBuilder.IndicatorType.Number)
+//                        // 小圆点
+//                        .setType(GPreviewBuilder.IndicatorType.Dot)
+//                        .start()
                 }
             }
         }
@@ -101,6 +127,9 @@ class CheckRoomActivity : MyBaseActivity() {
             .restrictOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
             .thumbnailScale(0.85f)
             .imageEngine(PicassoEngine())
+            .capture(true)
+            .captureStrategy(CaptureStrategy(true, "PhotoPicker"))
+            .theme(R.style.Matisse_Zhihu)
             .forResult(REQUEST_CODE_CHOOSE)
     }
 
@@ -113,7 +142,7 @@ class CheckRoomActivity : MyBaseActivity() {
                 holder.itemView.uploadImage.setImageResource(R.mipmap.add_pic)
                 holder.itemView.uploadDelete.visibility = View.GONE
             } else {
-                Picasso.get().load(File(data[position])).resize(300, 300)
+                Picasso.with(holder.itemView.context).load(File(data[position])).resize(300, 300)
                     .into(holder.itemView.uploadImage)
                 holder.itemView.uploadDelete.visibility = View.VISIBLE
             }
@@ -140,6 +169,12 @@ class CheckRoomActivity : MyBaseActivity() {
                 override fun onSuccess(context: Context, result: String) {
                     val fileInfoRes = Gson().fromJson(result, FileInfoRes::class.java)
                     submitUrl.add(fileInfoRes.retRes.file_url)
+//                    val bounds = Rect()
+//                    //new ThumbViewInfo(图片地址)
+//                    val item = ThumbViewInfo(fileInfoRes.retRes.file_url)
+//                    item.bounds = bounds
+//                    mThumbViewInfoList.add(item)
+
                     imageData.add(file)
                     imageAdapter.notifyDataSetChanged()
                 }
@@ -151,6 +186,10 @@ class CheckRoomActivity : MyBaseActivity() {
     }
 
     private fun submit(status: Int) {
+        if (submitUrl.size <= 0) {
+            toast("至少上传一张图片")
+            return
+        }
         val map = mapOf(
             Pair("contents", roomRemark.text.toString()),
             Pair("sh_status", status),

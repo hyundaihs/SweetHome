@@ -130,7 +130,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
             super.onBindViewHolder(holder, position)
             val imageInfo = data[position]
             holder.itemView.uploadDelete.visibility = View.GONE
-            Picasso.get().load(imageInfo.resize_file_url.getImageUrl())
+            Picasso.with(holder.itemView.context).load(imageInfo.resize_file_url.getImageUrl())
                 .resize(300, 300)
                 .into(holder.itemView.uploadImage)
         }
@@ -145,7 +145,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
             super.onBindViewHolder(holder, position)
             val operatingRecord = data[position]
             holder.itemView.status.text = WORK_ORDER_STATUS[operatingRecord.sh_status]
-            Picasso.get().load(operatingRecord.xqyg_file_url.getImageUrl())
+            Picasso.with(holder.itemView.context).load(operatingRecord.xqyg_file_url.getImageUrl())
                 .resize(300, 300)
                 .into(holder.itemView.photo)
             holder.itemView.contents.text = operatingRecord.title

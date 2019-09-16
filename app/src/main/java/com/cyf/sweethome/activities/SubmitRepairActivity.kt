@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,6 +27,7 @@ import com.squareup.picasso.Picasso
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.PicassoEngine
+import com.zhihu.matisse.internal.entity.CaptureStrategy
 import kotlinx.android.synthetic.main.activity_submit_repair.*
 import kotlinx.android.synthetic.main.layout_repair_contact_list_item.view.*
 import kotlinx.android.synthetic.main.layout_repair_type_item.view.*
@@ -40,7 +42,7 @@ import java.io.File
 class SubmitRepairActivity : MyBaseActivity() {
 
     val REQUEST_CODE_CHOOSE = 10
-    val MAX_IMAGE = 9
+    val MAX_IMAGE = 5
 
     private val typeList = ArrayList<RepairType>()
     private val typeAdapter = TypeAdapter(typeList)
@@ -58,8 +60,13 @@ class SubmitRepairActivity : MyBaseActivity() {
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
             val selectList = Matisse.obtainResult(data)
             for (i in 0 until selectList.size) {
-                val file = FileUtil.getPathFromUri(this, selectList[i])
-                uploadPhoto(file)
+                var file = FileUtil.getPathFromUri(this, selectList[i])
+                if (file != null) {
+                    uploadPhoto(file)
+                } else {
+                    file = "/storage/emulated/0/${Environment.DIRECTORY_PICTURES}/${selectList[i].lastPathSegment}"
+                    uploadPhoto(file)
+                }
             }
         }
     }
@@ -81,6 +88,9 @@ class SubmitRepairActivity : MyBaseActivity() {
         initTypeRecyclerView()
         initImageRecyclerView()
         initContactRecyclerView()
+        val time =
+            CalendarUtil(System.currentTimeMillis() + 10 * 60 * 1000).format(CalendarUtil.HH_mm)
+        immediatelyTime.text = "（最快将在${time}为您服务）"
         submit.setOnClickListener {
             submit()
         }
@@ -95,21 +105,28 @@ class SubmitRepairActivity : MyBaseActivity() {
             reservation.isChecked = true
             immediately.isChecked = false
             checkType = 2
-            chooseTime = CalendarUtil().format(CalendarUtil.YYYY_MM_DD_HH_MM)
-            reservation_time.text = chooseTime
             reservation_time.visibility = View.VISIBLE
+            showPickTimer()
         }
         reservation_time.setOnClickListener {
-            PickerUtil.showTimerPicker(this) { date, v ->
-                if (date != null) {
-                    chooseTime = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
-                    reservation_time.text = chooseTime
-                }
+            showPickTimer()
+        }
+    }
+
+    private fun showPickTimer() {
+        PickerUtil.showTimerPicker(this) { date, v ->
+            if (date != null) {
+                chooseTime = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
+                reservation_time.text = "（${chooseTime}）"
             }
         }
     }
 
     private fun submit() {
+        if(repairRemark.text.isEmpty()){
+            repairRemark.error = "请填写您遇到的问题"
+            return
+        }
         val map = mapOf(
             Pair("contents", repairRemark.text.toString()),
             Pair("title", contactList[contactAdapter.getChecked()].title),
@@ -198,6 +215,8 @@ class SubmitRepairActivity : MyBaseActivity() {
             .maxSelectable(max)
             .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
             .thumbnailScale(0.85f)
+            .capture(true)
+            .captureStrategy(CaptureStrategy(true, "PhotoPicker"))
             .imageEngine(PicassoEngine())
             .forResult(REQUEST_CODE_CHOOSE)
     }
@@ -290,6 +309,9 @@ class SubmitRepairActivity : MyBaseActivity() {
             val type = data[position]
             holder.itemView.typeName.text = type.title
             holder.itemView.typeName.isChecked = (position == checked)
+            holder.itemView.typeName.setOnClickListener {
+                setChecked(position)
+            }
         }
 
         override fun getItemCount(): Int = data.size
@@ -304,7 +326,7 @@ class SubmitRepairActivity : MyBaseActivity() {
                 holder.itemView.uploadImage.setImageResource(R.mipmap.add_pic)
                 holder.itemView.uploadDelete.visibility = View.GONE
             } else {
-                Picasso.get().load(File(data[position])).resize(300, 300)
+                Picasso.with(holder.itemView.context).load(File(data[position])).resize(300, 300)
                     .into(holder.itemView.uploadImage)
                 holder.itemView.uploadDelete.visibility = View.VISIBLE
             }
@@ -337,6 +359,9 @@ class SubmitRepairActivity : MyBaseActivity() {
             holder.itemView.contactName.text = contact.title
             holder.itemView.contactPhone.text = contact.phone
             holder.itemView.contactCheck.isChecked = (position == checked)
+            holder.itemView.contactCheck.setOnClickListener {
+                setChecked(position)
+            }
         }
 
         override fun getItemCount(): Int = data.size

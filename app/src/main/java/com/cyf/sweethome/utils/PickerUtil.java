@@ -81,6 +81,7 @@ public class PickerUtil {
     public static void showTimerPicker(final Context context, OnTimeSelectListener listener){
         TimePickerView pvTime = new TimePickerBuilder(context, listener)
                 .setType(new boolean[]{true, true, true, true, true, false})// 默认全部显示
+                .setTitleText("选择预约时间")
                 .build();
         pvTime.show();
     }

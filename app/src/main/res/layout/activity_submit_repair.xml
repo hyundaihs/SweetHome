@@ -1,167 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_ffffff_white_corner_10"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rect_ffffff_white_corner_10"
-                    android:orientation="vertical"
-                    android:padding="15dp">
+                    android:text="@string/repair_type"
+                    android:textColor="@color/color_393939"
+                    android:textSize="15sp" />
 
                 <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/repair_type"
-                        android:textColor="@color/color_393939"
-                        android:textSize="15sp" />
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/repair_tip"
-                        android:textColor="@color/color_A0A0A0"
-                        android:textSize="13sp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/repair_tip"
+                    android:textColor="@color/color_A0A0A0"
+                    android:textSize="13sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/repairType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                    android:id="@+id/repairType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rect_ffffff_white_corner_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="15dp"
-                    android:padding="15dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rect_ffffff_white_corner_10"
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <EditText
-                        android:id="@+id/repairRemark"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:gravity="top"
-                        android:hint="@string/repair_hint"
-                        android:inputType="text"
-                        android:minLines="3"
-                        android:textColor="@color/color_A0A0A0"
-                        android:textSize="13sp"
-                        android:importantForAutofill="no" />
+                    android:id="@+id/repairRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:maxLength="200"
+                    android:hint="@string/repair_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:minLines="3"
+                    android:textColor="@color/color_A0A0A0"
+                    android:textSize="13sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/repairImages"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                    android:id="@+id/repairImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/immediately"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:orientation="horizontal">
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableStart="@drawable/checked_button"
+                        android:drawablePadding="5dp"
+                        android:text="@string/immediately"
+                        android:textColor="@color/repair_radio_button_text"
+                        android:textSize="15sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioButton
-                            android:id="@+id/immediately"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:button="@null"
-                            android:drawableStart="@drawable/checked_button"
-                            android:drawablePadding="5dp"
-                            android:checked="true"
-                            android:text="@string/immediately"
-                            android:textColor="@color/repair_radio_button_text"
-                            android:textSize="15sp"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioButton
-                            android:id="@+id/reservation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:button="@null"
-                            android:drawableStart="@drawable/checked_button"
-                            android:drawablePadding="5dp"
-                            android:text="@string/reservation"
-                            android:textColor="@color/repair_radio_button_text"
-                            android:textSize="15sp"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/immediately" />
+                        android:id="@+id/reservation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:button="@null"
+                        android:drawableStart="@drawable/checked_button"
+                        android:drawablePadding="5dp"
+                        android:text="@string/reservation"
+                        android:textColor="@color/repair_radio_button_text"
+                        android:textSize="15sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/immediately" />
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@string/repair_time"
-                            android:textColor="@color/color_A0A0A0"
-                            android:textSize="13sp"
-                            app:layout_constraintBottom_toBottomOf="@id/immediately"
-                            app:layout_constraintLeft_toRightOf="@id/immediately"
-                            app:layout_constraintTop_toTopOf="@id/immediately" />
+                        android:id="@+id/immediatelyTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/color_A0A0A0"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@id/immediately"
+                        app:layout_constraintLeft_toRightOf="@id/immediately"
+                        app:layout_constraintTop_toTopOf="@id/immediately" />
 
                     <TextView
-                            android:id="@+id/reservation_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/color_A0A0A0"
-                            android:textSize="13sp"
-                            android:layout_marginStart="10dp"
-                            android:visibility="gone"
-                            android:hint="@string/click_choose_time"
-                            app:layout_constraintBottom_toBottomOf="@id/reservation"
-                            app:layout_constraintLeft_toRightOf="@id/reservation"
-                            app:layout_constraintTop_toTopOf="@id/reservation" />
+                        android:id="@+id/reservation_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/reservation"
+                        app:layout_constraintLeft_toRightOf="@id/reservation"
+                        app:layout_constraintTop_toTopOf="@id/reservation" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/repair_contact"
-                        android:textColor="@color/color_393939"
-                        android:textSize="13sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/repair_contact"
+                    android:textColor="@color/color_393939"
+                    android:textSize="13sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/repairContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                    android:id="@+id/repairContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 
 
             <TextView
-                    android:id="@+id/submit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rect_red_bg_corner_5"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/submit"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp" />
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rect_red_bg_corner_5"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/submit"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
 
         </LinearLayout>
     </ScrollView>

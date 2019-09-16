@@ -5,14 +5,23 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('E:\\AndroidStudioAll\\AndroidStudioProjects\\SweetHome\\sweet_home.jks')
+            storePassword '558600'
+            keyAlias = 'sweet_home'
+            keyPassword '558600'
+        }
+    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.cyf.sweethome"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
     buildTypes {
         release {
@@ -20,6 +29,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    /**
+     * jpush 账号
+     * FHsubway
+     * HANda082316
+     */
 
 }
 
@@ -39,7 +53,8 @@ dependencies {
     implementation 'com.lovedise:permissiongen:0.0.6'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.zhihu.android:matisse:0.4.3'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
+//    implementation 'com.ycjiang:imgepreviewlibrary:1.1.3'
 }

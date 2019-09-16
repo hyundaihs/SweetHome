@@ -24,12 +24,12 @@ class GlideImageLoader : ImageLoader() {
         //        VolleyUtil volleyUtil = VolleyUtil.getInstance(context);
         //        volleyUtil.getImage(imageView, (String) path);
         when (path) {
-            is Int -> Picasso.get().load(path).into(imageView)
+            is Int -> Picasso.with(context).load(path).into(imageView)
             is String -> {
                 if (path.contains("http")) {
-                    Picasso.get().load(path).into(imageView)
+                    Picasso.with(context).load(path).into(imageView)
                 } else {
-                    Picasso.get().load(File(path)).into(imageView)
+                    Picasso.with(context).load(File(path)).into(imageView)
                 }
             }
         }
