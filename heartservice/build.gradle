@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('E:\\AndroidStudioAll\\AndroidStudioProjects\\SweetHome\\sweet_home.jks')
+            storeFile file('E:\\AndroidStudioAll\\AndroidStudioProjects\\SweetHome\\heart_service.jks')
             storePassword '558600'
-            keyAlias = 'sweet_home'
+            keyAlias = 'heartservice'
             keyPassword '558600'
         }
     }
-    compileSdkVersion 28
+    compileSdkVersion 29
 
 
     defaultConfig {
@@ -22,7 +22,16 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
-
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "56f55cf8e233afc7c136b2df", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     buildTypes {
@@ -50,4 +59,6 @@ dependencies {
     implementation 'com.lovedise:permissiongen:0.0.6'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation  'cn.jiguang.sdk:jpush:3.3.4'
+    implementation  'cn.jiguang.sdk:jcore:2.1.2'
 }

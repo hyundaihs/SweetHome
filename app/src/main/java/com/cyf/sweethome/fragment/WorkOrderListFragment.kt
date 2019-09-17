@@ -130,7 +130,7 @@ class WorkOrderListFragment(val type: Int) : BaseFragment() {
             super.onBindViewHolder(holder, position)
             val workOrderListItem = data[position]
             holder.itemView.workOrderType.text = workOrderListItem.xqbsbxlx_title
-            holder.itemView.workOrderStatus.text = WORK_ORDER_STATUS[workOrderListItem.sh_status]
+            holder.itemView.workOrderStatus.text = workOrderListItem.sh_title
             holder.itemView.workOrderAddress.text = workOrderListItem.fw_title
             holder.itemView.workOrderTime.text = CalendarUtil(
                 workOrderListItem.create_time,

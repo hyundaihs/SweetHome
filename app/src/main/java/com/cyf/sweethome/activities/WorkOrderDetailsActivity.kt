@@ -110,7 +110,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
 
     private fun fillViews(details: WorkOrderDetails) {
         workOrderType.text = details.xqbsbxlx_title
-        workOrderStatus.text = WORK_ORDER_STATUS[details.sh_status]
+        workOrderStatus.text = details.sh_title
         workOrderRemark.text = details.contents
         workOrderTime.text = CalendarUtil(details.create_time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
         address.text = details.fw_title
@@ -150,7 +150,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val operatingRecord = data[position]
-            holder.itemView.status.text = WORK_ORDER_STATUS[operatingRecord.sh_status]
+            holder.itemView.status.text = operatingRecord.type_title
             Picasso.with(holder.itemView.context).load(operatingRecord.xqyg_file_url.getImageUrl())
                 .resize(300, 300)
                 .into(holder.itemView.photo)

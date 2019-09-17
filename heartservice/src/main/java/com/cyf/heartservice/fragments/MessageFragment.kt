@@ -76,6 +76,9 @@ class MessageFragment : BaseFragment() {
             }
         }
         setData()
+        deleteSearch.setOnClickListener {
+            searchText.setText("")
+        }
     }
 
     private val bgs = listOf(
@@ -86,7 +89,7 @@ class MessageFragment : BaseFragment() {
 
     private val pics = listOf(
         R.mipmap.headphones,
-        R.mipmap.headphones,
+        R.mipmap.gong_dan_chu_li,
         R.mipmap.bell
     )
 

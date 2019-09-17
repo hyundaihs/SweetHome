@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import cn.jpush.android.api.JPushInterface
+import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -83,9 +85,12 @@ class LoginActivity : MyBaseActivity() {
     }
 
     private fun login() {
+        val id = JPushInterface.getRegistrationID(this)
+        D("jpush_id =$id")
         val map = mapOf(
             Pair("phone", inputPhone.text.toString()),
-            Pair("msgverf", inputMsg.text.toString())
+            Pair("msgverf", inputMsg.text.toString()),
+            Pair("jpush_id", id)
         )
         KevinRequest.build(this).apply {
             setRequestUrl(LOGIN.getInterface(map))
@@ -111,7 +116,7 @@ class LoginActivity : MyBaseActivity() {
     }
 
 
-    fun getPermission(){
+    fun getPermission() {
         //处理需要动态申请的权限
         PermissionGen.with(this)
             .addRequestCode(SUCCESSCODE)
@@ -119,7 +124,7 @@ class LoginActivity : MyBaseActivity() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA
-            ) .request()
+            ).request()
     }
 
     override fun onRequestPermissionsResult(
@@ -132,12 +137,12 @@ class LoginActivity : MyBaseActivity() {
 
 
     @PermissionSuccess(requestCode = 100)
-    fun doSomething(){
+    fun doSomething() {
         toast("权限获取成功")
     }
 
     @PermissionFail(requestCode = 100)
-    fun doFailSomething(){
+    fun doFailSomething() {
         toast("权限获取失败")
     }
 

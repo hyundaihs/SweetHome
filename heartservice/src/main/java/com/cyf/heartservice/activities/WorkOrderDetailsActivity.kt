@@ -18,8 +18,10 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.heartservice.R
 import com.cyf.heartservice.entity.*
+import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_work_order_details.*
@@ -109,8 +111,30 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
     }
 
     private fun fillViews(details: WorkOrderDetails) {
+        when (details.sh_status) {
+            1 -> {//待接单
+                jieshou.text = "接收"
+                jieshou.visibility = View.VISIBLE
+                jujue.visibility = View.VISIBLE
+                layoutBottom.visibility = View.VISIBLE
+                line.visibility = View.VISIBLE
+            }
+            2 -> {//待处理
+                jieshou.text = "完成"
+                jieshou.visibility = View.VISIBLE
+                jujue.visibility = View.GONE
+                layoutBottom.visibility = View.VISIBLE
+                line.visibility = View.VISIBLE
+            }
+            else -> {
+                jieshou.visibility = View.GONE
+                jujue.visibility = View.GONE
+                layoutBottom.visibility = View.GONE
+                line.visibility = View.GONE
+            }
+        }
         workOrderType.text = details.xqbsbxlx_title
-        workOrderStatus.text = WORK_ORDER_STATUS[details.sh_status]
+        workOrderStatus.text = details.sh_title
         workOrderRemark.text = details.contents
         workOrderTime.text = CalendarUtil(details.create_time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
         address.text = details.fw_title
@@ -123,10 +147,54 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
             previewData.add(imageData[i].file_url.getImageUrl())
         }
         imageAdapter.notifyDataSetChanged()
-
         operatingRecordList.clear()
         operatingRecordList.addAll(details.log_lists)
         operatingRecordAdapter.notifyDataSetChanged()
+        jieshou.setOnClickListener {
+            when (details.sh_status) {
+                1 -> {//待接单
+                    setStatus(details.id,2)
+                }
+                2 -> {//待处理
+                    setStatus(details.id,3)
+                }
+
+            }
+        }
+        jujue.setOnClickListener {
+            setStatus(details.id,5)
+        }
+    }
+
+    private fun setStatus(id:String,status:Int){
+        val map = mapOf(
+            Pair("id", id),
+            Pair("sh_status", status)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(SETBSBX.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    getSuccessDialog(context,"操作成功",object :DialogUIListener(){
+                        override fun onPositive() {
+                            getData(id)
+                        }
+
+                        override fun onNegative() {
+
+                        }
+                    })
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
+        }
     }
 
     inner class ImageAdapter(val data: ArrayList<ImageInfo>) :
@@ -150,7 +218,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val operatingRecord = data[position]
-            holder.itemView.status.text = WORK_ORDER_STATUS[operatingRecord.sh_status]
+            holder.itemView.status.text = operatingRecord.type_title
             Picasso.with(holder.itemView.context).load(operatingRecord.xqyg_file_url.getImageUrl())
                 .resize(300, 300).into(holder.itemView.photo)
             holder.itemView.contents.text = operatingRecord.title

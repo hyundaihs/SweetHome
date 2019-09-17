@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.widget.addTextChangedListener
+import cn.jpush.android.api.JPushInterface
+import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -80,9 +82,12 @@ class LoginAcitivity : MyBaseActivity(){
     }
 
     private fun login() {
+        val id = JPushInterface.getRegistrationID(this)
+        D("jpush_id =$id")
         val map = mapOf(
             Pair("phone", inputPhone.text.toString()),
-            Pair("msgverf", inputMsg.text.toString())
+            Pair("msgverf", inputMsg.text.toString()),
+            Pair("jpush_id", id)
         )
         KevinRequest.build(this).apply {
             setRequestUrl(LOGIN.getInterface(map))
