@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FF4753</color>
+    <color name="color_1777FE">#1777FE</color>
+    <color name="color_1E1E1E">#1E1E1E</color>
+    <color name="color_A7A7A7">#A7A7A7</color>
+    <color name="color_C1C1C1">#C1C1C1</color>
+    <color name="color_F0F0F0">#F0F0F0</color>
+    <color name="color_C6BFC2">#C6BFC2</color>
+    <color name="color_F7F7FA">#F7F7FA</color>
+    <color name="color_8EA1AE">#8EA1AE</color>
+    <color name="color_1882D3">#1882D3</color>
+    <color name="color_A0A0A0">#A0A0A0</color>
+    <color name="color_121212">#121212</color>
+    <color name="color_C7C7CC">#C7C7CC</color>
+    <color name="color_FFB700">#FFB700</color>
+    <color name="color_35BDA5">#35BDA5</color>
+    <color name="color_343A50">#343A50</color>
+    <color name="color_1FAF51">#1FAF51</color>
+    <color name="color_393939">#393939</color>
+    <color name="color_FF4753">#FF4753</color>
+    <color name="color_FAB10B">#FAB10B</color>
+    <color name="color_EAEAEA">#EAEAEA</color>
 </resources>

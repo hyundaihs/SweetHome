@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
@@ -33,6 +34,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
 
     private val imageData = ArrayList<ImageInfo>()
     private val imageAdapter = ImageAdapter(imageData)
+    private val previewData = ArrayList<String>()
 
     private val operatingRecordList = java.util.ArrayList<OperatingRecord>()
     private val operatingRecordAdapter = OperatingRecordAdapter(operatingRecordList)
@@ -55,7 +57,8 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         workOrderDetailImages.isNestedScrollingEnabled = false
         imageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                //ShowImageDialog(File(images[position]))
+                PhotoViewActivity.setData(previewData,true,position)
+                startActivity(Intent(view.context, PhotoViewActivity::class.java))
             }
         }
 
@@ -116,6 +119,9 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         phone.text = details.phone
         imageData.clear()
         imageData.addAll(details.img_lists)
+        for(i in 0 until imageData.size){
+            previewData.add(imageData[i].file_url.getImageUrl())
+        }
         imageAdapter.notifyDataSetChanged()
 
         operatingRecordList.clear()

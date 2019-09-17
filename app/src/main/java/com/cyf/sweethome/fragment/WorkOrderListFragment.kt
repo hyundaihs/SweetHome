@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
@@ -93,7 +94,7 @@ class WorkOrderListFragment(val type: Int) : BaseFragment() {
 
     private fun getListData(page: Int, isRefresh: Boolean = false) {
         val map = mapOf(
-            Pair("page_size", "15"),
+            Pair("page_size", 10),
             Pair("page", page),
             Pair("sh_status", type)
         )
@@ -102,6 +103,7 @@ class WorkOrderListFragment(val type: Int) : BaseFragment() {
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     getErrorDialog(context, error)
+                    listViewSwipe.isRefreshing = false
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {

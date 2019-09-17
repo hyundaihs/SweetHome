@@ -1,4 +1,4 @@
-package com.cyf.sweethome.entity
+package com.cyf.heartservice.entity
 
 import android.text.TextUtils
 import android.util.Log
@@ -12,8 +12,8 @@ import java.security.MessageDigest
  */
 const val TEST_DEVICE_ID = "TR-005D16660016402020E42DE4"
 
-const val ROOT_URL = "https://jsj.lovejushijie.com"
-const val INTERFACE_INDEX = "/api.php/Index/"
+const val ROOT_URL = "http://s.yshdszx.com"
+const val INTERFACE_INDEX = "/apiyg.php/Index/"
 const val FROM = "/from/android"
 const val KEY_STR = "/keystr/"
 const val AREA = "$ROOT_URL/static/pca.json"
@@ -55,4 +55,8 @@ private fun md5(string: String): String {
 }
 
 const val UPLOADFILE = "uploadfile"//文件上传
+const val LOGIN = "login"//登陆
+const val GDYFTZLISTS = "gdyftzlists"//报事报修、验房通知列表
+const val YFJLINFO = "yfjlinfo"//验房记录详情
+const val BSBXINFO = "bsbxinfo"//报事保修详情
 

@@ -1,25 +1,20 @@
 package com.cyf.sweethome.activities
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-import android.graphics.Rect
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.utils.FileUtil.getPathFromUri
+import com.android.shuizu.myutillibrary.utils.PictureSelectorObtainMultipleResult
+import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
@@ -30,15 +25,10 @@ import com.cyf.sweethome.entity.getInterface
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.engine.impl.PicassoEngine
-import com.zhihu.matisse.internal.entity.CaptureStrategy
 import kotlinx.android.synthetic.main.activity_check_room.*
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
 import org.jetbrains.anko.toast
 import java.io.File
-import com.zhihu.matisse.internal.utils.MediaStoreCompat
 
 
 /**
@@ -53,21 +43,18 @@ class CheckRoomActivity : MyBaseActivity() {
     private val imageData = ArrayList<String>()
     private val imageAdapter = ImageAdapter(imageData)
     private val submitUrl = ArrayList<String>()
-//    private val mThumbViewInfoList = ArrayList<ThumbViewInfo>()
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
-            val selectList = Matisse.obtainResult(data)
-            for (i in 0 until selectList.size) {
-                var file = getPathFromUri(this, selectList[i])
-                if (file != null) {
-                    uploadPhoto(file)
-                } else {
-                    file =
-                        "/storage/emulated/0/${Environment.DIRECTORY_PICTURES}/${selectList[i].lastPathSegment}"
-                    uploadPhoto(file)
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val selectList = PictureSelectorObtainMultipleResult(data)
+            when (requestCode) {
+                REQUEST_CODE_CHOOSE -> {
+                    for (i in 0 until selectList.size) {
+                        val file = selectList[i]
+                        uploadPhoto(file)
+                    }
                 }
             }
         }
@@ -94,20 +81,10 @@ class CheckRoomActivity : MyBaseActivity() {
         imageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 if (position == imageData.size && position < MAX_IMAGE) {
-                    choosePic(MAX_IMAGE - imageData.size)
+                    PictureSelectorStart(MAX_IMAGE - imageData.size, REQUEST_CODE_CHOOSE)
                 } else {
-                    //ShowImageDialog(File(images[position]))
-                    //打开预览界面
-//                    GPreviewBuilder.from(this@CheckRoomActivity)
-//                        //是否使用自定义预览界面，当然8.0之后因为配置问题，必须要使用
-//                        .to(GPreviewActivity::class.java)
-//                        .setData(mThumbViewInfoList)
-//                        .setCurrentIndex(position)
-//                        .setSingleFling(true)
-//                        .setType(GPreviewBuilder.IndicatorType.Number)
-//                        // 小圆点
-//                        .setType(GPreviewBuilder.IndicatorType.Dot)
-//                        .start()
+                    PhotoViewActivity.setData(imageData,false,position)
+                    startActivity(Intent(view.context,PhotoViewActivity::class.java))
                 }
             }
         }
@@ -117,20 +94,6 @@ class CheckRoomActivity : MyBaseActivity() {
         nopassBtn.setOnClickListener {
             submit(2)
         }
-    }
-
-    fun choosePic(max: Int) {
-        Matisse.from(this)
-            .choose(MimeType.allOf())
-            .countable(true)
-            .maxSelectable(max)
-            .restrictOrientation(SCREEN_ORIENTATION_UNSPECIFIED)
-            .thumbnailScale(0.85f)
-            .imageEngine(PicassoEngine())
-            .capture(true)
-            .captureStrategy(CaptureStrategy(true, "PhotoPicker"))
-            .theme(R.style.Matisse_Zhihu)
-            .forResult(REQUEST_CODE_CHOOSE)
     }
 
     inner class ImageAdapter(val data: ArrayList<String>) :
@@ -169,12 +132,6 @@ class CheckRoomActivity : MyBaseActivity() {
                 override fun onSuccess(context: Context, result: String) {
                     val fileInfoRes = Gson().fromJson(result, FileInfoRes::class.java)
                     submitUrl.add(fileInfoRes.retRes.file_url)
-//                    val bounds = Rect()
-//                    //new ThumbViewInfo(图片地址)
-//                    val item = ThumbViewInfo(fileInfoRes.retRes.file_url)
-//                    item.bounds = bounds
-//                    mThumbViewInfoList.add(item)
-
                     imageData.add(file)
                     imageAdapter.notifyDataSetChanged()
                 }

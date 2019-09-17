@@ -1,11 +1,13 @@
 package com.cyf.sweethome.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
@@ -27,6 +29,7 @@ class CheckRoomDetailsActivity : MyBaseActivity() {
 
     private val imageData = ArrayList<ImageInfo>()
     private val imageAdapter = ImageAdapter(imageData)
+    private val previewData = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +73,8 @@ class CheckRoomDetailsActivity : MyBaseActivity() {
         detailsRecyclerView.isNestedScrollingEnabled = false
         imageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                //ShowImageDialog(File(images[position]))
+                PhotoViewActivity.setData(previewData,true,position)
+                startActivity(Intent(view.context, PhotoViewActivity::class.java))
             }
         }
     }
@@ -86,6 +90,9 @@ class CheckRoomDetailsActivity : MyBaseActivity() {
         phone.text = details.phone
         imageData.clear()
         imageData.addAll(details.img_lists)
+        for(i in 0 until imageData.size){
+            previewData.add(imageData[i].file_url.getImageUrl())
+        }
         imageAdapter.notifyDataSetChanged()
     }
 

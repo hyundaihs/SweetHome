@@ -3,31 +3,23 @@ package com.cyf.sweethome.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.os.Environment
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.utils.CalendarUtil
-import com.android.shuizu.myutillibrary.utils.FileUtil
-import com.android.shuizu.myutillibrary.utils.getErrorDialog
-import com.android.shuizu.myutillibrary.utils.getSuccessDialog
+import com.android.shuizu.myutillibrary.utils.*
 import com.cyf.sweethome.R
 import com.cyf.sweethome.entity.*
 import com.cyf.sweethome.utils.PickerUtil
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.engine.impl.PicassoEngine
-import com.zhihu.matisse.internal.entity.CaptureStrategy
 import kotlinx.android.synthetic.main.activity_submit_repair.*
 import kotlinx.android.synthetic.main.layout_repair_contact_list_item.view.*
 import kotlinx.android.synthetic.main.layout_repair_type_item.view.*
@@ -57,15 +49,15 @@ class SubmitRepairActivity : MyBaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
-            val selectList = Matisse.obtainResult(data)
-            for (i in 0 until selectList.size) {
-                var file = FileUtil.getPathFromUri(this, selectList[i])
-                if (file != null) {
-                    uploadPhoto(file)
-                } else {
-                    file = "/storage/emulated/0/${Environment.DIRECTORY_PICTURES}/${selectList[i].lastPathSegment}"
-                    uploadPhoto(file)
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val selectList = PictureSelectorObtainMultipleResult(data)
+            when (requestCode) {
+                REQUEST_CODE_CHOOSE -> {
+
+                    for (i in 0 until selectList.size) {
+                        val file = selectList[i]
+                        uploadPhoto(file)
+                    }
                 }
             }
         }
@@ -123,7 +115,7 @@ class SubmitRepairActivity : MyBaseActivity() {
     }
 
     private fun submit() {
-        if(repairRemark.text.isEmpty()){
+        if (repairRemark.text.isEmpty()) {
             repairRemark.error = "请填写您遇到的问题"
             return
         }
@@ -186,9 +178,10 @@ class SubmitRepairActivity : MyBaseActivity() {
         imageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 if (position == imageData.size && position < MAX_IMAGE) {
-                    choosePic(MAX_IMAGE - imageData.size)
+                    PictureSelectorStart(MAX_IMAGE - imageData.size, REQUEST_CODE_CHOOSE)
                 } else {
-                    //ShowImageDialog(File(images[position]))
+                    PhotoViewActivity.setData(imageData,false,position)
+                    startActivity(Intent(view.context, PhotoViewActivity::class.java))
                 }
             }
         }
@@ -206,19 +199,6 @@ class SubmitRepairActivity : MyBaseActivity() {
                 contactAdapter.setChecked(position)
             }
         }
-    }
-
-    fun choosePic(max: Int) {
-        Matisse.from(this)
-            .choose(MimeType.allOf())
-            .countable(true)
-            .maxSelectable(max)
-            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-            .thumbnailScale(0.85f)
-            .capture(true)
-            .captureStrategy(CaptureStrategy(true, "PhotoPicker"))
-            .imageEngine(PicassoEngine())
-            .forResult(REQUEST_CODE_CHOOSE)
     }
 
     private fun getTypes() {

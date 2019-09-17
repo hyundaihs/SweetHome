@@ -52,9 +52,7 @@ dependencies {
     implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.1'
     implementation 'com.lovedise:permissiongen:0.0.6'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation 'com.zhihu.android:matisse:0.4.3'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
-//    implementation 'com.ycjiang:imgepreviewlibrary:1.1.3'
 }

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.hardware.Camera
 import android.os.Environment
 import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.utils.getLoadigDialog
@@ -13,6 +12,8 @@ import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.io.File
@@ -21,7 +22,12 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
-open class RequestResult(val retInt: Int = 0, val retErr: String = "", val retUrl: String = "", val retCounts: Int = 0) {
+open class RequestResult(
+    val retInt: Int = 0,
+    val retErr: String = "",
+    val retUrl: String = "",
+    val retCounts: Int = 0
+) {
     override fun toString(): String {
         return "RequestResult(retInt=$retInt, retErr='$retErr', retCounts=$retCounts)"
     }
@@ -188,7 +194,7 @@ class KevinRequest private constructor(val context: Context) {
     fun postRequest() {
         dialog?.show()
         context.doAsync {
-            val requestBody = RequestBody.create(MEDIA_TYPE_JSON, Gson().toJson(map))
+            val requestBody = Gson().toJson(map).toRequestBody(MEDIA_TYPE_JSON)
             val request =
                 Request.Builder().url(requestUrl).post(requestBody).addHeader("cookie", sessionId)
                     .build()
@@ -243,8 +249,13 @@ class KevinRequest private constructor(val context: Context) {
             val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
             for (i in 0 until files.size) {
                 val file = File(files[i])
-                val fileBody = RequestBody.create("application/octet-stream".toMediaTypeOrNull(), file)
-                requestBodyBuilder.addFormDataPart(name, files[i].substring(files[i].lastIndexOf("/")), fileBody)
+                val fileBody =
+                    file.asRequestBody("application/octet-stream".toMediaTypeOrNull())
+                requestBodyBuilder.addFormDataPart(
+                    name,
+                    files[i].substring(files[i].lastIndexOf("/")),
+                    fileBody
+                )
             }
             val requestBody = requestBodyBuilder.build()
             val request = Request.Builder()
@@ -303,7 +314,7 @@ class KevinRequest private constructor(val context: Context) {
                 override fun onResponse(call: Call, response: Response) {
                     var ips: InputStream? = null
                     val buf = ByteArray(2048)
-                    var len = 0
+                    var len: Int
                     var fos: FileOutputStream? = null
 //                FileUtil.isFileExist(destFileDir)
                     // 储存下载文件的目录

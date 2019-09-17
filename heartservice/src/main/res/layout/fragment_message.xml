@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp"
+            android:text="消息"
+            android:textColor="@color/color_1E1E1E"
+            android:textSize="18sp" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_C6BFC2" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/rect_ffffff_white_corner_5"
+            android:hint="搜索"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/color_1E1E1E"
+            android:textSize="12sp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tabMessageList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -21,7 +21,11 @@ fun Any.getMessageDialog(
     meesage: String,
     listener: DialogUIListener? = null
 ): Dialog {
-    return DialogUIUtils.showAlert(context as Activity, "提示", meesage, listener).show()
+    return if (listener == null) {
+        DialogUIUtils.showAlert(context as Activity, "提示", meesage, MyDialogUIListener()).show()
+    } else {
+        DialogUIUtils.showAlert(context as Activity, "提示", meesage, listener).show()
+    }
 }
 
 fun Any.getSuccessDialog(
@@ -29,7 +33,11 @@ fun Any.getSuccessDialog(
     meesage: String,
     listener: DialogUIListener? = null
 ): Dialog {
-    return DialogUIUtils.showAlert(context as Activity, "成功", meesage, listener).show()
+    return if (listener == null) {
+        DialogUIUtils.showAlert(context as Activity, "成功", meesage, MyDialogUIListener()).show()
+    } else {
+        DialogUIUtils.showAlert(context as Activity, "成功", meesage, listener).show()
+    }
 }
 
 fun Any.getErrorDialog(
@@ -37,9 +45,26 @@ fun Any.getErrorDialog(
     error: String,
     listener: DialogUIListener? = null
 ): Dialog {
-    return DialogUIUtils.showAlert(context as Activity, "出错", error, listener).show()
+    return if (listener == null) {
+        DialogUIUtils.showAlert(context as Activity, "出错", error, MyDialogUIListener()).show()
+    } else {
+        DialogUIUtils.showAlert(context as Activity, "出错", error, listener).show()
+    }
 }
 
 fun Any.getLoginErrDialog(context: Context, listener: DialogUIListener? = null): Dialog {
-    return DialogUIUtils.showAlert(context as Activity, "出错", "需要重新验证登陆", listener).show()
+    return if (listener == null) {
+        DialogUIUtils.showAlert(context as Activity, "出错", "需要重新验证登陆", MyDialogUIListener()).show()
+    } else {
+        DialogUIUtils.showAlert(context as Activity, "出错", "需要重新验证登陆", listener).show()
+    }
+}
+
+class MyDialogUIListener : DialogUIListener() {
+    override fun onNegative() {
+    }
+
+    override fun onPositive() {
+    }
+
 }
