@@ -161,3 +161,19 @@ data class WorkOrderDetails(
 )
 
 data class WorkOrderDetailsRes(var retRes: WorkOrderDetails) : RequestResult()
+
+data class UserInfo(
+    var id: String, // 用户id
+    var xq_id: String, // 小区id
+    var phone: String, // 电话账号
+    var card_num: String, // 身份证
+    var title: String, // 姓名
+    var file_url: String, // 头像/证件照
+    var zc_file_url: String, // 注册照
+    var sex: String, // 女
+    var login_time: String, // 登录时间
+    var create_time: String, // 创建时间
+    var xqfh_id: String // 当前房号id（未认证通过时为0）
+)
+
+data class UserInfoRes(var retRes: UserInfo) : RequestResult()

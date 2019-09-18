@@ -56,6 +56,7 @@ private fun md5(string: String): String {
 
 const val UPLOADFILE = "uploadfile"//文件上传
 const val LOGIN = "login"//登陆
+const val SENDVERF = "sendverf"//发送短信验证码
 const val YFJLLISTS = "yfjllists"//验方记录列表
 const val YFJLINFO = "yfjlinfo"//验房记录详情
 const val TJYFJL = "tjyfjl"//提交验房记录
@@ -65,4 +66,6 @@ const val TJBSBX = "tjbsbx"//提交报事保修
 const val GDSL = "gdsl"//工单数量
 const val BSBXLISTS = "bsbxlists"//报事保修列表
 const val BSBXINFO = "bsbxinfo"//报事保修详情
+const val USERINFO = "userinfo"//用户详情
+const val WDFWLB = "wdfwlb"//我的房屋列表
 

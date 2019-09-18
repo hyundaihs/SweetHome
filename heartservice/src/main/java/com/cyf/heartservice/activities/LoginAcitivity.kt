@@ -12,6 +12,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.heartservice.R
 import com.cyf.heartservice.entity.LOGIN
+import com.cyf.heartservice.entity.SENDVERF
 import com.cyf.heartservice.entity.getInterface
 import kotlinx.android.synthetic.main.activitiy_login.*
 import kr.co.namee.permissiongen.PermissionFail
@@ -26,11 +27,11 @@ import java.util.*
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class LoginAcitivity : MyBaseActivity(){
+class LoginAcitivity : MyBaseActivity() {
 
     private var mTimer: Timer? = null
     private var mTimerTask: MyTimerTask? = null
-    private val COUNT = 6
+    private val COUNT = 60
     private var time = COUNT
     private var isPhoneNotEmpty = false
     private var isMsgNotEmpty = false
@@ -40,7 +41,7 @@ class LoginAcitivity : MyBaseActivity(){
         override fun run() {
             doAsync {
                 uiThread {
-                    getYzm.text = "${time--}S"
+                    getYzm.text = "${time--}s后重新获取"
                     if (time < 0) {
                         mTimer?.cancel()
                         mTimer = null
@@ -58,6 +59,8 @@ class LoginAcitivity : MyBaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activitiy_login)
+        isPhoneNotEmpty = inputPhone.text.isNotEmpty()
+        isMsgNotEmpty = inputMsg.text.isNotEmpty()
         loginBtn.isEnabled = (inputPhone.text.isNotEmpty() and inputMsg.text.isNotEmpty())
         getYzm.isEnabled = inputPhone.text.isNotEmpty()
         inputPhone.addTextChangedListener {
@@ -74,6 +77,7 @@ class LoginAcitivity : MyBaseActivity(){
             mTimer = Timer()
             mTimerTask = MyTimerTask()
             mTimer?.schedule(mTimerTask, 0, 1000)
+            sendYZM()
         }
         loginBtn.setOnClickListener {
             login()
@@ -81,9 +85,31 @@ class LoginAcitivity : MyBaseActivity(){
         getPermission()
     }
 
+    private fun sendYZM() {
+        val map = mapOf(
+            Pair("phone", inputPhone.text.toString())
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(SENDVERF.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    toast("发送成功")
+                }
+
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
+        }
+    }
+
     private fun login() {
         val id = JPushInterface.getRegistrationID(this)
-        D("jpush_id =$id")
         val map = mapOf(
             Pair("phone", inputPhone.text.toString()),
             Pair("msgverf", inputMsg.text.toString()),
@@ -110,7 +136,7 @@ class LoginAcitivity : MyBaseActivity(){
     }
 
 
-    fun getPermission(){
+    fun getPermission() {
         //处理需要动态申请的权限
         PermissionGen.with(this)
             .addRequestCode(SUCCESSCODE)
@@ -118,7 +144,7 @@ class LoginAcitivity : MyBaseActivity(){
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA
-            ) .request()
+            ).request()
     }
 
     override fun onRequestPermissionsResult(
@@ -131,12 +157,12 @@ class LoginAcitivity : MyBaseActivity(){
 
 
     @PermissionSuccess(requestCode = 100)
-    fun doSomething(){
+    fun doSomething() {
         toast("权限获取成功")
     }
 
     @PermissionFail(requestCode = 100)
-    fun doFailSomething(){
+    fun doFailSomething() {
         toast("权限获取失败")
     }
 }

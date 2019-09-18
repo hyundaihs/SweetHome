@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('D:\\Users\\lenovo\\workspace\\SweetHome\\heart_service.jks')
+            storeFile file('../heart_service.jks')
             storePassword '558600'
             keyAlias = 'heartservice'
             keyPassword '558600'

@@ -1,5 +1,6 @@
 package com.cyf.sweethome.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -9,9 +10,12 @@ import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
+import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.adapters.MyHouseAdapter
-import com.cyf.sweethome.entity.HouseListItem
+import com.cyf.sweethome.entity.*
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_my_house.*
 import kotlinx.android.synthetic.main.layout_list_empty.*
 import java.util.ArrayList
@@ -33,6 +37,7 @@ class MyHouseActivity : MyBaseActivity() {
 
         })
         initViews()
+        getMyHouse()
     }
 
     private fun initViews() {
@@ -47,7 +52,6 @@ class MyHouseActivity : MyBaseActivity() {
                 resources.getColor(android.R.color.transparent)
             )
         )
-        //myHouse.addItemDecoration(LineDecoration(this, LineDecoration.VERTICAL))
         myHouse.itemAnimator = DefaultItemAnimator()
         myHouse.isNestedScrollingEnabled = false
         myHouse.setEmptyView(listEmptyView)
@@ -56,6 +60,31 @@ class MyHouseActivity : MyBaseActivity() {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
 
             }
+        }
+    }
+
+    private fun getMyHouse() {
+        val map = mapOf(
+            Pair("wdfwlb", 0)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(WDFWLB.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val houseListRes = Gson().fromJson(result, HouseListRes::class.java)
+                    myHouseList.clear()
+                    myHouseList.addAll(houseListRes.retRes)
+                    myHouseAdapter.notifyDataSetChanged()
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
         }
     }
 }

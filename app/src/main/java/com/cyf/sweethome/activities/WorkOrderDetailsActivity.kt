@@ -38,13 +38,14 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
 
     private val operatingRecordList = java.util.ArrayList<OperatingRecord>()
     private val operatingRecordAdapter = OperatingRecordAdapter(operatingRecordList)
+    private var id: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentBaseView(R.layout.activity_work_order_details)
         setTitle("报事详情")
         initViews()
-        val id = intent.getStringExtra("id")
+        id = intent.getStringExtra("id")
         id?.let { getData(it) }
     }
 
@@ -57,7 +58,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         workOrderDetailImages.isNestedScrollingEnabled = false
         imageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                PhotoViewActivity.setData(previewData,true,position)
+                PhotoViewActivity.setData(previewData, true, position)
                 startActivity(Intent(view.context, PhotoViewActivity::class.java))
             }
         }
@@ -109,6 +110,11 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
     }
 
     private fun fillViews(details: WorkOrderDetails) {
+        if (details.sh_status == 3) {
+            layout_pj.visibility = View.VISIBLE
+        } else {
+            layout_pj.visibility = View.GONE
+        }
         workOrderType.text = details.xqbsbxlx_title
         workOrderStatus.text = details.sh_title
         workOrderRemark.text = details.contents
@@ -119,14 +125,25 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         phone.text = details.phone
         imageData.clear()
         imageData.addAll(details.img_lists)
-        for(i in 0 until imageData.size){
+        for (i in 0 until imageData.size) {
             previewData.add(imageData[i].file_url.getImageUrl())
         }
         imageAdapter.notifyDataSetChanged()
-
         operatingRecordList.clear()
         operatingRecordList.addAll(details.log_lists)
         operatingRecordAdapter.notifyDataSetChanged()
+        ping_jia.setOnClickListener {
+            val intent = Intent(it.context, PingJiaActivity::class.java)
+            intent.putExtra("id", details.id)
+            startActivityForResult(intent, 100)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == 101) {
+            id?.let { getData(it) }
+        }
     }
 
     inner class ImageAdapter(val data: ArrayList<ImageInfo>) :

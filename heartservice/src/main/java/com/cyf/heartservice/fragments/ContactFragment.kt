@@ -1,6 +1,8 @@
 package com.cyf.heartservice.fragments
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +41,9 @@ class ContactFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         getListData()
+        deleteSearch.setOnClickListener {
+            searchText.setText("")
+        }
     }
 
     private fun getListData() {
@@ -53,14 +58,6 @@ class ContactFragment : BaseFragment() {
                 setSuccessCallback(object : KevinRequest.SuccessCallback {
                     override fun onSuccess(context: Context, result: String) {
                         val contactListRes = Gson().fromJson(result, ContactListRes::class.java)
-//                        val contactBeans = ArrayList<ContactBean>()
-//                        for (i in 0 until contactListRes.retRes.size) {
-//                            val c = contactListRes.retRes[i]
-//                            val contactBean = ContactBean()
-//                            contactBean.id = i.toString()
-//                            contactBean.name = c.title
-//                            contactBeans.add(contactBean)
-//                        }
                         contactView.setData(contactListRes.retRes, false)
                         contactView.setContactListener(MyListener())
                     }
@@ -71,43 +68,33 @@ class ContactFragment : BaseFragment() {
         }
     }
 
-//    inner class ContactAdapter(val data:List<Contact>) :
-//        MyBaseAdapter(R.layout.layout_contact_list_item) {
-//
-//        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//            super.onBindViewHolder(holder, position)
-//            val contact = data[position]
-//            Picasso.with(holder.itemView.context).load(contact.file_url.getImageUrl())
-//                .resize(100,100)
-//                .error(R.mipmap.contact_title_no_image)
-//                .into(holder.itemView.photo)
-//            holder.itemView.name.text = contact.title
-//            holder.itemView.contents.text = "${contact.type_title}  ${contact.xq_title}"
-//        }
-//
-//        override fun getItemCount(): Int = data.size
-//    }
-
     inner class MyListener : ContactListener<ContactBean> {
         override fun loadAvatar(imageView: ImageView, contactBean: ContactBean) {
             imageView.setImageResource(R.mipmap.contact_title_no_image)
-            if(contactBean.file_url.isNotEmpty()){
+            if (contactBean.file_url.isNotEmpty()) {
                 Picasso.with(context).load(contactBean.file_url.getImageUrl())
-                    .resize(100, 100)
+                    .resize(300, 300)
                     .error(R.mipmap.contact_title_no_image)
                     .into(imageView)
             }
         }
 
-        override fun onClick(item: ContactBean?) {
+        override fun onClick(item: ContactBean) {
+            callPhone(item.account)
+        }
+
+        override fun onLongClick(item: ContactBean) {
 
         }
 
-        override fun onLongClick(item: ContactBean?) {
 
-        }
+    }
 
-
+    fun callPhone(phoneNum: String) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        val data = Uri.parse("tel:" + phoneNum)
+        intent.data = data
+        startActivity(intent)
     }
 
 }

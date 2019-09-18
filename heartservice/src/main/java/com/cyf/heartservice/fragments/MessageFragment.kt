@@ -1,5 +1,6 @@
 package com.cyf.heartservice.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.heartservice.R
 import com.cyf.heartservice.activities.RepairRoomActivity
-import com.cyf.heartservice.entity.RepairRoomListItem
+import com.cyf.heartservice.entity.*
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.layout_tab_message_list_item.view.*
 
@@ -25,7 +29,7 @@ import kotlinx.android.synthetic.main.layout_tab_message_list_item.view.*
  */
 class MessageFragment : BaseFragment() {
 
-    private val data = ArrayList<RepairRoomListItem>()
+    private val data = ArrayList<Msg>()
     private val adapter = TabMessageAdapter(data)
 
     override fun onCreateView(
@@ -75,13 +79,35 @@ class MessageFragment : BaseFragment() {
                 }
             }
         }
-        setData()
         deleteSearch.setOnClickListener {
             searchText.setText("")
+        }
+        getListData()
+    }
+
+    private fun getListData(){
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(XXZX.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val msgListRes = Gson().fromJson(result, MsgListRes::class.java)
+                    data.clear()
+                    data.addAll(msgListRes.retRes)
+                    adapter.notifyDataSetChanged()
+                }
+            })
+            setDialog()
+            postRequest()
         }
     }
 
     private val bgs = listOf(
+        R.drawable.rect_1777fe_corner_5,
         R.drawable.rect_1777fe_corner_5,
         R.drawable.rect_ffb700_corner_5,
         R.drawable.rect_35bda5_corner_5
@@ -89,18 +115,12 @@ class MessageFragment : BaseFragment() {
 
     private val pics = listOf(
         R.mipmap.headphones,
+        R.mipmap.headphones,
         R.mipmap.gong_dan_chu_li,
         R.mipmap.bell
     )
 
-    private fun setData() {
-        data.add(RepairRoomListItem(0, "0", "小秘书", "最新的", 111111111))
-        data.add(RepairRoomListItem(0, "0", "工单", "最新的", 111111111))
-        data.add(RepairRoomListItem(0, "0", "服务通知", "最新的", 111111111))
-        adapter.notifyDataSetChanged()
-    }
-
-    inner class TabMessageAdapter(val data: java.util.ArrayList<RepairRoomListItem>) :
+    inner class TabMessageAdapter(val data: ArrayList<Msg>) :
         MyBaseAdapter(R.layout.layout_tab_message_list_item) {
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -110,10 +130,7 @@ class MessageFragment : BaseFragment() {
             holder.itemView.photo.setImageResource(pics[position])
             holder.itemView.name.text = repairRoomListItem.title
             holder.itemView.contents.text = repairRoomListItem.contents
-            holder.itemView.time.text = CalendarUtil(
-                repairRoomListItem.create_time,
-                true
-            ).format(CalendarUtil.YYYY_MM_DD_HH_MM)
+            holder.itemView.time.text = repairRoomListItem.date_str
         }
 
         override fun getItemCount(): Int = data.size

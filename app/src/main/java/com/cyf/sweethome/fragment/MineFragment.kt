@@ -10,11 +10,14 @@ import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.activities.WorkOrderListActivity
 import com.cyf.sweethome.entity.GDSL
 import com.cyf.sweethome.entity.WorkOrderNumListRes
+import com.cyf.sweethome.entity.getImageUrl
 import com.cyf.sweethome.entity.getInterface
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
@@ -37,21 +40,28 @@ class MineFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        SweetHome.userInfo?.let {
+            Picasso.with(context).load(it.file_url.getImageUrl())
+                .resize(300, 300)
+                .error(R.mipmap.ic_launcher)
+                .into(photo)
+            account.text = it.phone
+        }
         val intent = Intent(context, WorkOrderListActivity::class.java)
         workOrder.setOnClickListener {
-            intent.putExtra("page",0)
+            intent.putExtra("page", 0)
             startActivity(intent)
         }
         orderReceiveing.setOnClickListener {
-            intent.putExtra("page",1)
+            intent.putExtra("page", 1)
             startActivity(intent)
         }
         processing.setOnClickListener {
-            intent.putExtra("page",2)
+            intent.putExtra("page", 2)
             startActivity(intent)
         }
         evaluate.setOnClickListener {
-            intent.putExtra("page",3)
+            intent.putExtra("page", 3)
             startActivity(intent)
         }
     }

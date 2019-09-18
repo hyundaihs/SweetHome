@@ -35,12 +35,22 @@ val HOUSE_STATUS_COLOR = listOf(0, R.color.color_FAB10B, R.color.color_1FAF51, R
 val CHECK_ROOM_STATUS = listOf("", "通过", "未通过")
 val CHECK_ROOM_STATUS_COLOR = listOf(0, R.color.color_1FAF51, R.color.color_FF4753)
 
+data class Msg(
+    var type_id: String, // 1
+    var title: String, // 小秘书
+    var contents: String, // 系统已于2019年通过
+    var date_str: String // 今天
+)
+
+data class MsgListRes(var retRes: ArrayList<Msg>) : RequestResult()
+
 data class RepairRoomListItem(
     var type_id: Int, // 类型（1：报事报修，2：验房）
     var row_id: String, // 报事报修id/验房记录id
     var title: String, // 名称【业主验房】
     var contents: String, // 内容【周店1栋1单元101】
-    var create_time: Long // 创建时间戳
+    var create_time: Long, // 创建时间戳
+    var is_read: Int //是否已读 1是  0 否
 )
 
 data class RepairRoomListRes(var retRes: ArrayList<RepairRoomListItem>) : RequestResult()
@@ -96,3 +106,18 @@ data class WorkOrderDetailsRes(var retRes: WorkOrderDetails) : RequestResult()
 //):ContactBean(title)
 
 data class ContactListRes(var retRes: List<ContactBean>) : RequestResult()
+
+data class UserInfo(
+    var id: String, // id
+    var xq_id: String, // 小区id
+    var type_id: String, // 账号类型
+    var account: String, // 账号
+    var file_url: String, // 头像
+    var title: String, // 昵称（刘小哲）
+    var login_time: String, // 登录时间戳
+    var create_time: String, // 创建时间戳
+    var sf_title: String, // 角色
+    var xq_title: String // 小区名
+)
+
+data class UserInfoRes(var retRes: UserInfo) : RequestResult()

@@ -15,6 +15,7 @@ import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
 import com.cyf.heartservice.R
+import com.cyf.heartservice.activities.RepairRoomActivity
 import kotlinx.android.synthetic.main.fragment_worker.*
 import kotlinx.android.synthetic.main.layout_tab_worker_list_item.view.*
 
@@ -80,6 +81,7 @@ class WorkerFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initViews()
     }
+
     private fun initViews() {
         val gridLayoutManager = GridLayoutManager(context, 4)
         workerList.layoutManager = gridLayoutManager
@@ -95,7 +97,16 @@ class WorkerFragment : BaseFragment() {
         workerList.adapter = imageAdapter
         imageAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                when (position) {
+                    0 -> {
+                        val intent = Intent(context, RepairRoomActivity::class.java)
+                        intent.putExtra("type", 1)
+                        startActivity(intent)
+                    }
+                    else -> {
 
+                    }
+                }
             }
         }
     }

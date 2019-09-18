@@ -9,8 +9,8 @@
 
     <ImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:contentDescription="@null"
             android:src="@mipmap/contact_title_no_image"
             app:layout_constraintBottom_toBottomOf="parent"
