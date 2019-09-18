@@ -106,10 +106,10 @@ class MessageFragment : BaseFragment() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val repairRoomListItem = data[position]
-            holder.itemView.icon.setBackgroundResource(bgs[position])
-            holder.itemView.icon.setImageResource(pics[position])
-            holder.itemView.title.text = repairRoomListItem.title
-            holder.itemView.message.text = repairRoomListItem.contents
+            holder.itemView.photo.setBackgroundResource(bgs[position])
+            holder.itemView.photo.setImageResource(pics[position])
+            holder.itemView.name.text = repairRoomListItem.title
+            holder.itemView.contents.text = repairRoomListItem.contents
             holder.itemView.time.text = CalendarUtil(
                 repairRoomListItem.create_time,
                 true

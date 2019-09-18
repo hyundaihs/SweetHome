@@ -1,1 +1,1 @@
-include ':app', ':heartservice', ':myutillibrary'
+include ':app', ':heartservice', ':myutillibrary', ':libcontacts'

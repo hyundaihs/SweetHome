@@ -1,6 +1,7 @@
 package com.cyf.heartservice.entity
 
 import com.android.shuizu.myutillibrary.request.RequestResult
+import com.chezi008.libcontacts.bean.ContactBean
 import com.cyf.heartservice.R
 
 /**
@@ -61,7 +62,7 @@ data class OperatingRecord(//操作记录
     var xqbsbx_id: String, // 报事保修id
     var title: String, // 报事已被提交，正在安排服务人员。
     var sh_status: Int, // 状态（1：待接单 2：待处理 3：待评价 4：已完成 0或不传为所有）
-    var type_title:String,//状态标题
+    var type_title: String,//状态标题
     var xqyg_title: String, // 服务人员姓名
     var xqyg_phone: String, // 服务人员电话
     var xqyg_file_url: String, // 服务人员头像
@@ -84,3 +85,14 @@ data class WorkOrderDetails(
 )
 
 data class WorkOrderDetailsRes(var retRes: WorkOrderDetails) : RequestResult()
+
+//data class Contact(
+//    var account: String, // 电话
+//    var title: String, // 李主管
+//    var file_url: String, // 头像
+//    var type_title: String, // 楼宇管家
+//    var xq_title: String, // 周店
+//    var py: String // 拼音首字母
+//):ContactBean(title)
+
+data class ContactListRes(var retRes: List<ContactBean>) : RequestResult()

@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('E:\\AndroidStudioAll\\AndroidStudioProjects\\SweetHome\\heart_service.jks')
+            storeFile file('D:\\Users\\lenovo\\workspace\\SweetHome\\heart_service.jks')
             storePassword '558600'
             keyAlias = 'heartservice'
             keyPassword '558600'
@@ -28,9 +28,9 @@ android {
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "56f55cf8e233afc7c136b2df", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
 
@@ -59,6 +59,10 @@ dependencies {
     implementation 'com.lovedise:permissiongen:0.0.6'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
-    implementation  'cn.jiguang.sdk:jpush:3.3.4'
-    implementation  'cn.jiguang.sdk:jcore:2.1.2'
+    implementation 'cn.jiguang.sdk:jpush:3.3.4'
+    implementation 'cn.jiguang.sdk:jcore:2.1.2'
+    implementation project(path: ':libcontacts')
+
+    //implementation 'de.halfbit:pinned-section-listview:1.0.0'
+
 }

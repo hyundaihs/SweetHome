@@ -11,10 +11,10 @@
             android:id="@+id/photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@mipmap/contact_title_no_image"
             android:contentDescription="@null" />
 
     <TextView
@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:text="消息"
             android:textSize="15sp"
             android:textColor="@color/color_343A50"
             app:layout_constraintLeft_toRightOf="@id/photo"
@@ -34,20 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="范德萨范德萨"
             android:textSize="12sp"
             android:textColor="@color/color_A0A0A0"
             app:layout_constraintBottom_toBottomOf="@id/photo"
             app:layout_constraintLeft_toLeftOf="@id/name" />
-
-    <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="昨天"
-            android:textSize="12sp"
-            android:textColor="@color/color_A0A0A0"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

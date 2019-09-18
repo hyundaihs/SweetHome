@@ -60,4 +60,5 @@ const val GDYFTZLISTS = "gdyftzlists"//报事报修、验房通知列表
 const val YFJLINFO = "yfjlinfo"//验房记录详情
 const val BSBXINFO = "bsbxinfo"//报事保修详情
 const val SETBSBX = "setbsbx"//设置报事报修状态
+const val LXRLISTS = "lxrlists"//联系人列表
 

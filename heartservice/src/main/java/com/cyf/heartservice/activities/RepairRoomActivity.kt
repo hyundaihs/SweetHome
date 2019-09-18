@@ -131,8 +131,8 @@ class RepairRoomActivity : MyBaseActivity() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val repairRoomListItem = data[position]
-            holder.itemView.title.text = repairRoomListItem.title
-            holder.itemView.message.text = repairRoomListItem.contents
+            holder.itemView.name.text = repairRoomListItem.title
+            holder.itemView.contents.text = repairRoomListItem.contents
             holder.itemView.time.text = CalendarUtil(
                 repairRoomListItem.create_time,
                 true
