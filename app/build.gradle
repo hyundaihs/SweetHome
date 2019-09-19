@@ -41,14 +41,6 @@ android {
         }
     }
 
-
-
-    /**
-     * jpush 账号
-     * FHsubway
-     * HANda082316
-     */
-
 }
 
 dependencies {

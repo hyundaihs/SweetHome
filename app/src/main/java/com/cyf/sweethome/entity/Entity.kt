@@ -77,6 +77,8 @@ data class HouseInfo(
     var xqdy_title: String // 单元名（1单元）
 )
 
+data class HouseInfoRes(var retRes: HouseInfo) : RequestResult()
+
 data class CheckRoomLog(
     var id: String, // 验方记录id
     var title: String, // 刘丽丽

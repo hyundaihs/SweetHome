@@ -68,4 +68,6 @@ const val BSBXLISTS = "bsbxlists"//报事保修列表
 const val BSBXINFO = "bsbxinfo"//报事保修详情
 const val USERINFO = "userinfo"//用户详情
 const val WDFWLB = "wdfwlb"//我的房屋列表
+const val DQFWXX = "dqfwxx"//当前房屋信息
+const val SETDQFW = "setdqfw"//设置当前房屋
 

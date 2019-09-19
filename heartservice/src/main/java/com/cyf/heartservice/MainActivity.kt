@@ -1,7 +1,9 @@
 package com.cyf.heartservice
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.cyf.heartservice.activities.LoginAcitivity
 
 /**
  * 测试账号：18062626737   通用验证码：5974338250
@@ -11,5 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        startActivity(Intent(this, LoginAcitivity::class.java))
+        finish()
     }
 }

@@ -48,6 +48,10 @@ class PingJiaActivity : MyBaseActivity(), View.OnClickListener {
         star3.setOnClickListener(this)
         star4.setOnClickListener(this)
         star5.setOnClickListener(this)
+        submit.setOnClickListener {
+            setResult(101)
+            finish()
+        }
     }
 
     private fun setColorForStars(num: Int) {

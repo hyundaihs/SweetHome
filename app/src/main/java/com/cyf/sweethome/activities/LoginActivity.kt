@@ -34,7 +34,7 @@ class LoginActivity : MyBaseActivity() {
 
     private var mTimer: Timer? = null
     private var mTimerTask: MyTimerTask? = null
-    private val COUNT = 6
+    private val COUNT = 60
     private var time = COUNT
     private val SUCCESSCODE = 100
 

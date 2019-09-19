@@ -7,18 +7,19 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.shuizu.myutillibrary.MyBaseActivity
-import com.android.shuizu.myutillibrary.adapter.LineDecoration
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.adapters.MyHouseAdapter
 import com.cyf.sweethome.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_my_house.*
 import kotlinx.android.synthetic.main.layout_list_empty.*
-import java.util.ArrayList
+import org.jetbrains.anko.toast
+import java.util.*
 
 /**
  * ChaYin
@@ -34,7 +35,7 @@ class MyHouseActivity : MyBaseActivity() {
         setContentBaseView(R.layout.activity_my_house)
         setTitle("我的房屋")
         addRightStringBtn("添加房屋", View.OnClickListener {
-
+            toast("开发中...")
         })
         initViews()
         getMyHouse()
@@ -58,8 +59,33 @@ class MyHouseActivity : MyBaseActivity() {
         myHouse.adapter = myHouseAdapter
         myHouseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-
+                if (myHouseList[position].xqfh_id != SweetHome.houseInfo?.id) {
+                    setMyHouse(myHouseList[position].xqfh_id)
+                }
             }
+        }
+    }
+
+    private fun setMyHouse(id: String) {
+        val map = mapOf(
+            Pair("xqfh_id", id)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(SETDQFW.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val houseInfoRes = Gson().fromJson(result, HouseInfoRes::class.java)
+                    SweetHome.houseInfo = houseInfoRes.retRes
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
         }
     }
 
