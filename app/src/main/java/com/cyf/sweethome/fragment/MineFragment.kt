@@ -19,6 +19,7 @@ import com.cyf.sweethome.entity.getInterface
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.jetbrains.anko.toast
 
 /**
  * ChaYin
@@ -63,6 +64,27 @@ class MineFragment : BaseFragment() {
         evaluate.setOnClickListener {
             intent.putExtra("page", 3)
             startActivity(intent)
+        }
+        edit_info.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        myHouse.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        myActivity.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        myHealth.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        tuiGuang.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        setting.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        about.setOnClickListener {
+            it.context.toast("建设中...")
         }
     }
 

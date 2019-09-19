@@ -13,10 +13,7 @@ import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.utils.PictureSelectorObtainMultipleResult
-import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
-import com.android.shuizu.myutillibrary.utils.getErrorDialog
-import com.android.shuizu.myutillibrary.utils.getSuccessDialog
+import com.android.shuizu.myutillibrary.utils.*
 import com.cyf.sweethome.R
 import com.cyf.sweethome.entity.FileInfoRes
 import com.cyf.sweethome.entity.TJYFJL
@@ -72,6 +69,7 @@ class CheckRoomActivity : MyBaseActivity() {
     }
 
     private fun initViews() {
+        roomTime.text = CalendarUtil().format(CalendarUtil.YYYY_MM_DD_HH_MM)
         val gridLayoutManager1 = GridLayoutManager(this, 5)
         uploadRecyclerView.layoutManager = gridLayoutManager1
         uploadRecyclerView.addItemDecoration(GridDivider(this, dp2px(10f).toInt(), 5))

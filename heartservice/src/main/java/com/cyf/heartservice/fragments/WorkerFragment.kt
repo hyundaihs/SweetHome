@@ -18,6 +18,7 @@ import com.cyf.heartservice.R
 import com.cyf.heartservice.activities.RepairRoomActivity
 import kotlinx.android.synthetic.main.fragment_worker.*
 import kotlinx.android.synthetic.main.layout_tab_worker_list_item.view.*
+import org.jetbrains.anko.toast
 
 /**
  * SweetHome
@@ -104,7 +105,7 @@ class WorkerFragment : BaseFragment() {
                         startActivity(intent)
                     }
                     else -> {
-
+                        view.context.toast("建设中...")
                     }
                 }
             }

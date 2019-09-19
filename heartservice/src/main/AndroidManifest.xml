@@ -17,16 +17,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.LoginAcitivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-                android:name=".activities.LoginAcitivity"
-                android:launchMode="singleTask" />
+<!--        <activity-->
+<!--                android:name=".activities.LoginAcitivity"-->
+<!--                android:launchMode="singleTask" />-->
         <activity android:name="com.android.shuizu.myutillibrary.activities.PhotoViewActivity" />
         <activity
                 android:name=".activities.HomepageActivity"

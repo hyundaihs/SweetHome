@@ -30,7 +30,7 @@ data class ImageInfo(
 val HOUSE_STATUS = listOf("", "审核中", "审核已通过", "已拒绝")
 val HOUSE_STATUS_COLOR = listOf(0, R.color.color_FAB10B, R.color.color_1FAF51, R.color.color_FF4753)
 
-val CHECK_ROOM_STATUS = listOf("", "通过", "未通过")
+val CHECK_ROOM_STATUS = listOf("", "通过", "不通过")
 val CHECK_ROOM_STATUS_COLOR = listOf(0, R.color.color_1FAF51, R.color.color_FF4753)
 
 data class HouseListItem(

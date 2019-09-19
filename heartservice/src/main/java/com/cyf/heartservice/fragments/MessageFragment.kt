@@ -22,6 +22,7 @@ import com.cyf.heartservice.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.layout_tab_message_list_item.view.*
+import org.jetbrains.anko.toast
 
 /**
  * SweetHome
@@ -64,7 +65,7 @@ class MessageFragment : BaseFragment() {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 when (position) {
                     0 -> {
-
+                        view.context.toast("建设中...")
                     }
                     1 -> {
                         val intent = Intent(context, RepairRoomActivity::class.java)
@@ -108,13 +109,11 @@ class MessageFragment : BaseFragment() {
 
     private val bgs = listOf(
         R.drawable.rect_1777fe_corner_5,
-        R.drawable.rect_1777fe_corner_5,
         R.drawable.rect_ffb700_corner_5,
         R.drawable.rect_35bda5_corner_5
     )
 
     private val pics = listOf(
-        R.mipmap.headphones,
         R.mipmap.headphones,
         R.mipmap.gong_dan_chu_li,
         R.mipmap.bell

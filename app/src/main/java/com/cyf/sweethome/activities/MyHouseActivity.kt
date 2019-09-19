@@ -35,7 +35,7 @@ class MyHouseActivity : MyBaseActivity() {
         setContentBaseView(R.layout.activity_my_house)
         setTitle("我的房屋")
         addRightStringBtn("添加房屋", View.OnClickListener {
-            toast("开发中...")
+            toast("建设中...")
         })
         initViews()
         getMyHouse()

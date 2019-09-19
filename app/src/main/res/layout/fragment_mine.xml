@@ -43,6 +43,7 @@
 
 
     <TextView
+        android:id="@+id/edit_info"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:background="@drawable/rect_white_bg_corner_10"
@@ -116,14 +117,6 @@
                             android:textColor="@android:color/black"
                             android:textSize="12sp" />
 
-                        <!--                        <TextView-->
-                        <!--                                android:id="@+id/workOrderNum"-->
-                        <!--                                android:layout_width="wrap_content"-->
-                        <!--                                android:layout_height="wrap_content"-->
-                        <!--                                android:layout_marginStart="5dp"-->
-                        <!--                                android:maxLines="1"-->
-                        <!--                                android:textColor="@color/colorAccent"-->
-                        <!--                                android:textSize="12sp" />-->
                     </LinearLayout>
                 </LinearLayout>
 
@@ -269,6 +262,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/myHouse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@mipmap/arrow"
@@ -285,6 +279,7 @@
                 android:background="@color/color_90727C8E" />
 
             <TextView
+                android:id="@+id/myActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@mipmap/arrow"
@@ -301,6 +296,7 @@
                 android:background="@color/color_90727C8E" />
 
             <TextView
+                android:id="@+id/myHealth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@mipmap/arrow"
@@ -317,6 +313,7 @@
                 android:background="@color/color_90727C8E" />
 
             <TextView
+                android:id="@+id/tuiGuang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@mipmap/arrow"
@@ -347,6 +344,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@mipmap/arrow"
@@ -363,6 +361,7 @@
                 android:background="@color/color_90727C8E" />
 
             <TextView
+                android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@mipmap/arrow"

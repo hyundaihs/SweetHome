@@ -20,6 +20,7 @@ import com.cyf.sweethome.entity.getInterface
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.jetbrains.anko.toast
 
 /**
  * ChaYin
@@ -49,6 +50,36 @@ class HomeFragment : BaseFragment() {
         }
         callRepair.setOnClickListener {
             startActivity(Intent(activity, SubmitRepairActivity::class.java))
+        }
+        message.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        open_door.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        self_pay.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        house_sale.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        volun_apply.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        submit_info.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        get_help.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        praise.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        feedback.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        cloudTalk.setOnClickListener {
+            it.context.toast("建设中...")
         }
     }
 

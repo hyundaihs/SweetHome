@@ -10,6 +10,7 @@ import com.cyf.heartservice.R
 import com.cyf.heartservice.entity.getImageUrl
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.jetbrains.anko.toast
 
 /**
  * SweetHome
@@ -37,6 +38,18 @@ class MineFragment : BaseFragment() {
                 .into(minePhoto)
             mineName.text = it.title
             mineInfo.text = "${it.sf_title}  ${it.xq_title}"
+        }
+        layoutInfo.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        help.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        opinion.setOnClickListener {
+            it.context.toast("建设中...")
+        }
+        set.setOnClickListener {
+            it.context.toast("建设中...")
         }
     }
 }
