@@ -6,14 +6,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp">
 
@@ -172,32 +171,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/rect_ffffff_white_corner_10" />
+
+            <TextView
+                android:id="@+id/ping_jia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/rect_red_bg_corner_5"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="评价"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/layout_pj"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:background="@android:color/white"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_D9D9D8" />
-
-        <TextView
-            android:id="@+id/ping_jia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@drawable/rect_red_bg_corner_5"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="评价"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
 </LinearLayout>

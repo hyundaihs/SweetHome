@@ -1,10 +1,21 @@
 package com.cyf.sweethome.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.entity.BSBXINFO
+import com.cyf.sweethome.entity.BSBXPJ
+import com.cyf.sweethome.entity.WorkOrderDetailsRes
+import com.cyf.sweethome.entity.getInterface
+import com.dou361.dialogui.listener.DialogUIListener
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_ping_jia.*
+import org.jetbrains.anko.toast
 
 /**
  * ChaYin
@@ -31,14 +42,14 @@ class PingJiaActivity : MyBaseActivity(), View.OnClickListener {
         }
     }
 
-    private var id: String? = null
+    private var id: String = "0"
     private var currStar = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentBaseView(R.layout.activity_ping_jia)
         setTitle("服务评价")
-        id = intent.getStringExtra("id")
+        id = intent.getStringExtra("id") as String
         initViews()
     }
 
@@ -49,8 +60,44 @@ class PingJiaActivity : MyBaseActivity(), View.OnClickListener {
         star4.setOnClickListener(this)
         star5.setOnClickListener(this)
         submit.setOnClickListener {
-            setResult(101)
-            finish()
+            if (currStar <= 0) {
+                toast("请选择星级")
+            } else {
+                submit()
+            }
+
+        }
+    }
+
+    private fun submit() {
+        val map = mapOf(
+            Pair("id", id),
+            Pair("pj", currStar),
+            Pair("title", pjContent.text.toString())
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(BSBXPJ.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    getSuccessDialog(context, "操作成功", object : DialogUIListener() {
+                        override fun onPositive() {
+                            setResult(101)
+                            finish()
+                        }
+
+                        override fun onNegative() {
+                        }
+                    })
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
         }
     }
 

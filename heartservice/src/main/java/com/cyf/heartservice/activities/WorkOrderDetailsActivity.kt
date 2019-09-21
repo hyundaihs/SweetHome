@@ -136,7 +136,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         workOrderType.text = details.xqbsbxlx_title
         workOrderStatus.text = details.sh_title
         workOrderRemark.text = details.contents
-        workOrderTime.text = CalendarUtil(details.create_time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
+        workOrderTime.text = CalendarUtil(details.create_time,true).format(CalendarUtil.YYYY_MM_DD_HH_MM)
         address.text = details.fw_title
         time.text = details.yy_time
         name.text = details.title
@@ -223,7 +223,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
                 .resize(300, 300).into(holder.itemView.photo)
             holder.itemView.contents.text = operatingRecord.title
             holder.itemView.time.text =
-                CalendarUtil(operatingRecord.create_time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
+                CalendarUtil(operatingRecord.create_time,true).format(CalendarUtil.YYYY_MM_DD_HH_MM)
             holder.itemView.lineDot.isChecked = (position == 0)
             holder.itemView.lineTop.visibility = if (position == 0) View.GONE else View.VISIBLE
             holder.itemView.lineBottom.visibility =

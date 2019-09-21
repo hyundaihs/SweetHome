@@ -70,4 +70,5 @@ const val USERINFO = "userinfo"//用户详情
 const val WDFWLB = "wdfwlb"//我的房屋列表
 const val DQFWXX = "dqfwxx"//当前房屋信息
 const val SETDQFW = "setdqfw"//设置当前房屋
+const val BSBXPJ = "bsbxpj"//报事报修评价
 
