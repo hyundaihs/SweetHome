@@ -18,25 +18,25 @@ fun Any.getLoadigDialog(context: Context): Dialog {
 
 fun Any.getMessageDialog(
     context: Context,
-    meesage: String,
+    message: String,
     listener: DialogUIListener? = null
 ): Dialog {
     return if (listener == null) {
-        DialogUIUtils.showAlert(context as Activity, "提示", meesage, MyDialogUIListener()).show()
+        DialogUIUtils.showAlertHorizontal(context as Activity, "提示", message, MyDialogUIListener()).show()
     } else {
-        DialogUIUtils.showAlert(context as Activity, "提示", meesage, listener).show()
+        DialogUIUtils.showAlertHorizontal(context as Activity, "提示", message, listener).show()
     }
 }
 
 fun Any.getSuccessDialog(
     context: Context,
-    meesage: String,
+    message: String,
     listener: DialogUIListener? = null
 ): Dialog {
     return if (listener == null) {
-        DialogUIUtils.showAlert(context as Activity, "成功", meesage, MyDialogUIListener()).show()
+        DialogUIUtils.showAlert(context as Activity, "成功", message, MyDialogUIListener()).show()
     } else {
-        DialogUIUtils.showAlert(context as Activity, "成功", meesage, listener).show()
+        DialogUIUtils.showAlert(context as Activity, "成功", message, listener).show()
     }
 }
 

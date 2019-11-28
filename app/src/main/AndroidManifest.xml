@@ -35,6 +35,8 @@
         <activity android:name=".activities.WorkOrderDetailsActivity" />
         <activity android:name="com.android.shuizu.myutillibrary.activities.PhotoViewActivity"/>
         <activity android:name=".activities.PingJiaActivity" />
+        <activity android:name=".activities.MemberApplyActivity" />
+        <activity android:name=".activities.MemberInfoNewsActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->

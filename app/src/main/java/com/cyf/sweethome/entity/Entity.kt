@@ -2,6 +2,7 @@ package com.cyf.sweethome.entity
 
 import com.android.shuizu.myutillibrary.request.RequestResult
 import com.cyf.sweethome.R
+import java.io.Serializable
 
 /**
  * ChaYin
@@ -21,10 +22,10 @@ data class FileInfo(
 data class FileInfoRes(var retRes: FileInfo) : RequestResult()
 
 data class ImageInfo(
-    var file_url: String, // => 图片地址
-    var resize_file_url: String, // => 缩略图地址
-    var ext: String, // => png
-    var file_size: String // => 112717
+    var file_url: String, // :String, // 图片地址
+    var resize_file_url: String, // :String, // 缩略图地址
+    var ext: String, // :String, // png
+    var file_size: String // :String, // 112717
 )
 
 val HOUSE_STATUS = listOf("", "审核中", "审核已通过", "已拒绝")
@@ -176,6 +177,37 @@ data class UserInfo(
     var login_time: String, // 登录时间
     var create_time: String, // 创建时间
     var xqfh_id: String // 当前房号id（未认证通过时为0）
-)
+) : Serializable
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()
+
+data class MemberStatus(
+    var sh_status: Int //审核状态（0：未申请，1：审核中，2：已通过，3：已拒绝）
+)
+
+data class MemberStatusRes(var retRes: MemberStatus) : RequestResult()
+
+data class MemberType(
+    var id: String, // 党建分类id
+    var title: String // 标题
+)
+
+data class MemberTypeListRes(var retRes: ArrayList<MemberType>) : RequestResult()
+
+data class MemberInfo(
+    var id: String, // 党建id
+    var title: String, // 标题
+    var sub_title: String, // 简介
+    var file_url: String, //图片
+    var app_contents: String, // 详情（html）
+    var view_nums: String, // 阅读量
+    var pl_nums: String, // 评论量
+    var create_time: Long, // 发布时间
+    var is_sq: Int, // 是否申请（0|1）
+    var stype_id: String, // 党建分类id
+    var stype_title: String // 党建分类标题
+)
+
+data class MemberInfoRes(var retRes: MemberInfo) : RequestResult()
+
+data class MemberInfoListRes(var retRes: ArrayList<MemberInfo>) : RequestResult()

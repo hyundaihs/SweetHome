@@ -11,6 +11,7 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.entity.USERINFO
+import com.cyf.sweethome.entity.UserInfo
 import com.cyf.sweethome.entity.UserInfoRes
 import com.cyf.sweethome.entity.getInterface
 import com.cyf.sweethome.fragment.CommunityFragment
@@ -44,6 +45,16 @@ class HomepageActivity : MyBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
         getUserInfo()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable("user_info",SweetHome.userInfo)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        SweetHome.userInfo = savedInstanceState.getSerializable("user_info") as UserInfo
     }
 
     private fun getUserInfo() {

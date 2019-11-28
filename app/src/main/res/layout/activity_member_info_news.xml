@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layoutTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white">
+
+        <View
+            android:id="@+id/evBg"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/bg_white" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutMember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/color_FF4753"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/color_FF4753"
+            app:tabTextColor="@color/color_303333" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_EAEAEA"
+        app:layout_constraintTop_toBottomOf="@id/layoutTab" />
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpagerMember"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTab" />
+
+</LinearLayout>

@@ -78,9 +78,21 @@ public class PickerUtil {
 //        pvOptions.show();
 //    }
 
-    public static void showTimerPicker(final Context context, OnTimeSelectListener listener){
+    public static void showTimerPicker(final Context context, OnTimeSelectListener listener) {
         TimePickerView pvTime = new TimePickerBuilder(context, listener)
                 .setType(new boolean[]{true, true, true, true, true, false})// 默认全部显示
+                .setTitleText("选择预约时间")
+                .setSubmitText("确定")
+                .setCancelText("取消")
+                .build();
+        pvTime.show();
+    }
+
+    public static void showTimerPickerYM(final Context context, OnTimeSelectListener listener) {
+        TimePickerView pvTime = new TimePickerBuilder(context, listener)
+                .setType(new boolean[]{true, true, false, false, false, false})// 默认全部显示
+                .setSubmitText("确定")
+                .setCancelText("取消")
                 .setTitleText("选择预约时间")
                 .build();
         pvTime.show();

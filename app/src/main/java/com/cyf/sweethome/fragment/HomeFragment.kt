@@ -9,14 +9,12 @@ import android.view.ViewGroup
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getMessageDialog
+import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
-import com.cyf.sweethome.activities.CheckRoomLogActivity
-import com.cyf.sweethome.activities.MyHouseActivity
-import com.cyf.sweethome.activities.SubmitRepairActivity
-import com.cyf.sweethome.entity.DQFWXX
-import com.cyf.sweethome.entity.HouseInfoRes
-import com.cyf.sweethome.entity.getInterface
+import com.cyf.sweethome.activities.*
+import com.cyf.sweethome.entity.*
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -67,7 +65,7 @@ class HomeFragment : BaseFragment() {
             it.context.toast("建设中...")
         }
         submit_info.setOnClickListener {
-            it.context.toast("建设中...")
+            getMemberStatus()
         }
         get_help.setOnClickListener {
             it.context.toast("建设中...")
@@ -87,6 +85,53 @@ class HomeFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == 101){
             houseAddress.text = SweetHome.houseInfo?.fw_title
+        }
+    }
+
+    private fun getMemberStatus(){
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(DJSQZT.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error, object : DialogUIListener() {
+                        override fun onPositive() {
+
+                        }
+
+                        override fun onNegative() {
+                        }
+                    })
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val houseInfoRes = Gson().fromJson(result, MemberStatusRes::class.java)
+                    when(houseInfoRes.retRes.sh_status){
+                        0->{//未申请
+                            startActivity(Intent(context,MemberApplyActivity::class.java))
+                        }
+                        1->{//审核中
+                            getSuccessDialog(context,"您的党员认证申请还在审核中，请耐心等待！")
+                        }
+                        2->{//已通过
+                            startActivity(Intent(context,MemberInfoNewsActivity::class.java))
+                        }
+                        3->{//已拒绝
+                            getMessageDialog(context,"您的党员认证已被拒绝，需要重新申请吗？",object : DialogUIListener() {
+                                override fun onPositive() {
+                                    startActivity(Intent(context,MemberApplyActivity::class.java))
+                                }
+
+                                override fun onNegative() {
+
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+            setDialog()
+            postRequest()
         }
     }
 
