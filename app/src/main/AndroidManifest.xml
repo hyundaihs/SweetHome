@@ -37,6 +37,8 @@
         <activity android:name=".activities.PingJiaActivity" />
         <activity android:name=".activities.MemberApplyActivity" />
         <activity android:name=".activities.MemberInfoNewsActivity" />
+        <activity android:name=".activities.MemberInfoDetailsActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->

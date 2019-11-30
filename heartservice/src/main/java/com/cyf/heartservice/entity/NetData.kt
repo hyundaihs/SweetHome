@@ -65,4 +65,7 @@ const val LXRLISTS = "lxrlists"//联系人列表
 const val SETYD = "setyd"//设为已读
 const val XXZX = "xxzx"//消息中心
 const val USERINFO = "userinfo"//用户信息
+const val DJSQJL = "djsqjl"//党员认证列表
+const val DJSQINFO = "djsqinfo"//党员认证详情
+const val DJSQSET = "djsqset"//党员认证审核
 

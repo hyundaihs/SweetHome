@@ -121,3 +121,22 @@ data class UserInfo(
 )
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()
+
+data class MemberApplyInfo(
+    var id: String, // 申请id
+    var phone: String, // 电话
+    var title: String, // 姓名
+    var card_num: String, // 身份证号
+    var file_url: String, // 头像
+    var sex: String, // 性别
+    var rdsj: String, // 入党时间
+    var dzbmc: String, // 党支部名称
+    var dzbdz: String, // 党支部地址
+    var contents: String, // 备注
+    var sh_status: Int, // 审核状态（0：未申请，1：审核中，2：已通过，3：已拒绝）
+    var create_time: Long // 申请时间戳
+)
+
+data class MemberApplyInfoRes(var retRes: MemberApplyInfo) : RequestResult()
+
+data class MemberApplyInfoListRes(var retRes: ArrayList<MemberApplyInfo>) : RequestResult()

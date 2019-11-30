@@ -1,6 +1,7 @@
 package com.cyf.sweethome.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.cyf.sweethome.R
+import com.cyf.sweethome.activities.MemberInfoDetailsActivity
 import com.cyf.sweethome.entity.*
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
@@ -62,7 +64,9 @@ class MemberListFragment(val id: String) : BaseFragment() {
         listView.adapter = adapter
         adapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                //getMessageInfoDetails(messageInfo[position].id)
+                val intent = Intent(view.context, MemberInfoDetailsActivity::class.java)
+                intent.putExtra("id", data[position].id)
+                startActivity(intent)
             }
         }
         listViewSwipe.isRefreshing = true
@@ -84,7 +88,6 @@ class MemberListFragment(val id: String) : BaseFragment() {
             Pair("page_size", "15"),
             Pair("page", page.toString())
         )
-
         KevinRequest.build(activity as Context).apply {
             setRequestUrl(DJLISTS.getInterface())
             setErrorCallback(object : KevinRequest.ErrorCallback {
@@ -123,11 +126,13 @@ class MemberListFragment(val id: String) : BaseFragment() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val memberInfo = data[position]
-            Picasso.with(holder.itemView.context).load(memberInfo.file_url.getImageUrl()).resize(300, 300)
+            Picasso.with(holder.itemView.context).load(memberInfo.file_url.getImageUrl())
+                .resize(300, 300)
                 .into(holder.itemView.imgView)
             holder.itemView.title.text = memberInfo.title
             holder.itemView.time.text = CalendarUtil(memberInfo.create_time, true).format(
-                CalendarUtil.STANDARD)
+                CalendarUtil.STANDARD
+            )
         }
 
         override fun getItemCount(): Int = data.size

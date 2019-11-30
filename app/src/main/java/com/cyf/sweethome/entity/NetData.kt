@@ -73,6 +73,10 @@ const val SETDQFW = "setdqfw"//设置当前房屋
 const val BSBXPJ = "bsbxpj"//报事报修评价
 const val DJSQZT = "djsqzt"//党员申请状态
 const val DJSQ = "djsq"//党员申请
-const val DJSTYPE = "djstype"//党员申请
-const val DJLISTS = "djlists"//党员申请
+const val DJSTYPE = "djstype"//党建信息类别
+const val DJLISTS = "djlists"//党建信息列表
+const val DJINFO = "djinfo"//党建信息详情
+const val NRPLLISTS = "nrpllists"//党建信息评论列表
+const val NRPLADD = "nrpladd"//发送评论
+const val DJBANNER = "djbanner"//党建banner图
 

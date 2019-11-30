@@ -15,6 +15,7 @@ import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
 import com.cyf.heartservice.R
+import com.cyf.heartservice.activities.MemberApplyListActivity
 import com.cyf.heartservice.activities.RepairRoomActivity
 import kotlinx.android.synthetic.main.fragment_worker.*
 import kotlinx.android.synthetic.main.layout_tab_worker_list_item.view.*
@@ -102,6 +103,10 @@ class WorkerFragment : BaseFragment() {
                     0 -> {
                         val intent = Intent(context, RepairRoomActivity::class.java)
                         intent.putExtra("type", 1)
+                        startActivity(intent)
+                    }
+                    6->{
+                        val intent = Intent(context, MemberApplyListActivity::class.java)
                         startActivity(intent)
                     }
                     else -> {

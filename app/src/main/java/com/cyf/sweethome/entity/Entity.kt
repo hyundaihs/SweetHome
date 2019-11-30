@@ -211,3 +211,31 @@ data class MemberInfo(
 data class MemberInfoRes(var retRes: MemberInfo) : RequestResult()
 
 data class MemberInfoListRes(var retRes: ArrayList<MemberInfo>) : RequestResult()
+
+open class CommentBase(
+    var id: String = "", // 评论id
+    var title: String = "", // 评论详情
+    var create_time: Long = 0, // 时间戳
+    var account_id: String = "", // 发布人账号id
+    var account_title: String = "", // 发布人昵称
+    var account_file_url: String = "", // 发布人头像
+    var hf_account_title: String = "", // 回复对象昵称
+    var hf_account_file_url: String = "", // 回复对象头像
+    var zan_nums: Int = 0, // 点赞数
+    var pl_nums: Int = 0, // 回复数
+    var my: Int = 0 // 是否是自己发布的（0|1）
+)
+
+data class CommentInfo(
+    var hf_lists: ArrayList<CommentBase> //回复列表
+) : CommentBase()
+
+data class CommentInfoListRes(var retRes: ArrayList<CommentInfo>) : RequestResult()
+
+data class BannerInfo(
+    var id: String, //党建id
+    var title: String, //标题
+    var file_url: String //图片
+)
+
+data class BannerInfoListRes(var retRes: ArrayList<BannerInfo>) : RequestResult()

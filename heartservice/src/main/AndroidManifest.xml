@@ -34,6 +34,8 @@
         <activity android:name=".activities.RepairRoomActivity" />
         <activity android:name=".activities.CheckRoomDetailsActivity" />
         <activity android:name=".activities.WorkOrderDetailsActivity" />
+        <activity android:name=".activities.MemberApplyListActivity" />
+        <activity android:name=".activities.MemberApplyDetailsActivity" />
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 这个Service要继承JCommonService -->
