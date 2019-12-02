@@ -69,8 +69,8 @@ class MemberApplyActivity : MyBaseActivity() {
 
     private fun submit() {
         val map = mapOf(
-            Pair("card_num", memberName.text.toString()),
-            Pair("title", memberIdCard.text.toString()),
+            Pair("title", memberName.text.toString()),
+            Pair("card_num", memberIdCard.text.toString()),
             Pair("rdsj", memberTime.text.toString()),
             Pair("dzbmc", memberGroupName.text.toString()),
             Pair("dzbdz", memberGroupAddr.text.toString())

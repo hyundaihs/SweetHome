@@ -88,7 +88,7 @@ fun WebView.loadLocalHtml(html:String) {
     val webSettings = getSettings()
 
     //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-//    webSettings.setJavaScriptEnabled(true)
+    webSettings.setJavaScriptEnabled(true)
 
     //设置自适应屏幕，两者合用
     webSettings.setUseWideViewPort(true) //将图片调整到适合webview的大小
