@@ -31,6 +31,7 @@ import org.jetbrains.anko.toast
 class HomeFragment : BaseFragment() {
 
     private val bannerInfos = ArrayList<BannerInfo>()
+    private val actBannerInfos = ArrayList<BannerInfo>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +46,7 @@ class HomeFragment : BaseFragment() {
         initViews()
         getHouseInfo()
         getBannerInfo()
+        getActBannerInfo()
     }
 
     private fun initBanner() {
@@ -82,6 +84,43 @@ class HomeFragment : BaseFragment() {
             }
         })
         banner.start()
+    }
+
+    private fun initActBanner() {
+        val images = ArrayList<String>()
+        //val titles = ArrayList<String>()
+        for (i in 0 until actBannerInfos.size) {
+            images.add(actBannerInfos[i].file_url.getImageUrl())
+            //titles.add(bannerInfos[i].title)
+        }
+        //设置指示器位置（指示器居右）
+        banner_act.setIndicatorGravity(BannerConfig.RIGHT)
+        //banner.setBannerTitles(titles)
+        banner_act.setImages(images).setImageLoader(GlideImageLoader()).start()
+        banner_act.setOnBannerListener {
+            val banner = actBannerInfos[it]
+            val intent = Intent(activity, ActInfoDetailsActivity::class.java)
+            intent.putExtra("id", banner.id)
+            startActivity(intent)
+        }
+
+        banner_act.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                bannerActText.text = actBannerInfos[position].title
+            }
+        })
+        banner_act.start()
     }
 
     private fun initViews() {
@@ -147,6 +186,26 @@ class HomeFragment : BaseFragment() {
                     bannerInfos.clear()
                     bannerInfos.addAll(bannerInfoListRes.retRes)
                     initBanner()
+                }
+            })
+            postRequest()
+        }
+    }
+
+    private fun getActBannerInfo(){
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(HDBANNER.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val bannerInfoListRes = Gson().fromJson(result, BannerInfoListRes::class.java)
+                    actBannerInfos.clear()
+                    actBannerInfos.addAll(bannerInfoListRes.retRes)
+                    initActBanner()
                 }
             })
             postRequest()

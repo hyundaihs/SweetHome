@@ -239,3 +239,25 @@ data class BannerInfo(
 )
 
 data class BannerInfoListRes(var retRes: ArrayList<BannerInfo>) : RequestResult()
+
+data class ActInfo(
+    var id: String = "", // 活动id
+    var stype_id: String = "", // 活动分类id
+    var title: String = "", // 标题
+    var sub_title: String = "", // 简介
+    var file_url: String = "", // 图片
+    var app_contents: String = "", // 详情（html）
+    var date_time: String = "", // 活动时间
+    var view_nums: Int = 0, // 浏览量
+    var pl_nums: Int = 0, // 评论量
+    var bm_nums: Int = 0, // 报名量
+    var hd_status: String = "", // 活动状态id
+    var create_time: Long = 0, // 发布时间（时间戳）
+    var stype_title: String = "", // 分类标题（人文社区）
+    var hd_status_title: String = "", // 活动状态标题（未开始）
+    var is_bm: Int = 0 // 是否报名（0|1）
+)
+
+data class ActInfoRes(var retRes: ActInfo) : RequestResult()
+
+data class ActInfoListRes(var retRes: ArrayList<ActInfo>) : RequestResult()

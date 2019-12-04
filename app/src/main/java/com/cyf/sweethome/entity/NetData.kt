@@ -79,4 +79,8 @@ const val DJINFO = "djinfo"//党建信息详情
 const val NRPLLISTS = "nrpllists"//党建信息评论列表
 const val NRPLADD = "nrpladd"//发送评论
 const val DJBANNER = "djbanner"//党建banner图
+const val HDLISTS = "hdlists"//活动列表
+const val HDINFO = "hdinfo"//活动 详情
+const val HDBM = "hdbm"//活动 报名
+const val HDBANNER = "hdbanner"//活动banner
 
