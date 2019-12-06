@@ -68,4 +68,7 @@ const val USERINFO = "userinfo"//用户信息
 const val DJSQJL = "djsqjl"//党员认证列表
 const val DJSQINFO = "djsqinfo"//党员认证详情
 const val DJSQSET = "djsqset"//党员认证审核
+const val HDSQJL = "hdsqjl"//志愿者申请记录
+const val HDSQINFO = "hdsqinfo"//志愿者申请详情
+const val HDSQSET = "hdsqset"//志愿者申请审核
 

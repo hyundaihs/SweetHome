@@ -7,6 +7,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.entity.HDSQ
 import com.cyf.sweethome.entity.TJBYX
 import com.cyf.sweethome.entity.getInterface
 import com.dou361.dialogui.listener.DialogUIListener
@@ -46,12 +47,12 @@ class VolunApplyActivity : MyBaseActivity() {
             return
         }
         val map = mapOf(
-            Pair("contents", name.text.toString()),
-            Pair("contents", idCard.text.toString()),
+            Pair("title", name.text.toString()),
+            Pair("card_num", idCard.text.toString()),
             Pair("contents", info.text.toString())
         )
         KevinRequest.build(this).apply {
-            setRequestUrl(TJBYX.getInterface(map))
+            setRequestUrl(HDSQ.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     getErrorDialog(context, error)

@@ -140,3 +140,19 @@ data class MemberApplyInfo(
 data class MemberApplyInfoRes(var retRes: MemberApplyInfo) : RequestResult()
 
 data class MemberApplyInfoListRes(var retRes: ArrayList<MemberApplyInfo>) : RequestResult()
+
+data class VolunApplyInfo(
+    var id: String, // 申请id
+    var phone: String, // 电话
+    var title: String, // 姓名
+    var card_num: String, // 身份证号
+    var file_url: String, // 头像
+    var sex: String, // 性别
+    var contents: String, // 备注
+    var sh_status: Int, // 审核状态（0：未申请，1：审核中，2：已通过，3：已拒绝）
+    var create_time: Long // 申请时间戳
+)
+
+data class VolunApplyInfoRes(var retRes: VolunApplyInfo) : RequestResult()
+
+data class VolunApplyInfoListRes(var retRes: ArrayList<VolunApplyInfo>) : RequestResult()
