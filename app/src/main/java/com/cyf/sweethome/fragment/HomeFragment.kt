@@ -152,13 +152,13 @@ class HomeFragment : BaseFragment() {
             getMemberStatus()
         }
         get_help.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, GetHelpActivity::class.java))
         }
         praise.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, PraiseActivity::class.java))
         }
         feedback.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, FeedbackActivity::class.java))
         }
         cloudTalk.setOnClickListener {
             it.context.toast("建设中...")
@@ -192,7 +192,7 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun getActBannerInfo(){
+    private fun getActBannerInfo() {
         KevinRequest.build(activity as Context).apply {
             setRequestUrl(HDBANNER.getInterface())
             setErrorCallback(object : KevinRequest.ErrorCallback {

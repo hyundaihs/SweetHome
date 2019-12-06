@@ -62,7 +62,7 @@
                     android:maxLength="200"
                     android:hint="@string/repair_hint"
                     android:importantForAutofill="no"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:minLines="3"
                     android:textColor="@color/color_A0A0A0"
                     android:textSize="13sp" />

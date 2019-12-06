@@ -261,3 +261,46 @@ data class ActInfo(
 data class ActInfoRes(var retRes: ActInfo) : RequestResult()
 
 data class ActInfoListRes(var retRes: ArrayList<ActInfo>) : RequestResult()
+
+data class CheckBodyInfo(
+    var id: String, // 体检记录id
+    var numbers: String, // 编号
+    var title: String, // 刘涛
+    var dates: String, // 2019-11-21
+    var sex: String, // 女
+    var sub_title: String // 周店物业服务中心
+)
+
+data class CheckBodyInfoListRes(var retRes: ArrayList<CheckBodyInfo>) : RequestResult()
+
+data class CheckReportInfo(//体检报告
+    var diastolic: String, // 舒张压
+    var diastolic_str: String, // 舒张压评价（偏高）
+    var systolic: String, // 收缩压
+    var systolic_str: String, // 收缩压评价（偏高）
+    var pulseRate: String, // 79
+    var bmi: String, // BMI 27.95
+    var bmi_str: String, // bmi评价（肥胖）
+    var height: String, // 身高 168
+    var weight: String, // 体重 78
+    var temperature: String, // 体温
+    var temperature_str: String // 体温评价（偏低）
+)
+
+data class CheckReport(
+    var title: String, // 姓名
+    var id: String, // id
+    var dates: String, // 日期：2019-11-20
+    var datas: CheckReportInfo, // Array（体检数据）
+    var create_time: String, // 提交时间戳
+    var age: String // 年龄
+)
+
+data class CheckReportRes(var retRes: CheckReport) : RequestResult()
+
+data class ShareCode(
+    var tg_code: String, // 推广码
+    var ewm_file_url: String  //二维码图片地址（upload/qrcode/1f0e3dad99908345f7439f8ffabdffc4_l9.png
+)
+
+data class ShareCodeRes(var retRes: ShareCode) : RequestResult()

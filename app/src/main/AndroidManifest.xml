@@ -40,6 +40,12 @@
         <activity android:name=".activities.MemberInfoDetailsActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activities.ActInfoDetailsActivity" />
+        <activity android:name=".activities.CheckBodyInfoDetailsActivity" />
+        <activity android:name=".activities.GetHelpActivity" />
+        <activity android:name=".activities.PraiseActivity" />
+        <activity android:name=".activities.FeedbackActivity" />
+        <activity android:name=".activities.MyShareCodeActivity" />
+        <activity android:name=".activities.VolunApplyActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->

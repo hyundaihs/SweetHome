@@ -12,6 +12,7 @@ import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
+import com.android.shuizu.myutillibrary.hideInput
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.*
 import com.cyf.sweethome.R
@@ -106,6 +107,7 @@ class SubmitRepairActivity : MyBaseActivity() {
     }
 
     private fun showPickTimer() {
+        hideInput()
         PickerUtil.showTimerPicker(this) { date, v ->
             if (date != null) {
                 chooseTime = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM_DD_HH_MM)

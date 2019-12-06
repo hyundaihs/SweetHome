@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.hideInput
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -26,7 +27,6 @@ class MemberApplyActivity : MyBaseActivity() {
 
     private fun init() {
         memberTime.setOnClickListener {
-            hideInput()
             chooseTime()
         }
         submit.setOnClickListener {
@@ -36,18 +36,8 @@ class MemberApplyActivity : MyBaseActivity() {
         }
     }
 
-    /**
-     * 隐藏键盘
-     */
-    private fun hideInput() {
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        val v = window.peekDecorView()
-        if (null != v) {
-            imm.hideSoftInputFromWindow(v.windowToken, 0)
-        }
-    }
-
     private fun chooseTime(){
+        hideInput()
         PickerUtil.showTimerPickerYM(this
         ) { date, _ ->
             val chooseTime = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM)

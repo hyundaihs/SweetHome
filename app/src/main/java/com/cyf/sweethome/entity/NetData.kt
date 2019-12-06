@@ -24,16 +24,20 @@ fun String.getImageUrl(): String {
 
 fun String.getInterface(map: Map<String, Any>? = null): String {
     var jsonStr = ""
-    if(map != null){
+    if (map != null) {
         jsonStr = Gson().toJson(map)
     }
     val keyStr = getKeyStr(jsonStr, this)
-    Log.d("md",keyStr)
+    Log.d("md", keyStr)
     return ROOT_URL + INTERFACE_INDEX + this + FROM + KEY_STR + keyStr
 }
 
 fun getKeyStr(jsonStr: String, inter: String): String {
-    return md5(jsonStr + "nimdaae" + inter + CalendarUtil(System.currentTimeMillis()).format(CalendarUtil.YYYYMMDD))
+    return md5(
+        jsonStr + "nimdaae" + inter + CalendarUtil(System.currentTimeMillis()).format(
+            CalendarUtil.YYYYMMDD
+        )
+    )
 }
 
 private fun md5(string: String): String {
@@ -83,4 +87,10 @@ const val HDLISTS = "hdlists"//活动列表
 const val HDINFO = "hdinfo"//活动 详情
 const val HDBM = "hdbm"//活动 报名
 const val HDBANNER = "hdbanner"//活动banner
+const val TJBGJL = "tjbgjl"//体检列表
+const val TJBGINFO = "tjbginfo"//体检详情
+const val TJJSBBM = "tjjsbbm"//家事帮帮忙提交
+const val TJYJFK = "tjyjfk"//意见反馈
+const val TJBYX = "tjbyx"//表扬物业
+const val WDTGM = "wdtgm"//我的推广码
 

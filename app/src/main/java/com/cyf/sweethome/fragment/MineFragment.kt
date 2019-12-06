@@ -11,6 +11,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
+import com.cyf.sweethome.activities.MyShareCodeActivity
 import com.cyf.sweethome.activities.WorkOrderListActivity
 import com.cyf.sweethome.entity.GDSL
 import com.cyf.sweethome.entity.WorkOrderNumListRes
@@ -78,7 +79,7 @@ class MineFragment : BaseFragment() {
             it.context.toast("建设中...")
         }
         tuiGuang.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(context, MyShareCodeActivity::class.java))
         }
         setting.setOnClickListener {
             it.context.toast("建设中...")

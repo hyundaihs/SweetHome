@@ -1,9 +1,12 @@
 package com.android.shuizu.myutillibrary
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.util.TypedValue
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 
 
@@ -47,4 +50,12 @@ fun Any.getTime(time: Long): String {
 
 fun Context.gotoActivity(cls: Class<*>){
     startActivity(Intent(this, cls))
+}
+
+fun Activity.hideInput(){
+    val imm = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+    val v = window.peekDecorView()
+    if (null != v) {
+        imm.hideSoftInputFromWindow(v.windowToken, 0)
+    }
 }
