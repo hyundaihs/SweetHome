@@ -23,8 +23,8 @@ import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_member_list.*
-import kotlinx.android.synthetic.main.layout_list_empty.*
 import kotlinx.android.synthetic.main.layout_member_list_item.view.*
+import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
 
 class MemberListFragment(val id: String) : BaseFragment() {
 
@@ -51,7 +51,7 @@ class MemberListFragment(val id: String) : BaseFragment() {
         listView.addItemDecoration(LineDecoration(context, LineDecoration.HORIZONTAL))
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
-        listView.setEmptyView(listEmptyView)
+        listView.setEmptyView(emptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()

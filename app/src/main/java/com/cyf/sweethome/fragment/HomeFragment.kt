@@ -146,7 +146,7 @@ class HomeFragment : BaseFragment() {
             it.context.toast("建设中...")
         }
         volun_apply.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, VolunApplyActivity::class.java))
         }
         submit_info.setOnClickListener {
             getMemberStatus()

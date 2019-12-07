@@ -25,12 +25,8 @@ import com.cyf.sweethome.entity.*
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_events_center.*
-import kotlinx.android.synthetic.main.fragment_events_center.listView
-import kotlinx.android.synthetic.main.fragment_events_center.listViewSwipe
-import kotlinx.android.synthetic.main.fragment_work_order_list.*
 import kotlinx.android.synthetic.main.layout_act_info_list_item.view.*
-import kotlinx.android.synthetic.main.layout_list_empty.*
+import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
 
 /**
  * ChaYin
@@ -68,7 +64,7 @@ class EventsCenterFragment : BaseFragment() {
         )
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
-        listView.setEmptyView(listEmptyView)
+        listView.setEmptyView(emptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()
@@ -126,7 +122,7 @@ class EventsCenterFragment : BaseFragment() {
                     if (isRefresh) {
                         data.clear()
                     }
-                    data.addAll(actInfoListRes.retRes)
+                    //data.addAll(actInfoListRes.retRes)
                     adapter.notifyDataSetChanged()
                     listViewSwipe.isRefreshing = false
                 }

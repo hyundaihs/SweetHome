@@ -8,12 +8,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/color_EAEAEA"/>
+        android:background="@color/color_EAEAEA" />
 
-    <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
-        android:id="@+id/checkRoomLogs"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"/>
+        android:padding="15dp">
+
+        <include layout="@layout/layout_swipe_refresh_empty_recycleview" />
+    </LinearLayout>
 
 </LinearLayout>

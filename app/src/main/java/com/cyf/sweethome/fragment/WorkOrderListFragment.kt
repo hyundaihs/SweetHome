@@ -22,8 +22,7 @@ import com.cyf.sweethome.R
 import com.cyf.sweethome.activities.WorkOrderDetailsActivity
 import com.cyf.sweethome.entity.*
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_work_order_list.*
-import kotlinx.android.synthetic.main.layout_list_empty.*
+import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
 import kotlinx.android.synthetic.main.layout_work_order_item.view.*
 import java.util.*
 
@@ -64,7 +63,7 @@ class WorkOrderListFragment(val type: Int) : BaseFragment() {
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
         listView.adapter = workOrderAdapter
-        listView.setEmptyView(listEmptyView)
+        listView.setEmptyView(emptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()

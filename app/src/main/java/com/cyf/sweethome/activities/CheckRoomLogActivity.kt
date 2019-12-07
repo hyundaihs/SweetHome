@@ -20,8 +20,7 @@ import com.cyf.sweethome.entity.CheckRoomLogListRes
 import com.cyf.sweethome.entity.YFJLLISTS
 import com.cyf.sweethome.entity.getInterface
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_checkroom_log.*
-import kotlinx.android.synthetic.main.layout_list_empty.*
+import kotlinx.android.synthetic.main.layout_empty_recycleview.*
 import java.util.*
 
 /**
@@ -53,9 +52,9 @@ class CheckRoomLogActivity : MyBaseActivity() {
 
     private fun initViews() {
         val layoutManager = LinearLayoutManager(this)
-        checkRoomLogs.layoutManager = layoutManager
+        listView.layoutManager = layoutManager
         layoutManager.orientation = RecyclerView.VERTICAL
-        checkRoomLogs.addItemDecoration(
+        listView.addItemDecoration(
             RecyclerViewDivider(
                 this,
                 LinearLayoutManager.VERTICAL,
@@ -63,10 +62,10 @@ class CheckRoomLogActivity : MyBaseActivity() {
                 resources.getColor(android.R.color.transparent)
             )
         )
-        checkRoomLogs.itemAnimator = DefaultItemAnimator()
-        checkRoomLogs.isNestedScrollingEnabled = false
-        checkRoomLogs.setEmptyView(listEmptyView)
-        checkRoomLogs.adapter = myAdapter
+        listView.itemAnimator = DefaultItemAnimator()
+        listView.isNestedScrollingEnabled = false
+        listView.setEmptyView(emptyView)
+        listView.adapter = myAdapter
         myAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 val intent = Intent(this@CheckRoomLogActivity, CheckRoomDetailsActivity::class.java)

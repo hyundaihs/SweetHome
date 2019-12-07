@@ -23,7 +23,7 @@ import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_health_house.*
 import kotlinx.android.synthetic.main.layout_check_body_info_list_item.view.*
-import kotlinx.android.synthetic.main.layout_list_empty.*
+import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
 
 /**
  * ChaYin
@@ -61,7 +61,7 @@ class HealthHouseFragment : BaseFragment(){
         )
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
-        listView.setEmptyView(listEmptyView)
+        listView.setEmptyView(emptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
                 refresh()

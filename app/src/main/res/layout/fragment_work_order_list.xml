@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
 
-    <com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
-            android:id="@+id/listViewSwipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <include layout="@layout/layout_swipe_refresh_empty_recycleview" />
 
-        <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <com.android.shuizu.myutillibrary.widget.EmptyRecyclerView
-                    android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:layout_height="wrap_content" />
-
-        </androidx.core.widget.NestedScrollView>
-
-
-    </com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout>
 </LinearLayout>

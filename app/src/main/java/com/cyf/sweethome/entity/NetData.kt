@@ -94,4 +94,5 @@ const val TJYJFK = "tjyjfk"//意见反馈
 const val TJBYX = "tjbyx"//表扬物业
 const val WDTGM = "wdtgm"//我的推广码
 const val HDSQ = "hdsq"//志愿者申请
+const val HDSTYPE = "hdstype"//活动分类列表
 

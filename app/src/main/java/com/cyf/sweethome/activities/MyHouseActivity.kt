@@ -16,8 +16,7 @@ import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.adapters.MyHouseAdapter
 import com.cyf.sweethome.entity.*
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_my_house.*
-import kotlinx.android.synthetic.main.layout_list_empty.*
+import kotlinx.android.synthetic.main.layout_empty_recycleview.*
 import org.jetbrains.anko.toast
 import java.util.*
 
@@ -43,9 +42,9 @@ class MyHouseActivity : MyBaseActivity() {
 
     private fun initViews() {
         val layoutManager = LinearLayoutManager(this)
-        myHouse.layoutManager = layoutManager
+        listView.layoutManager = layoutManager
         layoutManager.orientation = RecyclerView.VERTICAL
-        myHouse.addItemDecoration(
+        listView.addItemDecoration(
             RecyclerViewDivider(
                 this,
                 LinearLayoutManager.VERTICAL,
@@ -53,10 +52,10 @@ class MyHouseActivity : MyBaseActivity() {
                 resources.getColor(android.R.color.transparent)
             )
         )
-        myHouse.itemAnimator = DefaultItemAnimator()
-        myHouse.isNestedScrollingEnabled = false
-        myHouse.setEmptyView(listEmptyView)
-        myHouse.adapter = myHouseAdapter
+        listView.itemAnimator = DefaultItemAnimator()
+        listView.isNestedScrollingEnabled = false
+        listView.setEmptyView(emptyView)
+        listView.adapter = myHouseAdapter
         myHouseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 if (myHouseList[position].xqfh_id != SweetHome.houseInfo?.id) {
