@@ -122,7 +122,7 @@ class EventsCenterFragment : BaseFragment() {
                     if (isRefresh) {
                         data.clear()
                     }
-                    //data.addAll(actInfoListRes.retRes)
+                    data.addAll(actInfoListRes.retRes)
                     adapter.notifyDataSetChanged()
                     listViewSwipe.isRefreshing = false
                 }

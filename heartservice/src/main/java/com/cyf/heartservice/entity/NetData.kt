@@ -71,4 +71,8 @@ const val DJSQSET = "djsqset"//党员认证审核
 const val HDSQJL = "hdsqjl"//志愿者申请记录
 const val HDSQINFO = "hdsqinfo"//志愿者申请详情
 const val HDSQSET = "hdsqset"//志愿者申请审核
+const val BZSC = "bzsc"//使用手册
+const val TJYJFK = "tjyjfk"//意见反馈
+const val SETINFO = "setinfo"//消息开关
+const val WDTGM = "wdtgm"//分享二维码
 

@@ -10,10 +10,13 @@ import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.entity.DJSQ
+import com.cyf.sweethome.entity.getImageUrl
 import com.cyf.sweethome.entity.getInterface
 import com.cyf.sweethome.utils.PickerUtil
 import com.dou361.dialogui.listener.DialogUIListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_member_apply.*
 
 class MemberApplyActivity : MyBaseActivity() {
@@ -26,19 +29,24 @@ class MemberApplyActivity : MyBaseActivity() {
     }
 
     private fun init() {
+        SweetHome.userInfo?.let {
+            memberName.setText(it.title)
+            memberIdCard.setText(it.card_num)
+        }
         memberTime.setOnClickListener {
             chooseTime()
         }
         submit.setOnClickListener {
-            if(checkEdits()){
+            if (checkEdits()) {
                 submit()
             }
         }
     }
 
-    private fun chooseTime(){
+    private fun chooseTime() {
         hideInput()
-        PickerUtil.showTimerPickerYM(this
+        PickerUtil.showTimerPickerYM(
+            this
         ) { date, _ ->
             val chooseTime = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM)
             memberTime.setText(chooseTime)
@@ -82,7 +90,7 @@ class MemberApplyActivity : MyBaseActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-                    getSuccessDialog(context,"申请提交成功！", object : DialogUIListener() {
+                    getSuccessDialog(context, "申请提交成功！", object : DialogUIListener() {
                         override fun onPositive() {
                             finish()
                         }

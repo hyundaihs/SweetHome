@@ -33,7 +33,7 @@ class ActInfoDetailsActivity : MyBaseActivity() {
             Pair("id", id)
         )
         KevinRequest.build(this).apply {
-            setRequestUrl(HDINFO.getInterface())
+            setRequestUrl(HDINFO.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     getErrorDialog(context, error, object : DialogUIListener() {
@@ -66,13 +66,26 @@ class ActInfoDetailsActivity : MyBaseActivity() {
         )}"
         actInfoType.text = "活动类型：${actInfo.hd_status_title}"
         actInfoContent.loadLocalHtml(actInfo.app_contents)
+        layoutSubmit.visibility = if (actInfo.is_sq == 1) View.VISIBLE else View.GONE
         if (actInfo.is_bm == 1) {
-            layoutBtn.visibility = View.GONE
+            setSubmitStatus(true)
         } else {
-            layoutBtn.visibility = View.VISIBLE
+            setSubmitStatus(false)
         }
-        submit.setOnClickListener {
-            submit()
+
+    }
+
+    private fun setSubmitStatus(isAlready: Boolean) {
+        if (isAlready) {
+            submit.text = "已参与"
+            submit.setBackgroundResource(R.drawable.react_a0a0a0_corner_5)
+            submit.setOnClickListener(null)
+        } else {
+            submit.text = "参与"
+            submit.setBackgroundResource(R.drawable.rect_ff4753_corner_5)
+            submit.setOnClickListener {
+                submit()
+            }
         }
     }
 
@@ -97,7 +110,7 @@ class ActInfoDetailsActivity : MyBaseActivity() {
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
                     toast("报名成功")
-                    layoutBtn.visibility = View.GONE
+                    setSubmitStatus(true)
                 }
             })
             setDataMap(map)

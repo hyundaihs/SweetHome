@@ -45,6 +45,7 @@ data class Msg(
 data class MsgListRes(var retRes: ArrayList<Msg>) : RequestResult()
 
 data class RepairRoomListItem(
+    var id : String, //通知id
     var type_id: Int, // 类型（1：报事报修，2：验房）
     var row_id: String, // 报事报修id/验房记录id
     var title: String, // 名称【业主验房】
@@ -117,7 +118,8 @@ data class UserInfo(
     var login_time: String, // 登录时间戳
     var create_time: String, // 创建时间戳
     var sf_title: String, // 角色
-    var xq_title: String // 小区名
+    var xq_title: String, // 小区名
+    var jpush_status: Int  //是否开启推送
 )
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()
@@ -156,3 +158,16 @@ data class VolunApplyInfo(
 data class VolunApplyInfoRes(var retRes: VolunApplyInfo) : RequestResult()
 
 data class VolunApplyInfoListRes(var retRes: ArrayList<VolunApplyInfo>) : RequestResult()
+
+data class ShareCode(
+    var tg_code: String, // 推广码
+    var ewm_file_url: String  //二维码图片地址（upload/qrcode/1f0e3dad99908345f7439f8ffabdffc4_l9.png
+)
+
+data class ShareCodeRes(var retRes: ShareCode) : RequestResult()
+
+data class HelpContent(
+    var app_contents: String
+)
+
+data class HelpContentRes(var retRes: HelpContent) : RequestResult()

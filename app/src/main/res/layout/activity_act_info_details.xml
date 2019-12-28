@@ -55,7 +55,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
-        android:id="@+id/layoutBtn"
+        android:id="@+id/layoutSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

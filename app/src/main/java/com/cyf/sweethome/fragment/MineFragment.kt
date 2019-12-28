@@ -11,8 +11,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
-import com.cyf.sweethome.activities.MyShareCodeActivity
-import com.cyf.sweethome.activities.WorkOrderListActivity
+import com.cyf.sweethome.activities.*
 import com.cyf.sweethome.entity.GDSL
 import com.cyf.sweethome.entity.WorkOrderNumListRes
 import com.cyf.sweethome.entity.getImageUrl
@@ -67,25 +66,32 @@ class MineFragment : BaseFragment() {
             startActivity(intent)
         }
         edit_info.setOnClickListener {
-            it.context.toast("建设中...")
+            it.context.toast("本小区暂无此功能")
         }
         myHouse.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivityForResult(Intent(activity, MyHouseActivity::class.java), 100)
         }
         myActivity.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, EventsCenterActivity::class.java))
         }
         myHealth.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, HealthActivity::class.java))
         }
         tuiGuang.setOnClickListener {
             startActivity(Intent(context, MyShareCodeActivity::class.java))
         }
         setting.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivityForResult(Intent(context, SettingActivity::class.java), 104)
         }
         about.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(context, AboutUsActivity::class.java))
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == 105) {
+            activity?.finish()
         }
     }
 

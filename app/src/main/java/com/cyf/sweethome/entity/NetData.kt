@@ -95,4 +95,9 @@ const val TJBYX = "tjbyx"//表扬物业
 const val WDTGM = "wdtgm"//我的推广码
 const val HDSQ = "hdsq"//志愿者申请
 const val HDSTYPE = "hdstype"//活动分类列表
+const val GYWM = "gywm"//关于我们
+const val SETINFO = "setinfo"//设置通知消息
+const val DJWYF = "djwyf"//待缴物业费
+const val XQLISTS = "xqlists"//小区列表
+const val XQDYLISTS = "xqdylists"//小区单元信息
 

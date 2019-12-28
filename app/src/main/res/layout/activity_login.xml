@@ -35,7 +35,6 @@
         android:layout_marginTop="45dp"
         android:textSize="14sp"
         android:inputType="phone"
-        android:text="17139061224"
         android:textColor="@color/color_121212"
         android:background="@drawable/login_input_bg"
         android:hint="@string/text4"/>

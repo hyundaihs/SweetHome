@@ -65,7 +65,7 @@ class MessageFragment : BaseFragment() {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 when (position) {
                     0 -> {
-                        view.context.toast("建设中...")
+                        view.context.toast("本小区暂无此功能")
                     }
                     1 -> {
                         val intent = Intent(context, RepairRoomActivity::class.java)

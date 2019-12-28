@@ -80,7 +80,7 @@ class HomeFragment : BaseFragment() {
             }
 
             override fun onPageSelected(position: Int) {
-                bannerText.text = bannerInfos[position].title
+                bannerText?.text = bannerInfos[position].title
             }
         })
         banner.start()
@@ -117,7 +117,7 @@ class HomeFragment : BaseFragment() {
             }
 
             override fun onPageSelected(position: Int) {
-                bannerActText.text = actBannerInfos[position].title
+                bannerActText?.text = actBannerInfos[position].title
             }
         })
         banner_act.start()
@@ -134,16 +134,16 @@ class HomeFragment : BaseFragment() {
             startActivity(Intent(activity, SubmitRepairActivity::class.java))
         }
         message.setOnClickListener {
-            it.context.toast("建设中...")
+            it.context.toast("本小区暂无此功能")
         }
         open_door.setOnClickListener {
-            it.context.toast("建设中...")
+            it.context.toast("本小区暂无此功能")
         }
         self_pay.setOnClickListener {
-            it.context.toast("建设中...")
+            startActivity(Intent(activity, PaymentActivity::class.java))
         }
         house_sale.setOnClickListener {
-            it.context.toast("建设中...")
+            it.context.toast("本小区暂无此功能")
         }
         volun_apply.setOnClickListener {
             startActivity(Intent(activity, VolunApplyActivity::class.java))
@@ -161,7 +161,7 @@ class HomeFragment : BaseFragment() {
             startActivity(Intent(activity, FeedbackActivity::class.java))
         }
         cloudTalk.setOnClickListener {
-            it.context.toast("建设中...")
+            it.context.toast("本小区暂无此功能")
         }
     }
 

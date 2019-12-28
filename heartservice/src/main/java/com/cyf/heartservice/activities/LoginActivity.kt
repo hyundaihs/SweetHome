@@ -9,7 +9,9 @@ import cn.jpush.android.api.JPushInterface
 import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.PreferenceUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.cyf.heartservice.HeartService
 import com.cyf.heartservice.R
 import com.cyf.heartservice.entity.LOGIN
 import com.cyf.heartservice.entity.SENDVERF
@@ -27,7 +29,9 @@ import java.util.*
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class LoginAcitivity : MyBaseActivity() {
+class LoginActivity : MyBaseActivity() {
+
+    var account: String by PreferenceUtil(HeartService.instance, "account", "")
 
     private var mTimer: Timer? = null
     private var mTimerTask: MyTimerTask? = null
@@ -72,6 +76,7 @@ class LoginAcitivity : MyBaseActivity() {
             isMsgNotEmpty = inputMsg.text.isNotEmpty()
             loginBtn.isEnabled = isPhoneNotEmpty && isMsgNotEmpty
         }
+        inputPhone.setText(account)
         getYzm.setOnClickListener {
             getYzm.isEnabled = false
             mTimer = Timer()
@@ -124,6 +129,7 @@ class LoginAcitivity : MyBaseActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
+                    account = inputPhone.text.toString()
                     startActivity(Intent(context, HomepageActivity::class.java))
                     finish()
                 }

@@ -176,7 +176,8 @@ data class UserInfo(
     var sex: String, // 女
     var login_time: String, // 登录时间
     var create_time: String, // 创建时间
-    var xqfh_id: String // 当前房号id（未认证通过时为0）
+    var xqfh_id: String, // 当前房号id（未认证通过时为0）
+    var jpush_status: Int  //是否开启推送
 ) : Serializable
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()
@@ -223,7 +224,8 @@ open class CommentBase(
     var hf_account_file_url: String = "", // 回复对象头像
     var zan_nums: Int = 0, // 点赞数
     var pl_nums: Int = 0, // 回复数
-    var my: Int = 0 // 是否是自己发布的（0|1）
+    var my: Int = 0, // 是否是自己发布的（0|1）
+    var is_sq: Int = 0 //是否申请
 )
 
 data class CommentInfo(
@@ -255,7 +257,8 @@ data class ActInfo(
     var create_time: Long = 0, // 发布时间（时间戳）
     var stype_title: String = "", // 分类标题（人文社区）
     var hd_status_title: String = "", // 活动状态标题（未开始）
-    var is_bm: Int = 0 // 是否报名（0|1）
+    var is_bm: Int = 0, // 是否报名（0|1）
+    var is_sq: Int = 0 //是否申请
 )
 
 data class ActInfoRes(var retRes: ActInfo) : RequestResult()
@@ -304,3 +307,68 @@ data class ShareCode(
 )
 
 data class ShareCodeRes(var retRes: ShareCode) : RequestResult()
+
+data class AboutUs(
+    var app_contents: String
+)
+
+data class AboutUsRes(var retRes: AboutUs) : RequestResult()
+
+data class Payment(
+    var id: String, //id
+    var dates: String, //日期
+    var price: String //金额
+)
+
+data class SumPayment(
+    var all_price: String, //总欠费
+    var lists: ArrayList<Payment> //待缴列表
+)
+
+data class SumPaymentRes(var retRes: SumPayment) : RequestResult()
+
+//[0] => Array（单元列表）
+//(
+//[id] => 单元id
+//[title] => 单元名称（1栋 1单元)
+//[cs] => 总层数（24）
+//[lists] => Array（楼层列表）
+//(
+//[0] => Array
+//(
+//[cs] => 楼层（1）
+//[title] => 楼层名称（1层）
+//[lists] => Array（房屋列表）
+//(
+//[0] => Array
+//(
+//[id] => 房号id
+//[title] => 房号（101）
+//[cs] => 层数
+//)
+//
+//)
+//
+//)
+//
+//
+//)
+//
+//)
+open class Room(
+    var id: String = "0", //单元id
+    var title: String = "", //单元名称
+    var cs: String = "0" //总层数
+)
+
+data class Floor(
+    var lists: ArrayList<Room> //房间
+) : Room()
+
+data class Building(
+    var lists: ArrayList<Floor> //楼层
+) : Room()
+
+data class BuildingListRes(var retRes: ArrayList<Building>) : RequestResult()
+
+data class CommunityListRes(var retRes: ArrayList<Room>) : RequestResult()

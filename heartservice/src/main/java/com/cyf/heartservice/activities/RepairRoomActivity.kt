@@ -86,7 +86,7 @@ class RepairRoomActivity : MyBaseActivity() {
 
     private fun setRead(pos: Int) {
         val map = mapOf(
-            Pair("id", repairRoomList[pos].row_id)
+            Pair("id", repairRoomList[pos].id)
         )
         KevinRequest.build(this).apply {
             setRequestUrl(SETYD.getInterface(map))

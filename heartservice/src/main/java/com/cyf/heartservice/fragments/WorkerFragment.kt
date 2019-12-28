@@ -15,9 +15,7 @@ import com.android.shuizu.myutillibrary.dp2px
 import com.android.shuizu.myutillibrary.fragment.BaseFragment
 import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
 import com.cyf.heartservice.R
-import com.cyf.heartservice.activities.MemberApplyListActivity
-import com.cyf.heartservice.activities.RepairRoomActivity
-import com.cyf.heartservice.activities.VolunApplyListActivity
+import com.cyf.heartservice.activities.*
 import kotlinx.android.synthetic.main.fragment_worker.*
 import kotlinx.android.synthetic.main.layout_tab_worker_list_item.view.*
 import org.jetbrains.anko.toast
@@ -72,6 +70,8 @@ class WorkerFragment : BaseFragment() {
     )
     private val imageAdapter = WorkerAdapter(imageData)
 
+    private var mAct: HomepageActivity? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,6 +83,7 @@ class WorkerFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViews()
+        mAct = activity as HomepageActivity
     }
 
     private fun initViews() {
@@ -106,16 +107,22 @@ class WorkerFragment : BaseFragment() {
                         intent.putExtra("type", 1)
                         startActivity(intent)
                     }
-                    5->{
+                    1 -> {
+                        mAct?.loadContact()
+                    }
+                    2 -> {
+                        startActivity(Intent(context, MyShareCodeActivity::class.java))
+                    }
+                    5 -> {
                         val intent = Intent(context, VolunApplyListActivity::class.java)
                         startActivity(intent)
                     }
-                    6->{
+                    6 -> {
                         val intent = Intent(context, MemberApplyListActivity::class.java)
                         startActivity(intent)
                     }
                     else -> {
-                        view.context.toast("建设中...")
+                        view.context.toast("本小区暂无此功能")
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.cyf.sweethome.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -29,12 +30,25 @@ class MyHouseActivity : MyBaseActivity() {
     private val myHouseList = ArrayList<HouseListItem>()
     private val myHouseAdapter = MyHouseAdapter(myHouseList)
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == 155){
+            toast(data?.getStringExtra("choose_building")?:"")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentBaseView(R.layout.activity_my_house)
         setTitle("我的房屋")
         addRightStringBtn("添加房屋", View.OnClickListener {
-            toast("建设中...")
+            toast("本小区暂无此功能")
+//            startActivityForResult(
+//                Intent(
+//                    this@MyHouseActivity,
+//                    ChooseCommunityActivity::class.java
+//                ), 155
+//            )
         })
         initViews()
         getMyHouse()

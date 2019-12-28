@@ -78,21 +78,21 @@ class HomepageActivity : MyBaseActivity() {
         fragments.add(ContactFragment())
         fragments.add(WorkerFragment())
         fragments.add(MineFragment())
-        bottomTab.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.tabMessage -> {
-                    loadFragment(0)
-                }
-                R.id.tabContact -> {
-                    loadFragment(1)
-                }
-                R.id.tabWorker -> {
-                    loadFragment(2)
-                }
-                else -> {
-                    loadFragment(3)
-                }
-            }
+        tabMessage.setOnClickListener {
+            if (last != 0)
+                loadFragment(0)
+        }
+        tabContact.setOnClickListener {
+            if (last != 1)
+                loadFragment(1)
+        }
+        tabWorker.setOnClickListener {
+            if (last != 2)
+                loadFragment(2)
+        }
+        tabMine.setOnClickListener {
+            if (last != 3)
+                loadFragment(3)
         }
         loadFragment(0)
     }
@@ -105,6 +105,11 @@ class HomepageActivity : MyBaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun loadContact() {
+        loadFragment(1)
+        bottomTab.check(R.id.tabContact)
     }
 
     private fun loadFragment(position: Int) {

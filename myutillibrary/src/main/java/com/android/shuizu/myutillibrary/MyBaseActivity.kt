@@ -17,8 +17,8 @@ abstract class MyBaseActivity : AppCompatActivity() {
         setBackup(true)
     }
 
-    fun setContentBaseView(res:Int){
-        baseContent.addView(layoutInflater.inflate(res,null,false))
+    fun setContentBaseView(res: Int) {
+        baseContent.addView(layoutInflater.inflate(res, null, false))
     }
 
     fun setTitle(text: String) {
@@ -26,12 +26,12 @@ abstract class MyBaseActivity : AppCompatActivity() {
     }
 
     fun setBackup(showBack: Boolean) {
-        if(showBack) {
+        if (showBack) {
             addLeftImageBtn(R.mipmap.back, View.OnClickListener {
                 finish()
             })
-        }else{
-            removeLeftImageBtn()
+        } else {
+            setLeftImageBtnVisibility(View.GONE)
         }
     }
 
@@ -47,19 +47,31 @@ abstract class MyBaseActivity : AppCompatActivity() {
         toolbarLeftImage.setOnClickListener(click)
     }
 
-    fun removeLeftImageBtn(){
-        toolbarLeftImage.visibility = View.GONE
+    fun setLeftStringBtnVisibility(visibility: Int) {
+        toolbarLeftBtn.visibility = visibility
     }
 
-    fun addRightStringBtn(text: String,click: View.OnClickListener){
+    fun setLeftImageBtnVisibility(visibility: Int) {
+        toolbarLeftImage.visibility = visibility
+    }
+
+    fun addRightStringBtn(text: String, click: View.OnClickListener) {
         toolbarRightBtn.visibility = View.VISIBLE
         toolbarRightBtn.text = text
         toolbarRightBtn.setOnClickListener(click)
     }
 
-    fun addRightImageBtn(res: Int,click: View.OnClickListener){
+    fun addRightImageBtn(res: Int, click: View.OnClickListener) {
         toolbarRightImg.visibility = View.VISIBLE
         toolbarRightImg.setImageResource(res)
         toolbarRightImg.setOnClickListener(click)
+    }
+
+    fun setRightStringBtnVisibility(visibility: Int) {
+        toolbarRightBtn.visibility = visibility
+    }
+
+    fun setRightImageBtnVisibility(visibility: Int) {
+        toolbarRightImg.visibility = visibility
     }
 }

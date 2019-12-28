@@ -10,8 +10,10 @@ import cn.jpush.android.api.JPushInterface
 import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.PreferenceUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.entity.LOGIN
 import com.cyf.sweethome.entity.SENDVERF
 import com.cyf.sweethome.entity.getInterface
@@ -31,6 +33,8 @@ import org.jetbrains.anko.uiThread
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
 class LoginActivity : MyBaseActivity() {
+
+    var account: String by PreferenceUtil(SweetHome.instance, "account", "")
 
     private var mTimer: Timer? = null
     private var mTimerTask: MyTimerTask? = null
@@ -69,6 +73,7 @@ class LoginActivity : MyBaseActivity() {
         inputMsg.addTextChangedListener {
             loginBtn.isEnabled = (inputPhone.text.isNotEmpty() and inputMsg.text.isNotEmpty())
         }
+        inputPhone.setText(account)
         getYzm.setOnClickListener {
             getYzm.isEnabled = false
             mTimer = Timer()
@@ -82,7 +87,7 @@ class LoginActivity : MyBaseActivity() {
         getPermission()
     }
 
-    private fun sendYZM(){
+    private fun sendYZM() {
         val map = mapOf(
             Pair("phone", inputPhone.text.toString())
         )
@@ -107,7 +112,6 @@ class LoginActivity : MyBaseActivity() {
 
     private fun login() {
         val id = JPushInterface.getRegistrationID(this)
-        D("jpush_id =$id")
         val map = mapOf(
             Pair("phone", inputPhone.text.toString()),
             Pair("msgverf", inputMsg.text.toString()),
@@ -122,10 +126,9 @@ class LoginActivity : MyBaseActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-//                    val loginInfoRes = Gson().fromJson(result, LoginInfoRes::class.java)
-//                    val loginInfo = loginInfoRes.retRes
-//                    login_verf = loginInfo.login_verf
+                    account = inputPhone.text.toString()
                     startActivity(Intent(context, HomepageActivity::class.java))
+                    inputMsg.setText("")
                     finish()
                 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cyf.sweethome" >
+    package="com.cyf.sweethome">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,48 +9,107 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".SweetHome"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".SweetHome"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.LoginActivity" >
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.HomepageActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activities.MyHouseActivity" />
-        <activity android:name=".activities.CheckRoomLogActivity" />
-        <activity android:name=".activities.CheckRoomActivity" />
-        <activity android:name=".activities.CheckRoomDetailsActivity" />
-        <activity android:name=".activities.SubmitRepairActivity" />
-        <activity android:name=".activities.WorkOrderListActivity" />
-        <activity android:name=".activities.WorkOrderDetailsActivity" />
-        <activity android:name="com.android.shuizu.myutillibrary.activities.PhotoViewActivity"/>
-        <activity android:name=".activities.PingJiaActivity" />
-        <activity android:name=".activities.MemberApplyActivity" />
-        <activity android:name=".activities.MemberInfoNewsActivity" />
-        <activity android:name=".activities.MemberInfoDetailsActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".activities.ActInfoDetailsActivity" />
-        <activity android:name=".activities.CheckBodyInfoDetailsActivity" />
-        <activity android:name=".activities.GetHelpActivity" />
-        <activity android:name=".activities.PraiseActivity" />
-        <activity android:name=".activities.FeedbackActivity" />
-        <activity android:name=".activities.MyShareCodeActivity" />
-        <activity android:name=".activities.VolunApplyActivity" />
+        <activity
+            android:name=".activities.HomepageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MyHouseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.CheckRoomLogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.CheckRoomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.CheckRoomDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SubmitRepairActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WorkOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WorkOrderDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.shuizu.myutillibrary.activities.PhotoViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PingJiaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MemberApplyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MemberInfoNewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MemberInfoDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".activities.ActInfoDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.CheckBodyInfoDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.GetHelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PraiseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MyShareCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.VolunApplyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EventsCenterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.HealthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.ChooseRoomActivity" />
+        <activity android:name=".activities.ChooseCommunityActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 这个Service要继承JCommonService -->
-        <service android:name="PushService"
+        <service
+            android:name="PushService"
             android:process=":pushcore">
             <intent-filter>
                 <action android:name="cn.jiguang.user.service.action" />
