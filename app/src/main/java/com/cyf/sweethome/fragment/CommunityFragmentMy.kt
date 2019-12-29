@@ -38,7 +38,7 @@ class CommunityFragmentMy : MyBaseFragment() {
         val fragments = ArrayList<Fragment>()
         fragments.add(EventsCenterFragmentMy())
         fragments.add(HealthHouseFragmentMy())
-        fragments.add(MineCommunityFragmentMy())
+        fragments.add(MineCommunityFragment())
 
         comViewPager.adapter = MyPagerAdapter(childFragmentManager, fragments, titles)
         comTabLayout.setupWithViewPager(comViewPager)//此方法就是让tablayout和ViewPager联动

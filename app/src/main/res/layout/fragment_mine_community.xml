@@ -72,6 +72,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/lable1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/dot_1"
@@ -80,6 +81,7 @@
                         android:text="觉得非常满意" />
 
                     <TextView
+                        android:id="@+id/lable2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -89,6 +91,7 @@
                         android:text="觉得满意" />
 
                     <TextView
+                        android:id="@+id/lable3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -98,6 +101,7 @@
                         android:text="觉得一般" />
 
                     <TextView
+                        android:id="@+id/lable4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -107,6 +111,7 @@
                         android:text="觉得不满意" />
 
                     <TextView
+                        android:id="@+id/lable5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -154,7 +159,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="红桥新城"
                         android:textColor="@color/color_515C6F"
                         android:textSize="15sp" />
 
@@ -163,7 +167,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableStart="@mipmap/phone_red"
-                        android:text="18571514990"
                         android:textColor="@color/color_FF4753"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -173,7 +176,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="江岸区红桥新城99号"
                     android:textColor="@color/color_515C6F"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -206,7 +208,6 @@
                         android:id="@+id/communityTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -229,7 +230,6 @@
                         android:id="@+id/communityTotalArea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -252,7 +252,6 @@
                         android:id="@+id/communityPlotRatio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -275,7 +274,6 @@
                         android:id="@+id/communityGreenRate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -298,7 +296,6 @@
                         android:id="@+id/communityDeveloper"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -321,7 +318,6 @@
                         android:id="@+id/communityCompany"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -344,7 +340,6 @@
                         android:id="@+id/communityStreet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -367,7 +362,6 @@
                         android:id="@+id/communityNeighbor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -390,7 +384,6 @@
                         android:id="@+id/communityPolice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019-03-01"
                         android:textColor="@color/color_393939"
                         android:textSize="12sp" />
                 </LinearLayout>

@@ -362,3 +362,32 @@ data class LoginInfo(
 )
 
 data class LoginInfoRes(var retRes: LoginInfo) : RequestResult()
+
+data class XQInfo(
+    var id: String, // 小区id
+    var province: String, // 湖北
+    var city: String, // 武汉
+    var area: String, // 洪山区
+    var street: String, // 洪山街道
+    var address: String, // 洪山区88号
+    var title: String, // 周店小区
+    var kfs_title: String, // 开发商名称
+    var jc_date: String, // 2018-09-01（建成日期）
+    var mj: String, // 17000（总面积）
+    var wygs_title: String, // 物业公司名称
+    var rjlv: String, // 80.00（容积率）
+    var lhlv: String, // 90.00（绿化率）
+    var wygly_phone: String, // 物业电话
+    var jwhmc: String, // 居委会名称
+    var sspcs: String // 派出所名称
+)
+
+data class XQInfoRes(var retRes: XQInfo) : RequestResult()
+
+data class XQPFInfo(
+    var counts: String, //报事总数
+    var zhpf: String, //4.8（平均分）
+    var arr: Map<Int, Int> //Array（百分比）
+)
+
+data class XQPFInfoRes(var retRes: XQPFInfo) : RequestResult()
