@@ -100,4 +100,7 @@ const val SETINFO = "setinfo"//设置通知消息
 const val DJWYF = "djwyf"//待缴物业费
 const val XQLISTS = "xqlists"//小区列表
 const val XQDYLISTS = "xqdylists"//小区单元信息
+const val APKV = "apkv"//检查更新
+const val YZSFLISTS = "yzsflists"//业主身份认证
+const val TJSFRZ = "tjsfrz"//提交身份认证
 

@@ -11,24 +11,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.heartservice.R
 import com.cyf.heartservice.activities.RepairRoomActivity
+import com.cyf.heartservice.activities.SecretaryActivity
 import com.cyf.heartservice.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.layout_tab_message_list_item.view.*
-import org.jetbrains.anko.toast
 
 /**
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class MessageFragment : BaseFragment() {
+class MessageFragmentMy : MyBaseFragment() {
 
     private val data = ArrayList<Msg>()
     private val adapter = TabMessageAdapter(data)
@@ -65,7 +64,8 @@ class MessageFragment : BaseFragment() {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
                 when (position) {
                     0 -> {
-                        view.context.toast("本小区暂无此功能")
+                        val intent = Intent(context, SecretaryActivity::class.java)
+                        startActivity(intent)
                     }
                     1 -> {
                         val intent = Intent(context, RepairRoomActivity::class.java)

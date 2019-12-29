@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.cyf.sweethome.R
 import kotlinx.android.synthetic.main.fragment_community.*
 
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_community.*
  * ChaYin
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
-class CommunityFragment : BaseFragment() {
+class CommunityFragmentMy : MyBaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,9 +36,9 @@ class CommunityFragment : BaseFragment() {
         titles.add("我的社区")
 
         val fragments = ArrayList<Fragment>()
-        fragments.add(EventsCenterFragment())
-        fragments.add(HealthHouseFragment())
-        fragments.add(MineCommunityFragment())
+        fragments.add(EventsCenterFragmentMy())
+        fragments.add(HealthHouseFragmentMy())
+        fragments.add(MineCommunityFragmentMy())
 
         comViewPager.adapter = MyPagerAdapter(childFragmentManager, fragments, titles)
         comTabLayout.setupWithViewPager(comViewPager)//此方法就是让tablayout和ViewPager联动

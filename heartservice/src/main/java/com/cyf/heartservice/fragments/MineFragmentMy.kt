@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.cyf.heartservice.HeartService
 import com.cyf.heartservice.R
 import com.cyf.heartservice.activities.FeedbackActivity
@@ -20,7 +20,7 @@ import org.jetbrains.anko.toast
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class MineFragment : BaseFragment() {
+class MineFragmentMy : MyBaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

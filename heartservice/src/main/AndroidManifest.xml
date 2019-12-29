@@ -61,6 +61,15 @@
         <activity android:name=".activities.HelpActivity" />
         <activity android:name=".activities.FeedbackActivity" />
         <activity android:name=".activities.MyShareCodeActivity" />
+        <activity android:name=".activities.SecretaryActivity" />
+        <activity android:name=".activities.NotifyDetailsActivity" />
+        <activity android:name=".activities.PropertyKnowledgeActivity" />
+        <activity android:name=".activities.JumingRenzhengActivity" />
+        <activity android:name=".activities.ChooseCommunityActivity" />
+        <activity android:name=".activities.ChooseRoomActivity" />
+        <activity android:name=".activities.JumingInfoListActivity" />
+        <activity android:name=".activities.JumingDetailsActivity" />
+        <activity android:name=".activities.HouseInfoActivity" />
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 这个Service要继承JCommonService -->

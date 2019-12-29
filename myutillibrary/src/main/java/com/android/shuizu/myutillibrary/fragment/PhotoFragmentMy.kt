@@ -13,7 +13,7 @@ import java.io.File
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class PhotoFragment(val file: String, val isURL: Boolean) : BaseFragment() {
+class PhotoFragmentMy(val file: String, val isURL: Boolean) : MyBaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.cyf.sweethome.R
-import com.cyf.sweethome.fragment.WorkOrderListFragment
+import com.cyf.sweethome.fragment.WorkOrderListFragmentMy
 import kotlinx.android.synthetic.main.activity_work_order_list.*
 
 /**
@@ -30,10 +30,10 @@ class WorkOrderListActivity : MyBaseActivity() {
         titles.add("待评价")
 
         val fragments = ArrayList<Fragment>()
-        fragments.add(WorkOrderListFragment(0))
-        fragments.add(WorkOrderListFragment(1))
-        fragments.add(WorkOrderListFragment(2))
-        fragments.add(WorkOrderListFragment(3))
+        fragments.add(WorkOrderListFragmentMy(0))
+        fragments.add(WorkOrderListFragmentMy(1))
+        fragments.add(WorkOrderListFragmentMy(2))
+        fragments.add(WorkOrderListFragmentMy(3))
 
         workOrderViewPager.adapter = MyPagerAdapter(supportFragmentManager, fragments, titles)
         workOrderTabLayout.setupWithViewPager(workOrderViewPager)//此方法就是让tablayout和ViewPager联动

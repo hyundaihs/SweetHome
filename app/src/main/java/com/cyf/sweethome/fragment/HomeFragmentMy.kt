@@ -7,8 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
-import com.android.shuizu.myutillibrary.E
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getMessageDialog
@@ -28,7 +27,7 @@ import org.jetbrains.anko.toast
  * ChaYin
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
-class HomeFragment : BaseFragment() {
+class HomeFragmentMy : MyBaseFragment() {
 
     private val bannerInfos = ArrayList<BannerInfo>()
     private val actBannerInfos = ArrayList<BannerInfo>()

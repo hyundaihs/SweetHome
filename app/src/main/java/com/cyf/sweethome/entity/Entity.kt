@@ -182,6 +182,8 @@ data class UserInfo(
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()
 
+data class UserInfoListRes(var retRes: ArrayList<UserInfo>) : RequestResult()
+
 data class MemberStatus(
     var sh_status: Int //审核状态（0：未申请，1：审核中，2：已通过，3：已拒绝）
 )
@@ -327,34 +329,6 @@ data class SumPayment(
 
 data class SumPaymentRes(var retRes: SumPayment) : RequestResult()
 
-//[0] => Array（单元列表）
-//(
-//[id] => 单元id
-//[title] => 单元名称（1栋 1单元)
-//[cs] => 总层数（24）
-//[lists] => Array（楼层列表）
-//(
-//[0] => Array
-//(
-//[cs] => 楼层（1）
-//[title] => 楼层名称（1层）
-//[lists] => Array（房屋列表）
-//(
-//[0] => Array
-//(
-//[id] => 房号id
-//[title] => 房号（101）
-//[cs] => 层数
-//)
-//
-//)
-//
-//)
-//
-//
-//)
-//
-//)
 open class Room(
     var id: String = "0", //单元id
     var title: String = "", //单元名称
@@ -372,3 +346,19 @@ data class Building(
 data class BuildingListRes(var retRes: ArrayList<Building>) : RequestResult()
 
 data class CommunityListRes(var retRes: ArrayList<Room>) : RequestResult()
+
+data class VersionInfo(
+    var v_title: String, // 版本名称
+    var v_num: Int, // 版本号
+    var http_url: String, // 下载地址
+    var contents: String // 更新说明（html）
+)
+
+data class VersionInfoRes(var retRes: VersionInfo) : RequestResult()
+
+data class LoginInfo(
+    var login_verf: String, // 登录密钥（自动登录用）
+    var is_rz: Int //是否认证
+)
+
+data class LoginInfoRes(var retRes: LoginInfo) : RequestResult()

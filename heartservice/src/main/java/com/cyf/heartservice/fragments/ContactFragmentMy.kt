@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.chezi008.libcontacts.bean.ContactBean
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_contact.*
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class ContactFragment : BaseFragment() {
+class ContactFragmentMy : MyBaseFragment() {
 
 //    private val contact = ArrayList<Contact>()
 

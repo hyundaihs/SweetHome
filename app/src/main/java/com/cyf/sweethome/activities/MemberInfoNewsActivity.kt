@@ -13,7 +13,7 @@ import com.cyf.sweethome.entity.DJSTYPE
 import com.cyf.sweethome.entity.MemberType
 import com.cyf.sweethome.entity.MemberTypeListRes
 import com.cyf.sweethome.entity.getInterface
-import com.cyf.sweethome.fragment.MemberListFragment
+import com.cyf.sweethome.fragment.MemberListFragmentMy
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_member_info_news.*
@@ -63,7 +63,7 @@ class MemberInfoNewsActivity : MyBaseActivity() {
         val fragments = ArrayList<Fragment>()
 
         for (i in 0 until data.size) {
-            val memberListFragment = MemberListFragment(data[i].id)
+            val memberListFragment = MemberListFragmentMy(data[i].id)
             fragments.add(memberListFragment)
         }
 

@@ -104,6 +104,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.ChooseRoomActivity" />
         <activity android:name=".activities.ChooseCommunityActivity" />
+        <activity android:name=".activities.JumingRenzhengActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->

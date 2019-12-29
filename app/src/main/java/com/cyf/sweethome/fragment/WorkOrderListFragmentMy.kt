@@ -8,52 +8,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.android.shuizu.myutillibrary.adapter.LineDecoration
-import com.android.shuizu.myutillibrary.adapter.LineDecoration.*
+import androidx.recyclerview.widget.RecyclerView
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
 import com.cyf.sweethome.R
-import com.cyf.sweethome.activities.ActInfoDetailsActivity
+import com.cyf.sweethome.activities.WorkOrderDetailsActivity
 import com.cyf.sweethome.entity.*
-import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.layout_act_info_list_item.view.*
 import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
+import kotlinx.android.synthetic.main.layout_work_order_item.view.*
+import java.util.*
 
 /**
- * ChaYin
- * Created by ${蔡雨峰} on 2019/9/15/015.
+ * SweetHome
+ * Created by 蔡雨峰 on 2019/9/16.
  */
-class EventsCenterFragment : BaseFragment() {
+class WorkOrderListFragmentMy(val type: Int) : MyBaseFragment() {
 
-    private val data = ArrayList<ActInfo>()
-    private val adapter = ActInfoListAdapter(data)
+    private val workOrderList = ArrayList<WorkOrderListItem>()
+    private val workOrderAdapter = WorkOrderAdapter(workOrderList)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_events_center, container, false)
+        return inflater.inflate(R.layout.fragment_work_order_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        init()
+        initViews()
     }
 
-    private fun init() {
+    private fun initViews() {
         val layoutManager = LinearLayoutManager(context)
         listView.layoutManager = layoutManager
-        layoutManager.orientation = VERTICAL
+        layoutManager.orientation = RecyclerView.VERTICAL
         listView.addItemDecoration(
             RecyclerViewDivider(
                 activity as Context,
@@ -64,6 +61,7 @@ class EventsCenterFragment : BaseFragment() {
         )
         listView.itemAnimator = DefaultItemAnimator()
         listView.isNestedScrollingEnabled = false
+        listView.adapter = workOrderAdapter
         listView.setEmptyView(emptyView)
         listViewSwipe.setOnRefreshListener(object : SwipeRefreshAndLoadLayout.OnRefreshListener {
             override fun onRefresh() {
@@ -74,56 +72,47 @@ class EventsCenterFragment : BaseFragment() {
                 loadMore(currPage)
             }
         })
-        listView.adapter = adapter
-        adapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+        workOrderAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                val intent = Intent(view.context, ActInfoDetailsActivity::class.java)
-                intent.putExtra("id", data[position].id)
+                val intent = Intent(context, WorkOrderDetailsActivity::class.java)
+                intent.putExtra("id", workOrderList[position].id)
                 startActivity(intent)
             }
         }
-        listViewSwipe.isRefreshing = true
         refresh()
     }
 
     private fun refresh() {
-        getActInfo(listViewSwipe.currPage, true)
+        getListData(listViewSwipe.currPage, true)
     }
 
     private fun loadMore(currPage: Int) {
-        getActInfo(currPage)
+        getListData(currPage, false)
     }
 
-
-    private fun getActInfo(page: Int, isRefresh: Boolean = false) {
+    private fun getListData(page: Int, isRefresh: Boolean = false) {
         val map = mapOf(
-            Pair("page_size", "15"),
-            Pair("page", page.toString())
+            Pair("page_size", 10),
+            Pair("page", page),
+            Pair("sh_status", type)
         )
         KevinRequest.build(activity as Context).apply {
-            setRequestUrl(HDLISTS.getInterface())
+            setRequestUrl(BSBXLISTS.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
                     listViewSwipe.isRefreshing = false
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
-
-                        }
-
-                        override fun onNegative() {
-                        }
-                    })
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-                    val actInfoListRes = Gson().fromJson(result, ActInfoListRes::class.java)
-                    listViewSwipe.setTotalPages(actInfoListRes.retCounts, 15)
+                    val workOrderListRes = Gson().fromJson(result, WorkOrderListRes::class.java)
+                    listViewSwipe.setTotalPages(workOrderListRes.retCounts, 15)
                     if (isRefresh) {
-                        data.clear()
+                        workOrderList.clear()
                     }
-                    data.addAll(actInfoListRes.retRes)
-                    adapter.notifyDataSetChanged()
+                    workOrderList.addAll(workOrderListRes.retRes)
+                    workOrderAdapter.notifyDataSetChanged()
                     listViewSwipe.isRefreshing = false
                 }
             })
@@ -132,19 +121,19 @@ class EventsCenterFragment : BaseFragment() {
         }
     }
 
-    private class ActInfoListAdapter(val data: ArrayList<ActInfo>) :
-        MyBaseAdapter(R.layout.layout_act_info_list_item) {
+    inner class WorkOrderAdapter(val data: ArrayList<WorkOrderListItem>) :
+        MyBaseAdapter(R.layout.layout_work_order_item) {
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
-            val actInfo = data[position]
-            Picasso.with(holder.itemView.context).load(actInfo.file_url.getImageUrl())
-                .into(holder.itemView.imgView)
-            holder.itemView.act_title.text = actInfo.title
-            holder.itemView.act_num.text = "${actInfo.bm_nums}参与"
-            holder.itemView.act_time.text = CalendarUtil(actInfo.create_time, true).format(
-                CalendarUtil.STANDARD
-            )
+            val workOrderListItem = data[position]
+            holder.itemView.workOrderType.text = workOrderListItem.xqbsbxlx_title
+            holder.itemView.workOrderStatus.text = workOrderListItem.sh_title
+            holder.itemView.workOrderAddress.text = workOrderListItem.fw_title
+            holder.itemView.workOrderTime.text = CalendarUtil(
+                workOrderListItem.create_time,
+                true
+            ).format(CalendarUtil.YYYY_MM_DD_HH_MM)
         }
 
         override fun getItemCount(): Int = data.size

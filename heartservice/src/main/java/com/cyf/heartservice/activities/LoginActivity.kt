@@ -8,14 +8,18 @@ import androidx.core.widget.addTextChangedListener
 import cn.jpush.android.api.JPushInterface
 import com.android.shuizu.myutillibrary.D
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.downloadApk
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.PreferenceUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getMessageDialog
+import com.android.shuizu.myutillibrary.utils.getSuccessDialog
+import com.cyf.heartservice.BuildConfig
 import com.cyf.heartservice.HeartService
 import com.cyf.heartservice.R
-import com.cyf.heartservice.entity.LOGIN
-import com.cyf.heartservice.entity.SENDVERF
-import com.cyf.heartservice.entity.getInterface
+import com.cyf.heartservice.entity.*
+import com.dou361.dialogui.listener.DialogUIListener
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activitiy_login.*
 import kr.co.namee.permissiongen.PermissionFail
 import kr.co.namee.permissiongen.PermissionGen
@@ -88,6 +92,7 @@ class LoginActivity : MyBaseActivity() {
             login()
         }
         getPermission()
+        requestVersionInfo()
     }
 
     private fun sendYZM() {
@@ -170,5 +175,52 @@ class LoginActivity : MyBaseActivity() {
     @PermissionFail(requestCode = 100)
     fun doFailSomething() {
         toast("权限获取失败")
+    }
+
+    //获取版本信息
+    private fun requestVersionInfo() {
+        val map = mapOf(
+            Pair("type", "android")
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(APKV.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val versionInfoRes = Gson().fromJson(result, VersionInfoRes::class.java)
+                    checkVersion(versionInfoRes.retRes)
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
+        }
+    }
+
+    private fun checkVersion(versionInfo: VersionInfo) {
+        if (versionInfo.v_num > BuildConfig.VERSION_CODE) {//有新的版本是否更新
+            getMessageDialog(
+                this,
+                "发现新版本${versionInfo.v_title}，是否立即下载？",
+                object : DialogUIListener() {
+                    override fun onPositive() {
+                        download(versionInfo.http_url)
+                    }
+
+                    override fun onNegative() {
+
+                    }
+                })
+        } else {
+            //getSuccessDialog(this, "已经是最新版本！")
+        }
+    }
+
+    private fun download(url: String) {
+        downloadApk(this, "$ROOT_URL/$url")
     }
 }

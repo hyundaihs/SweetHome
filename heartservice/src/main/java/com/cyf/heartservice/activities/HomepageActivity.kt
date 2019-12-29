@@ -11,10 +11,10 @@ import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.heartservice.HeartService
 import com.cyf.heartservice.R
 import com.cyf.heartservice.entity.*
-import com.cyf.heartservice.fragments.ContactFragment
-import com.cyf.heartservice.fragments.MessageFragment
-import com.cyf.heartservice.fragments.MineFragment
-import com.cyf.heartservice.fragments.WorkerFragment
+import com.cyf.heartservice.fragments.ContactFragmentMy
+import com.cyf.heartservice.fragments.MessageFragmentMy
+import com.cyf.heartservice.fragments.MineFragmentMy
+import com.cyf.heartservice.fragments.WorkerFragmentMy
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_homepage.*
@@ -74,10 +74,10 @@ class HomepageActivity : MyBaseActivity() {
     }
 
     private fun init() {
-        fragments.add(MessageFragment())
-        fragments.add(ContactFragment())
-        fragments.add(WorkerFragment())
-        fragments.add(MineFragment())
+        fragments.add(MessageFragmentMy())
+        fragments.add(ContactFragmentMy())
+        fragments.add(WorkerFragmentMy())
+        fragments.add(MineFragmentMy())
         tabMessage.setOnClickListener {
             if (last != 0)
                 loadFragment(0)

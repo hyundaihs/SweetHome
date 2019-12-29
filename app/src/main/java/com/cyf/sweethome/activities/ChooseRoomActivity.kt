@@ -15,6 +15,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.SweetHome.Companion.CHOOSE_BUILDING_RESULT
 import com.cyf.sweethome.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_choose_room.*
@@ -29,132 +30,96 @@ class ChooseRoomActivity : MyBaseActivity() {
     }
 
     var chooseType = BUILDING
-    val building = ArrayList<Building>()
-    val data = ArrayList<String>()
-    val adapter = ListItemAdapter(data)
-    var chooseBuilding = 0
-    var chooseFloor = 0
-    var chooseRoom = 0
+
+    val buildData = ArrayList<Building>()
+    val buildAdapter = BuildingAdapter(buildData)
+    val floorData = ArrayList<Floor>()
+    val floorAdapter = FloorAdapter(floorData)
+    val roomData = ArrayList<Room>()
+    val roomAdapter = RoomAdapter(roomData)
+
+    var chooseBuildingName = ""
+    var chooseFloorName = ""
+    var chooseRoomName = ""
     var communityId = "0"
     var communityName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentBaseView(R.layout.activity_choose_room)
-        communityId = intent.getStringExtra("id")?:""
-        communityName = intent.getStringExtra("name")?:""
+        communityId = intent.getStringExtra("id") ?: ""
+        communityName = intent.getStringExtra("name") ?: ""
 
         setTitle("选择房间")
-        addRightStringBtn("完成", View.OnClickListener {
-            val intent = Intent()
-            intent.putExtra("choose_building", getChooseStr())
-            setResult(155, intent)
-            chooseType = BUILDING
-            finish()
-        })
-        init()
-    }
-
-    private fun getChooseStr(): String {
-        var rel = "您已选择：communityName"
-        when (chooseType) {
-            BUILDING -> {
-                rel += building[chooseBuilding].title
-            }
-            FLOOR -> {
-                rel += building[chooseBuilding].title
-                rel += building[chooseBuilding].lists[chooseFloor].title
-            }
-            ROOM -> {
-                rel += building[chooseBuilding].title
-                rel += building[chooseBuilding].lists[chooseFloor].title
-                rel += building[chooseBuilding].lists[chooseFloor].lists[chooseRoom].title
+        initRecyclerView(chooseBuilding, buildAdapter)
+        initRecyclerView(chooseFloor, floorAdapter)
+        initRecyclerView(chooseRoom, roomAdapter)
+        getBuildingData()
+        buildAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                chooseBuildingName = buildData[position].title
+                floorData.clear()
+                floorData.addAll(buildData[position].lists)
+                floorAdapter.notifyDataSetChanged()
+                layoutFloor.visibility = if (floorData.size > 0) View.VISIBLE else View.GONE
+                chooseType = FLOOR
+                refreshData()
             }
         }
-        return rel
+        floorAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                chooseFloorName = floorData[position].title
+                roomData.clear()
+                roomData.addAll(floorData[position].lists)
+                roomAdapter.notifyDataSetChanged()
+                layoutRoom.visibility = if (roomData.size > 0) View.VISIBLE else View.GONE
+                chooseType = ROOM
+                refreshData()
+            }
+        }
+        roomAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
+            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                chooseRoomName = roomData[position].title
+                val intent = Intent()
+                intent.putExtra(
+                    "chooseId",
+                    roomData[position].id
+                )
+                intent.putExtra(
+                    "chooseName",
+                    "${chooseBuildingName} ${chooseFloorName} ${chooseRoomName}"
+                )
+                setResult(CHOOSE_BUILDING_RESULT, intent)
+                finish()
+            }
+        }
+        refreshData()
     }
 
-    private fun init() {
+    private fun initRecyclerView(recyclerView: RecyclerView, adapter: MyBaseAdapter) {
         chooseText.addTextChangedListener {
             val isShow = it?.isEmpty() ?: true
             chooseText.visibility = if (isShow) View.GONE else View.VISIBLE
         }
         val layoutManager = LinearLayoutManager(this)
-        chooseList.layoutManager = layoutManager
+        recyclerView.layoutManager = layoutManager
         layoutManager.orientation = RecyclerView.VERTICAL
-        chooseList.addItemDecoration(
+        recyclerView.addItemDecoration(
             RecyclerViewDivider(
                 this,
-                LinearLayoutManager.VERTICAL,
+                LinearLayoutManager.HORIZONTAL,
                 DisplayUtils.dp2px(this, 1f),
                 resources.getColor(R.color.color_727C8E)
             )
         )
-        chooseList.itemAnimator = DefaultItemAnimator()
-        chooseList.isNestedScrollingEnabled = false
-        chooseList.adapter = adapter
-        adapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
-            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                when (chooseType) {
-                    BUILDING -> {
-                        chooseBuilding = position
-                        chooseType = FLOOR
-                    }
-                    FLOOR -> {
-                        chooseFloor = position
-                        chooseType = ROOM
-                    }
-                    ROOM -> {
-                        chooseRoom = position
-                    }
-                }
-                refreshData()
-            }
-        }
-        getBuildingData()
-        refreshData()
-    }
-
-    override fun finish() {
-        when (chooseType) {
-            BUILDING -> {
-                super.finish()
-            }
-            FLOOR -> {
-                chooseType = BUILDING
-                refreshData()
-            }
-            ROOM -> {
-                chooseRoom = FLOOR
-                refreshData()
-            }
-        }
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.isNestedScrollingEnabled = false
+        recyclerView.adapter = adapter
     }
 
     private fun refreshData() {
-        when (chooseType) {
-            BUILDING -> {
-                for (i in 0 until building.size) {
-                    data.clear()
-                    data.add(building[i].title)
-                }
-            }
-            FLOOR -> {
-                val floors = building[chooseBuilding].lists
-                for (i in 0 until floors.size) {
-                    data.clear()
-                    data.add(floors[i].title)
-                }
-            }
-            ROOM -> {
-                val rooms = building[chooseBuilding].lists[chooseFloor].lists
-                for (i in 0 until rooms.size) {
-                    data.clear()
-                    data.add(rooms[i].title)
-                }
-            }
-        }
-        adapter.notifyDataSetChanged()
+        chooseText.text =
+            "您已选择：${communityName} ${chooseBuildingName} ${chooseFloorName} ${chooseRoomName}"
     }
 
     private fun getBuildingData() {
@@ -171,8 +136,9 @@ class ChooseRoomActivity : MyBaseActivity() {
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
                     val buildingListRes = Gson().fromJson(result, BuildingListRes::class.java)
-                    building.clear()
-                    building.addAll(buildingListRes.retRes)
+                    buildData.clear()
+                    buildData.addAll(buildingListRes.retRes)
+                    buildAdapter.notifyDataSetChanged()
                 }
             })
             setDataMap(map)
@@ -181,12 +147,34 @@ class ChooseRoomActivity : MyBaseActivity() {
         }
     }
 
-    inner class ListItemAdapter(val data: ArrayList<String>) :
+    inner class BuildingAdapter(val data: ArrayList<Building>) :
         MyBaseAdapter(R.layout.layout_choose_building_list_item) {
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
-            holder.itemView.text.text = data[position]
+            holder.itemView.text.text = data[position].title
+        }
+
+        override fun getItemCount(): Int = data.size
+    }
+
+    inner class FloorAdapter(val data: ArrayList<Floor>) :
+        MyBaseAdapter(R.layout.layout_choose_building_list_item) {
+
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            super.onBindViewHolder(holder, position)
+            holder.itemView.text.text = data[position].title
+        }
+
+        override fun getItemCount(): Int = data.size
+    }
+
+    inner class RoomAdapter(val data: ArrayList<Room>) :
+        MyBaseAdapter(R.layout.layout_choose_building_list_item) {
+
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            super.onBindViewHolder(holder, position)
+            holder.itemView.text.text = data[position].title
         }
 
         override fun getItemCount(): Int = data.size

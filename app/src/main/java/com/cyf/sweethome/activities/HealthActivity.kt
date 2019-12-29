@@ -3,7 +3,7 @@ package com.cyf.sweethome.activities
 import android.os.Bundle
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.cyf.sweethome.R
-import com.cyf.sweethome.fragment.HealthHouseFragment
+import com.cyf.sweethome.fragment.HealthHouseFragmentMy
 
 class HealthActivity :MyBaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +14,7 @@ class HealthActivity :MyBaseActivity(){
             .beginTransaction()
             .add(
                 R.id.fragment_container,
-                HealthHouseFragment()
+                HealthHouseFragmentMy()
             )   // 此处的R.id.fragment_container是要盛放fragment的父容器
             .commit()
     }

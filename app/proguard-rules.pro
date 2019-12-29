@@ -35,3 +35,6 @@
 
 -dontwarn cn.jiguang.**
 -keep class cn.jiguang.** { *; }
+
+
+-keep class com.xuexiang.xupdate.entity.** { *; }

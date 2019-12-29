@@ -3,7 +3,7 @@ package com.cyf.sweethome.activities
 import android.os.Bundle
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.cyf.sweethome.R
-import com.cyf.sweethome.fragment.EventsCenterFragment
+import com.cyf.sweethome.fragment.EventsCenterFragmentMy
 
 class EventsCenterActivity : MyBaseActivity() {
 
@@ -15,7 +15,7 @@ class EventsCenterActivity : MyBaseActivity() {
             .beginTransaction()
             .add(
                 R.id.fragment_container,
-                EventsCenterFragment()
+                EventsCenterFragmentMy()
             )   // 此处的R.id.fragment_container是要盛放fragment的父容器
             .commit()
     }

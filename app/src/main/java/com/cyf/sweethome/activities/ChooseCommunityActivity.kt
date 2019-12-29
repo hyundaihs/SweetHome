@@ -14,7 +14,11 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
-import com.cyf.sweethome.entity.*
+import com.cyf.sweethome.SweetHome.Companion.CHOOSE_COMMUNITY_RESULT
+import com.cyf.sweethome.entity.CommunityListRes
+import com.cyf.sweethome.entity.Room
+import com.cyf.sweethome.entity.XQLISTS
+import com.cyf.sweethome.entity.getInterface
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_choose_community.*
 import kotlinx.android.synthetic.main.layout_choose_building_list_item.view.*
@@ -23,16 +27,6 @@ class ChooseCommunityActivity : MyBaseActivity() {
 
     val data = ArrayList<Room>()
     val adapter = ListItemAdapter(data)
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == 155){
-            val intent = Intent()
-            intent.putExtra("choose_building", data?.getStringExtra("choose_building"))
-            setResult(155, intent)
-            finish()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +42,7 @@ class ChooseCommunityActivity : MyBaseActivity() {
         chooseList.addItemDecoration(
             RecyclerViewDivider(
                 this,
-                LinearLayoutManager.VERTICAL,
+                LinearLayoutManager.HORIZONTAL,
                 DisplayUtils.dp2px(this, 1f),
                 resources.getColor(R.color.color_727C8E)
             )
@@ -58,10 +52,11 @@ class ChooseCommunityActivity : MyBaseActivity() {
         chooseList.adapter = adapter
         adapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-                val intent = Intent(this@ChooseCommunityActivity, ChooseRoomActivity::class.java)
-                intent.putExtra("id", data[position].id)
-                intent.putExtra("name", data[position].title)
-                startActivityForResult(intent, 155)
+                val intent = Intent()
+                intent.putExtra("chooseId", data[position].id)
+                intent.putExtra("chooseName", data[position].title)
+                setResult(CHOOSE_COMMUNITY_RESULT, intent)
+                finish()
             }
         }
         getCommunityData()

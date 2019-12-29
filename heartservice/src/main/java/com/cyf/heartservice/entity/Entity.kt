@@ -45,7 +45,7 @@ data class Msg(
 data class MsgListRes(var retRes: ArrayList<Msg>) : RequestResult()
 
 data class RepairRoomListItem(
-    var id : String, //通知id
+    var id: String, //通知id
     var type_id: Int, // 类型（1：报事报修，2：验房）
     var row_id: String, // 报事报修id/验房记录id
     var title: String, // 名称【业主验房】
@@ -123,6 +123,7 @@ data class UserInfo(
 )
 
 data class UserInfoRes(var retRes: UserInfo) : RequestResult()
+data class UserInfoListRes(var retRes: ArrayList<UserInfo>) : RequestResult()
 
 data class MemberApplyInfo(
     var id: String, // 申请id
@@ -171,3 +172,105 @@ data class HelpContent(
 )
 
 data class HelpContentRes(var retRes: HelpContent) : RequestResult()
+
+data class Notify(//与物业知识内容一样
+    var id: String, // 通知公告id
+    var stype_id: String, // 分类id
+    var title: String, // 标题
+    var view_nums: String, // 浏览量
+    var app_contents: String, //详情（html）
+    var create_time: Long, // 发布时间（时间戳）
+    var stype_title: String // 分类标题
+)
+
+data class NotifyRes(var retRes: Notify) : RequestResult()
+
+data class NotifyListRes(var retRes: ArrayList<Notify>) : RequestResult()
+
+open class Room(
+    var id: String = "0", //单元id
+    var title: String = "", //单元名称
+    var cs: String = "0" //总层数
+)
+
+data class Floor(
+    var lists: ArrayList<Room> //房间
+) : Room()
+
+data class Building(
+    var lists: ArrayList<Floor> //楼层
+) : Room()
+
+data class BuildingListRes(var retRes: ArrayList<Building>) : RequestResult()
+
+data class CommunityListRes(var retRes: ArrayList<Room>) : RequestResult()
+
+data class JumingInfo(
+    var xqyz_id: String, // 业主id
+    var xqfh_id: String, // 房号id
+    var title: String, // 王中华
+    var phone: String, // 13429895721
+    var fw_title: String, // 周店1栋第1单元0701
+    var xqyzsf_title: String // 业主(身份)
+)
+
+data class JumingInfoListRes(var retRes: ArrayList<JumingInfo>) : RequestResult()
+
+data class JumingDetails(
+    var id: String, // 业主id
+    var title: String, // 王中华
+    var phone: String, // 13429895720
+    var sex: String, // 男
+    var card_num: String, // 420102198707243010
+    var xqyzsf_title: String // 业主(身份)
+)
+
+data class JumingDetailsRes(var retRes: JumingDetails) : RequestResult()
+data class JumingDetailsListRes(var retRes: ArrayList<JumingDetails>) : RequestResult()
+
+data class HouseInfo(
+    var xqyz_id: String, // 业主id
+    var xqld_title: String, // 1栋
+    var xqdy_title: String, // 第1单元
+    var xqfh_title: String, // 0701
+    var yf_status: String, // 验房状态（1：通过，2：未通过）
+    var create_time: Long, // 时间戳
+    var xqfh_id: String // 房号id
+)
+
+data class HouseInfoListRes(var retRes: ArrayList<HouseInfo>) : RequestResult()
+
+data class Payment(
+    var id: String, //id
+    var dates: String, //日期
+    var price: String //金额
+)
+
+data class SumPayment(
+    var all_price: String, //总欠费
+    var lists: ArrayList<Payment> //待缴列表
+)
+
+data class SumPaymentRes(var retRes: SumPayment) : RequestResult()
+
+data class Repair(
+    var id: String, // 报事保修id
+    var xqfh_id: String, // 房号id
+    var xqbsbxlx_title: String, // 家具维修
+    var fw_title: String, // 周店3栋第2单元0101
+    var contents: String, // 沙发断了
+    var sh_status: Int, // 状态（1：待接单 2：待处理 3：待评价 4：已完成）
+    var sh_title: String, // 状态标题（待接单）
+    var create_time: Long // 时间戳
+)
+
+data class RepairListRes(var retRes: ArrayList<Repair>) : RequestResult()
+
+data class VersionInfo(
+    var v_title: String, // 版本名称
+    var v_num: Int, // 版本号
+    var http_url: String, // 下载地址
+    var contents: String // 更新说明（html）
+)
+
+data class VersionInfoRes(var retRes: VersionInfo) : RequestResult()

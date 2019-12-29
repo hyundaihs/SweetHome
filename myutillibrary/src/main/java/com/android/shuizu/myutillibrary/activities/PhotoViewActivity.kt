@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.R
-import com.android.shuizu.myutillibrary.fragment.PhotoFragment
+import com.android.shuizu.myutillibrary.fragment.PhotoFragmentMy
 import kotlinx.android.synthetic.main.activity_photo_view.*
 
 /**
@@ -38,7 +38,7 @@ class PhotoViewActivity : MyBaseActivity() {
     private fun initViews() {
         val fragments = ArrayList<Fragment>()
         for (i in 0 until data.size) {
-            fragments.add(PhotoFragment(data[i], isURL))
+            fragments.add(PhotoFragmentMy(data[i], isURL))
         }
         myPager.adapter = MyPagerAdapter(supportFragmentManager, fragments)
         myPager.setCurrentItem(pos, true)

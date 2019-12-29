@@ -7,25 +7,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
-import com.android.shuizu.myutillibrary.widget.SwipeRefreshAndLoadLayout
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.cyf.sweethome.R
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import kotlinx.android.synthetic.main.fragment_mine_community.*
-import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.formatter.PercentFormatter
-import kotlinx.android.synthetic.main.layout_choose_building_list_item.view.*
 
 
 /**
  * ChaYin
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
-class MineCommunityFragment : BaseFragment() {
+class MineCommunityFragmentMy : MyBaseFragment() {
 
     val COLORS = listOf(
         R.color.color_23CA93,

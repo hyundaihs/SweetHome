@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
-import com.android.shuizu.myutillibrary.fragment.BaseFragment
-import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
+import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
+import com.cyf.heartservice.HeartService
+import com.cyf.heartservice.HeartService.Companion.CHOOSE_BUILDING_RESULT
 import com.cyf.heartservice.R
 import com.cyf.heartservice.activities.*
 import kotlinx.android.synthetic.main.fragment_worker.*
@@ -24,7 +24,7 @@ import org.jetbrains.anko.toast
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/17.
  */
-class WorkerFragment : BaseFragment() {
+class WorkerFragmentMy : MyBaseFragment() {
 
     private val imageData: List<String> = listOf(
         "工单处理",
@@ -80,6 +80,18 @@ class WorkerFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_worker, container, false)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 144 && resultCode == CHOOSE_BUILDING_RESULT) {
+            val roomId = data?.getStringExtra("chooseId") ?: ""
+            val roomName = data?.getStringExtra("chooseName") ?: ""
+            val intent = Intent(context, HouseInfoActivity::class.java)
+            intent.putExtra("id", roomId)
+            intent.putExtra("name", roomName)
+            startActivity(intent)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViews()
@@ -108,10 +120,18 @@ class WorkerFragment : BaseFragment() {
                         startActivity(intent)
                     }
                     1 -> {
-                        mAct?.loadContact()
+                        val intent = Intent(context, RepairRoomActivity::class.java)
+                        intent.putExtra("type", 2)
+                        startActivity(intent)
                     }
                     2 -> {
                         startActivity(Intent(context, MyShareCodeActivity::class.java))
+                    }
+                    3 -> {
+                        startActivity(Intent(context, PropertyKnowledgeActivity::class.java))
+                    }
+                    4 -> {
+                        startActivity(Intent(context, JumingRenzhengActivity::class.java))
                     }
                     5 -> {
                         val intent = Intent(context, VolunApplyListActivity::class.java)
@@ -120,6 +140,16 @@ class WorkerFragment : BaseFragment() {
                     6 -> {
                         val intent = Intent(context, MemberApplyListActivity::class.java)
                         startActivity(intent)
+                    }
+                    10 -> {
+                        val intent = Intent(context, JumingInfoListActivity::class.java)
+                        startActivity(intent)
+                    }
+                    11 -> {
+                        val intent = Intent(context, ChooseRoomActivity::class.java)
+                        intent.putExtra("id", HeartService.userInfo?.xq_id)
+                        intent.putExtra("name", HeartService.userInfo?.xq_title)
+                        startActivityForResult(intent, 144)
                     }
                     else -> {
                         view.context.toast("本小区暂无此功能")

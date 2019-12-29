@@ -2,20 +2,16 @@ package com.cyf.sweethome.utils;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.View;
-import android.widget.Toast;
 
-import com.android.shuizu.myutillibrary.utils.CalendarUtil;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.cyf.sweethome.MainActivity;
+import com.cyf.sweethome.entity.UserInfo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,6 +73,35 @@ public class PickerUtil {
 //        pvOptions.setPicker(singleData);
 //        pvOptions.show();
 //    }
+
+    public static void showUserInfoPicker(final Context context, ArrayList<UserInfo> userInfo, OnOptionsSelectListener listener) {
+        List<String> data = new ArrayList<>();
+        for (int i = 0; i < userInfo.size(); i++) {
+            data.add(userInfo.get(i).getTitle());
+        }
+        OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(context, listener)
+                .setTitleText("选择身份")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK)
+                .setContentTextSize(20)
+                .build();
+        pvOptions.setPicker(data);
+        pvOptions.show();
+    }
+
+    public static void showSexPicker(final Context context, OnOptionsSelectListener listener) {
+        List<String> sexData = new ArrayList<>();
+        sexData.add("男");
+        sexData.add("女");
+        OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(context, listener)
+                .setTitleText("选择性别")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK)
+                .setContentTextSize(20)
+                .build();
+        pvOptions.setPicker(sexData);
+        pvOptions.show();
+    }
 
     public static void showTimerPicker(final Context context, OnTimeSelectListener listener) {
         TimePickerView pvTime = new TimePickerBuilder(context, listener)

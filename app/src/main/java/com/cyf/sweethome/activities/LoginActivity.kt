@@ -14,9 +14,7 @@ import com.android.shuizu.myutillibrary.utils.PreferenceUtil
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
-import com.cyf.sweethome.entity.LOGIN
-import com.cyf.sweethome.entity.SENDVERF
-import com.cyf.sweethome.entity.getInterface
+import com.cyf.sweethome.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import kr.co.namee.permissiongen.PermissionFail
@@ -126,8 +124,13 @@ class LoginActivity : MyBaseActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
+                    val loginInfoRes = Gson().fromJson(result, LoginInfoRes::class.java)
                     account = inputPhone.text.toString()
-                    startActivity(Intent(context, HomepageActivity::class.java))
+                    if(loginInfoRes.retRes.is_rz == 1){
+                        startActivity(Intent(context, HomepageActivity::class.java))
+                    }else{
+                        startActivity(Intent(context, JumingRenzhengActivity::class.java))
+                    }
                     inputMsg.setText("")
                     finish()
                 }
