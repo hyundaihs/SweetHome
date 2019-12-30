@@ -41,11 +41,15 @@ class KevinRequest private constructor(val context: Context) {
 
     companion object {
         var sessionId: String = ""
-
+        var flag = false
         private val MEDIA_TYPE_JSON =
             "application/x-www-form-urlencoded charset=utf-8".toMediaTypeOrNull()//mdiatype 这个需要和服务端保持一致
 
         const val LOGINERR = "loginerr"//需要重新登录错误信息
+
+        fun stopLoop(){
+            flag = false
+        }
 
         fun build(c: Context): KevinRequest {
             return KevinRequest(c)
@@ -187,6 +191,57 @@ class KevinRequest private constructor(val context: Context) {
                     dialog?.dismiss()
                     errorCallback?.onError(context, response.message)
                 }
+            }
+        }
+    }
+
+    //循环访问
+    fun postRequest(millis:Long){
+        dialog?.show()
+        flag = true
+        context.doAsync {
+            while(flag){
+                val requestBody = Gson().toJson(map).toRequestBody(MEDIA_TYPE_JSON)
+                val request =
+                    Request.Builder().url(requestUrl).post(requestBody).addHeader("cookie", sessionId)
+                        .build()
+                try {
+                    val response = mOkHttpClient.newCall(request).execute()
+                    if (response.isSuccessful) {
+                        val string = response.body!!.string()
+                        getSession(response)
+                        val res: RequestResult = Gson().fromJson(string, RequestResult::class.java)
+                        if (res.retInt == 1) {
+                            uiThread {
+                                dialog?.dismiss()
+                                successCallback?.onSuccess(context, string)
+                            }
+                        } else {
+                            if (res.retErr == LOGINERR) {
+                                uiThread {
+                                    dialog?.dismiss()
+                                    loginErrCallback?.onLoginErr(context)
+                                }
+                            } else {
+                                uiThread {
+                                    dialog?.dismiss()
+                                    errorCallback?.onError(context, res.retErr)
+                                }
+                            }
+                        }
+                    } else {
+                        uiThread {
+                            dialog?.dismiss()
+                            errorCallback?.onError(context, response.message)
+                        }
+                    }
+                } catch (e: Exception) {
+                    uiThread {
+                        dialog?.dismiss()
+                        errorCallback?.onError(context, e.toString())
+                    }
+                }
+                Thread.sleep(millis)
             }
         }
     }

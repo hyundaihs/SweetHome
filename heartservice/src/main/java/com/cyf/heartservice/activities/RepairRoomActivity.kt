@@ -75,9 +75,25 @@ class RepairRoomActivity : MyBaseActivity() {
                     startActivity(intent)
                 } else {
                     setRead(position)
-                    val intent = Intent(view.context, CheckRoomDetailsActivity::class.java)
-                    intent.putExtra("id", repairRoomList[position].row_id)
-                    startActivity(intent)
+                    when (repairRoomList[position].type_id) {
+                        2 -> {
+                            val intent = Intent(view.context, CheckRoomDetailsActivity::class.java)
+                            intent.putExtra("id", repairRoomList[position].row_id)
+                            startActivity(intent)
+                        }
+                        3 -> {
+                            val intent = Intent(view.context, ZXFXActivity::class.java)
+                            intent.putExtra("id", repairRoomList[position].row_id)
+                            intent.putExtra("page_code", ZXFXActivity.PAGE_CODE_ZX)
+                            startActivity(intent)
+                        }
+                        4 -> {
+                            val intent = Intent(view.context, ZXFXActivity::class.java)
+                            intent.putExtra("id", repairRoomList[position].row_id)
+                            intent.putExtra("page_code", ZXFXActivity.PAGE_CODE_FX)
+                            startActivity(intent)
+                        }
+                    }
                 }
             }
         }

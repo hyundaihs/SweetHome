@@ -95,22 +95,14 @@ class EventsCenterFragmentMy : MyBaseFragment() {
 
     private fun getActInfo(page: Int, isRefresh: Boolean = false) {
         val map = mapOf(
-            Pair("page_size", "15"),
-            Pair("page", page.toString())
+            Pair("page_size", "5"),
+            Pair("page", page)
         )
         KevinRequest.build(activity as Context).apply {
             setRequestUrl(HDLISTS.getInterface())
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     listViewSwipe.isRefreshing = false
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
-
-                        }
-
-                        override fun onNegative() {
-                        }
-                    })
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {

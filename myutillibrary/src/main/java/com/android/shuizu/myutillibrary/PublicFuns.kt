@@ -4,9 +4,12 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.text.InputType
 import android.util.Log
 import android.util.TypedValue
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.HProgressDialogUtils
@@ -18,6 +21,7 @@ import com.xuexiang.xupdate.utils.UpdateUtils
 import com.xuexiang.xutil.tip.ToastUtils.toast
 import org.jetbrains.anko.toast
 import java.io.File
+import androidx.core.content.ContextCompat.getSystemService
 
 
 /**
@@ -68,6 +72,13 @@ fun Activity.hideInput() {
     if (null != v) {
         imm.hideSoftInputFromWindow(v.windowToken, 0)
     }
+}
+
+fun Any.callPhone(context: Context, phoneNum: String) {
+    val intent = Intent(Intent.ACTION_DIAL)
+    val data = Uri.parse("tel:" + phoneNum)
+    intent.data = data
+    context.startActivity(intent)
 }
 
 fun Any.initVersionUpdate(context: Application) {

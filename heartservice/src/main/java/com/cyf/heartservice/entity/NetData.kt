@@ -89,4 +89,6 @@ const val DJWYF = "djwyf"//代缴物业费
 const val FXKH = "fxkh"//房下客户
 const val BSBXLISTS = "bsbxlists"//房下报事
 const val APKV = "apkv"//版本更新
+const val ZXSQINFO = "zxsqinfo"//装修详情
+const val WPFXINFO = "wpfxinfo"//放行详情
 

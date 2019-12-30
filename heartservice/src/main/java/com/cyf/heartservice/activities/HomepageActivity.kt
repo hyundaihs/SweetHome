@@ -28,17 +28,17 @@ class HomepageActivity : MyBaseActivity() {
 
     private val fragments = ArrayList<Fragment>(4)
     private var last = -1
+    private var start = -1L
 
+//    private var isExit = false  // 标识是否退出
 
-    private var isExit = false  // 标识是否退出
-
-    private val mHandler = object : Handler() {
-
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            isExit = false
-        }
-    }
+//    private val mHandler = object : Handler() {
+//
+//        override fun handleMessage(msg: Message) {
+//            super.handleMessage(msg)
+//            isExit = false
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,14 +97,25 @@ class HomepageActivity : MyBaseActivity() {
         loadFragment(0)
     }
 
+
     override fun onBackPressed() {
-        if (!isExit) {
-            isExit = true
-            toast("再按一次后退键退出程序")
-            mHandler.sendEmptyMessageDelayed(0, 2000)  // 利用handler延迟发送更改状态信息
+        if (start <= 0) {
+            start = System.currentTimeMillis()
         } else {
-            super.onBackPressed()
+            val now = System.currentTimeMillis()
+            if (now - start <= 2000) {
+                super.onBackPressed()
+            } else {
+                start = now
+            }
         }
+//        if (!isExit) {
+//            isExit = true
+//            toast("再按一次后退键退出程序")
+//            mHandler.sendEmptyMessageDelayed(0, 2000)  // 利用handler延迟发送更改状态信息
+//        } else {
+//            super.onBackPressed()
+//        }
     }
 
     fun loadContact() {

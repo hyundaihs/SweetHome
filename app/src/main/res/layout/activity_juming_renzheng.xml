@@ -52,25 +52,6 @@
                 android:layout_marginBottom="15dp"
                 android:background="@color/color_727C8E" />
 
-
-            <EditText
-                android:id="@+id/renzhengPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="请输入手机号码"
-                android:inputType="text"
-                android:textColor="@color/color_393939"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/color_727C8E" />
-
-
             <EditText
                 android:id="@+id/renzhengCardnum"
                 android:layout_width="match_parent"
@@ -95,7 +76,7 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@mipmap/arrow"
                 android:hint="请选择性别"
-                android:inputType="text"
+                android:inputType="none"
                 android:textColor="@color/color_393939"
                 android:textSize="15sp" />
 
@@ -119,7 +100,7 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@mipmap/arrow"
                 android:hint="请选择社区"
-                android:inputType="text"
+                android:inputType="none"
                 android:textColor="@color/color_393939"
                 android:textSize="15sp" />
 
@@ -138,7 +119,7 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@mipmap/arrow"
                 android:hint="请选择房间"
-                android:inputType="text"
+                android:inputType="none"
                 android:textColor="@color/color_393939"
                 android:textSize="15sp" />
 
@@ -156,7 +137,7 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@mipmap/arrow"
                 android:hint="请选择身份"
-                android:inputType="text"
+                android:inputType="none"
                 android:textColor="@color/color_393939"
                 android:textSize="15sp" />
 

@@ -20,6 +20,7 @@ class PhotoViewActivity : MyBaseActivity() {
         private val data = ArrayList<String>()
         private var pos = 0
         private var isURL = false
+        //传入的url必须是完整的
         fun setData(d: List<String>, url: Boolean = false, current: Int = 0) {
             data.clear()
             data.addAll(d)

@@ -108,7 +108,7 @@ class ChooseRoomActivity : MyBaseActivity() {
             RecyclerViewDivider(
                 this,
                 LinearLayoutManager.HORIZONTAL,
-                DisplayUtils.dp2px(this, 1f),
+                DisplayUtils.dp2px(this, 0.5f),
                 resources.getColor(R.color.color_727C8E)
             )
         )

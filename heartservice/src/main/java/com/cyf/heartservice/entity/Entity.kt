@@ -274,3 +274,32 @@ data class VersionInfo(
 )
 
 data class VersionInfoRes(var retRes: VersionInfo) : RequestResult()
+
+data class ZXFXInfo(
+    var id: String, // 6
+    var jsr: String, // 经手人
+    var xq_title: String, // 周店
+    var xqld_title: String, // 1栋
+    var xqdy_title: String, // 第1单元
+    var xqfh_title: String, // 0301
+    var xqyz_id: String, // 业主id
+    var fwzt_title: String, // 自住（房屋兴致）
+    var xqyz_title: String, // 刘涛（业主）
+    var xqyz_phone: String, // 业主电话）
+    var sbr_title: String, // 张大哥（申办人）
+    var sbr_phone: String, // 申办人电话）
+    var sbr_card_num: String, // 申办人身份证）
+    var zxfzr_title: String, // 装修负责人）
+    var zxfzr_phone: String, // 装修负责人电话）
+    var zxfzr_card_num: String, // 装修负责人身份证）
+    var zxqx: String, // 2019-12-31（装修截止日期）
+    var zxdw: String, // 装修单位
+    var blyy: String, // 办理原因
+    var yzqrfs: String, // 当面（业主确认方式）
+    var contents: String, // 备注
+    var file_url_wz: String, // 照片（一张）
+    var file_url_jz: String, // 行驶证照片（一张）
+    var create_time: Long // 时间戳
+)
+
+data class ZXFXInfoRes(var retRes: ZXFXInfo) : RequestResult()

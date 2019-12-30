@@ -70,6 +70,7 @@
         <activity android:name=".activities.JumingInfoListActivity" />
         <activity android:name=".activities.JumingDetailsActivity" />
         <activity android:name=".activities.HouseInfoActivity" />
+        <activity android:name=".activities.ZXFXActivity" />
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 这个Service要继承JCommonService -->

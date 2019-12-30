@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.android.shuizu.myutillibrary.MyBaseActivity
+import com.android.shuizu.myutillibrary.hideInput
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
@@ -55,6 +56,7 @@ class JumingRenzhengActivity : MyBaseActivity() {
 
     private fun init() {
         renzhengSex.setOnClickListener {
+            hideInput()
             PickerUtil.showSexPicker(this, object : OnOptionsSelectChangeListener,
                 OnOptionsSelectListener {
                 override fun onOptionsSelect(
@@ -73,14 +75,16 @@ class JumingRenzhengActivity : MyBaseActivity() {
         }
 
         renzhengShequ.setOnClickListener {
+            hideInput()
             startActivityForResult(Intent(this, ChooseCommunityActivity::class.java), 155)
         }
 
         renzhengFangjian.setOnClickListener {
+            hideInput()
             if (communityId.isEmpty() || communityName.isEmpty()) {
                 renzhengShequ.error = "请先选择小区"
                 toast("请先选择小区")
-            }else{
+            } else {
                 val intent = Intent(this, ChooseRoomActivity::class.java)
                 intent.putExtra("id", communityId)
                 intent.putExtra("name", communityName)
@@ -89,6 +93,7 @@ class JumingRenzhengActivity : MyBaseActivity() {
         }
 
         renzhengShenfen.setOnClickListener {
+            hideInput()
             PickerUtil.showUserInfoPicker(this, userInfos, object : OnOptionsSelectChangeListener,
                 OnOptionsSelectListener {
                 override fun onOptionsSelect(
@@ -190,9 +195,11 @@ class JumingRenzhengActivity : MyBaseActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-                    getSuccessDialog(context, "提交成功",object :DialogUIListener(){
+                    getSuccessDialog(context, "提交成功", object : DialogUIListener() {
                         override fun onPositive() {
-                            startActivity(Intent(context, HomepageActivity::class.java))
+                            val intent = Intent(context, IsAuthActivity::class.java)
+                            intent.putExtra("status", 1)
+                            startActivity(intent)
                             finish()
                         }
 

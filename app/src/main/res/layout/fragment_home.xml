@@ -97,9 +97,10 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/loopMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="关于在线缴费功能的相关使用操作说明"
+                android:text="暂无最新消息"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 

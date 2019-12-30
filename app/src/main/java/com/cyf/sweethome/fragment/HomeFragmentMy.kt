@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
+import com.android.shuizu.myutillibrary.E
+import com.android.shuizu.myutillibrary.callPhone
 import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
@@ -21,6 +23,7 @@ import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.youth.banner.BannerConfig
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 
 /**
@@ -31,6 +34,7 @@ class HomeFragmentMy : MyBaseFragment() {
 
     private val bannerInfos = ArrayList<BannerInfo>()
     private val actBannerInfos = ArrayList<BannerInfo>()
+    private var isRun = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,12 @@ class HomeFragmentMy : MyBaseFragment() {
         getHouseInfo()
         getBannerInfo()
         getActBannerInfo()
+        getLastMessage()
+    }
+
+    override fun onDestroy() {
+        isRun = false
+        super.onDestroy()
     }
 
     private fun initBanner() {
@@ -133,7 +143,7 @@ class HomeFragmentMy : MyBaseFragment() {
             startActivity(Intent(activity, SubmitRepairActivity::class.java))
         }
         message.setOnClickListener {
-            it.context.toast("本小区暂无此功能")
+            startActivity(Intent(activity, SecretaryActivity::class.java))
         }
         open_door.setOnClickListener {
             it.context.toast("本小区暂无此功能")
@@ -160,7 +170,9 @@ class HomeFragmentMy : MyBaseFragment() {
             startActivity(Intent(activity, FeedbackActivity::class.java))
         }
         cloudTalk.setOnClickListener {
-            it.context.toast("本小区暂无此功能")
+            SweetHome.houseInfo?.let {
+                callPhone(activity as Context, it.wygly_phone)
+            }
         }
     }
 
@@ -290,6 +302,43 @@ class HomeFragmentMy : MyBaseFragment() {
             })
             setDialog()
             postRequest()
+        }
+    }
+
+    //获取最新一条通告
+    private fun getLastMessage() {
+        val map = mapOf(
+            Pair("page", 1),
+            Pair("page_size", 10)
+        )
+        KevinRequest.build(activity as Context).apply {
+            setRequestUrl(TZGGLISTS.getInterface(map))
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    loopMessage.text = "暂无最新消息"
+                    loopMessage.setOnClickListener(null)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    val notifyListRes = Gson().fromJson(result, NotifyListRes::class.java)
+                    if (notifyListRes.retRes.size <= 0) {
+                        loopMessage.text = "暂无最新消息"
+                        loopMessage.setOnClickListener(null)
+                    } else {
+                        val notify = notifyListRes.retRes[0]
+                        loopMessage.text = notify.title
+                        loopMessage.setOnClickListener {
+                            val intent = Intent(context, NotifyDetailsActivity::class.java)
+                            intent.putExtra("id", notify.id)
+                            startActivity(intent)
+                        }
+                    }
+
+                }
+            })
+            setDataMap(map)
+            postRequest(60000)
         }
     }
 }

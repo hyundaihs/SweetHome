@@ -21,6 +21,7 @@ class SweetHome : Application() {
         var instance: SweetHome by Delegates.notNull()
         val CHOOSE_COMMUNITY_RESULT = 140
         val CHOOSE_BUILDING_RESULT = 141
+        val ADD_HOUSE_RESULT = 142
     }
 
     override fun onCreate() {

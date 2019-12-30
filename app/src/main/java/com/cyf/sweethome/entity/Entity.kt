@@ -75,6 +75,7 @@ data class HouseInfo(
     var fw_status: String, // 房屋状态（1：自主，2：出租，3：闲置）
     var xq_title: String, // 小区名 （周店）
     var xqld_title: String, // 楼栋名（1栋）
+    var wygly_phone: String, //物业电话
     var xqdy_title: String // 单元名（1单元）
 )
 
@@ -358,7 +359,8 @@ data class VersionInfoRes(var retRes: VersionInfo) : RequestResult()
 
 data class LoginInfo(
     var login_verf: String, // 登录密钥（自动登录用）
-    var is_rz: Int //是否认证
+    var is_rz: Int, //是否认证
+    var sh_status: Int //认证状态
 )
 
 data class LoginInfoRes(var retRes: LoginInfo) : RequestResult()
@@ -391,3 +393,18 @@ data class XQPFInfo(
 )
 
 data class XQPFInfoRes(var retRes: XQPFInfo) : RequestResult()
+
+
+data class Notify(//与物业知识内容一样
+    var id: String, // 通知公告id
+    var stype_id: String, // 分类id
+    var title: String, // 标题
+    var view_nums: String, // 浏览量
+    var app_contents: String, //详情（html）
+    var create_time: Long, // 发布时间（时间戳）
+    var stype_title: String // 分类标题
+)
+
+data class NotifyRes(var retRes: Notify) : RequestResult()
+
+data class NotifyListRes(var retRes: ArrayList<Notify>) : RequestResult()

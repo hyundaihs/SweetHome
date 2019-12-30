@@ -105,4 +105,6 @@ const val YZSFLISTS = "yzsflists"//业主身份认证
 const val TJSFRZ = "tjsfrz"//提交身份认证
 const val XQINFO = "xqinfo"//小区详情
 const val XQPF = "xqpf"//小区评分
+const val TZGGLISTS = "tzgglists"//通知公告列表
+const val TZGGINFO = "tzgginfo"//通知公告详情
 

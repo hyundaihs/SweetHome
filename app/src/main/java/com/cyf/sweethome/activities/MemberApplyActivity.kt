@@ -2,7 +2,6 @@ package com.cyf.sweethome.activities
 
 import android.content.Context
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.hideInput
 import com.android.shuizu.myutillibrary.request.KevinRequest
@@ -12,11 +11,9 @@ import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.entity.DJSQ
-import com.cyf.sweethome.entity.getImageUrl
 import com.cyf.sweethome.entity.getInterface
 import com.cyf.sweethome.utils.PickerUtil
 import com.dou361.dialogui.listener.DialogUIListener
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_member_apply.*
 
 class MemberApplyActivity : MyBaseActivity() {

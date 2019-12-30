@@ -11,13 +11,16 @@ import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
 import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
+import com.cyf.sweethome.SweetHome.Companion.ADD_HOUSE_RESULT
 import com.cyf.sweethome.adapters.MyHouseAdapter
 import com.cyf.sweethome.entity.*
+import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.layout_empty_recycleview.*
+import kotlinx.android.synthetic.main.activity_my_house.*
 import org.jetbrains.anko.toast
 import java.util.*
 
@@ -32,8 +35,8 @@ class MyHouseActivity : MyBaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == 155){
-            toast(data?.getStringExtra("choose_building")?:"")
+        if (resultCode == ADD_HOUSE_RESULT) {
+            getMyHouse()
         }
     }
 
@@ -42,13 +45,12 @@ class MyHouseActivity : MyBaseActivity() {
         setContentBaseView(R.layout.activity_my_house)
         setTitle("我的房屋")
         addRightStringBtn("添加房屋", View.OnClickListener {
-            toast("本小区暂无此功能")
-//            startActivityForResult(
-//                Intent(
-//                    this@MyHouseActivity,
-//                    ChooseCommunityActivity::class.java
-//                ), 155
-//            )
+            startActivityForResult(
+                Intent(
+                    this@MyHouseActivity,
+                    AddHouseActivity::class.java
+                ), 155
+            )
         })
         initViews()
         getMyHouse()
@@ -56,24 +58,30 @@ class MyHouseActivity : MyBaseActivity() {
 
     private fun initViews() {
         val layoutManager = LinearLayoutManager(this)
-        listView.layoutManager = layoutManager
+        myHouse.layoutManager = layoutManager
         layoutManager.orientation = RecyclerView.VERTICAL
-        listView.addItemDecoration(
+        myHouse.addItemDecoration(
             RecyclerViewDivider(
                 this,
                 LinearLayoutManager.VERTICAL,
-                10,
+                DisplayUtils.dp2px(this, 15f),
                 resources.getColor(android.R.color.transparent)
             )
         )
-        listView.itemAnimator = DefaultItemAnimator()
-        listView.isNestedScrollingEnabled = false
-        listView.setEmptyView(emptyView)
-        listView.adapter = myHouseAdapter
+        myHouse.itemAnimator = DefaultItemAnimator()
+        myHouse.isNestedScrollingEnabled = false
+        myHouse.setEmptyView(emptyView)
+        myHouse.adapter = myHouseAdapter
         myHouseAdapter.myOnItemClickListener = object : MyBaseAdapter.MyOnItemClickListener {
             override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                if (myHouseList[position].sh_status != 2) {
+                    getErrorDialog(view.context, "暂未通过审核!")
+                    return
+                }
                 if (myHouseList[position].xqfh_id != SweetHome.houseInfo?.id) {
                     setMyHouse(myHouseList[position].xqfh_id)
+                } else {
+                    finish()
                 }
             }
         }
@@ -94,10 +102,10 @@ class MyHouseActivity : MyBaseActivity() {
                 override fun onSuccess(context: Context, result: String) {
                     val houseInfoRes = Gson().fromJson(result, HouseInfoRes::class.java)
                     SweetHome.houseInfo = houseInfoRes.retRes
+                    finish()
                 }
             })
             setDataMap(map)
-            setDialog()
             postRequest()
         }
     }

@@ -15,6 +15,7 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.android.shuizu.myutillibrary.utils.getSuccessDialog
 import com.cyf.sweethome.R
+import com.cyf.sweethome.SweetHome
 import com.cyf.sweethome.entity.*
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
@@ -37,6 +38,10 @@ class VolunApplyActivity : MyBaseActivity() {
     private fun init() {
         submit.setOnClickListener {
             submit()
+        }
+        SweetHome.userInfo?.let {
+            name.setText(it.title)
+            idCard.setText(it.card_num)
         }
         val gridLayoutManager = GridLayoutManager(this, 3)
         volunType.layoutManager = gridLayoutManager

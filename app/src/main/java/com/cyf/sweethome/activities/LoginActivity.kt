@@ -128,11 +128,17 @@ class LoginActivity : MyBaseActivity() {
                     account = inputPhone.text.toString()
                     if(loginInfoRes.retRes.is_rz == 1){
                         startActivity(Intent(context, HomepageActivity::class.java))
+                        finish()
                     }else{
-                        startActivity(Intent(context, JumingRenzhengActivity::class.java))
+                        if(loginInfoRes.retRes.sh_status == 0){
+                            startActivity(Intent(context, JumingRenzhengActivity::class.java))
+                        }else{
+                            val intent = Intent(context, IsAuthActivity::class.java)
+                            intent.putExtra("status",loginInfoRes.retRes.sh_status)
+                            startActivity(intent)
+                        }
                     }
                     inputMsg.setText("")
-                    finish()
                 }
 
             })

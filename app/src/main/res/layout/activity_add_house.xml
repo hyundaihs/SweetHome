@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -36,83 +35,6 @@
             android:paddingEnd="20dp"
             android:paddingBottom="15dp">
 
-            <EditText
-                android:id="@+id/renzhengName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="请输入姓名"
-                android:inputType="text"
-                android:textColor="@color/color_393939"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/color_727C8E" />
-
-
-            <EditText
-                android:id="@+id/renzhengPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="请输入手机号码"
-                android:inputType="text"
-                android:textColor="@color/color_393939"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/color_727C8E" />
-
-
-            <EditText
-                android:id="@+id/renzhengCardnum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="请输入身份证"
-                android:inputType="text"
-                android:textColor="@color/color_393939"
-                android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/color_727C8E" />
-
-            <TextView
-                android:id="@+id/renzhengSex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawableEnd="@mipmap/arrow"
-                android:hint="请选择性别"
-                android:inputType="text"
-                android:textColor="@color/color_393939"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rect_ffffff_white_corner_10"
-            android:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingTop="15dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="15dp">
-
             <TextView
                 android:id="@+id/renzhengShequ"
                 android:layout_width="match_parent"
@@ -126,7 +48,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@color/color_727C8E" />
@@ -145,7 +67,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@color/color_727C8E" />
@@ -180,5 +102,4 @@
             android:textColor="@color/bg_white"
             android:textSize="14sp" />
     </LinearLayout>
-
 </LinearLayout>
