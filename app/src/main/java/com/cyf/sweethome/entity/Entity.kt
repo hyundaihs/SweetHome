@@ -408,3 +408,7 @@ data class Notify(//与物业知识内容一样
 data class NotifyRes(var retRes: Notify) : RequestResult()
 
 data class NotifyListRes(var retRes: ArrayList<Notify>) : RequestResult()
+
+data class JpushInfo(
+    var type: String //消息类型
+)

@@ -109,7 +109,6 @@
         <activity android:name=".activities.SecretaryActivity" />
         <activity android:name=".activities.AddHouseActivity" />
         <activity android:name=".activities.IsAuthActivity" />
-        <activity android:name="com.cyf.heartservice.activities.ZXFXActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->

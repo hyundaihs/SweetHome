@@ -303,3 +303,7 @@ data class ZXFXInfo(
 )
 
 data class ZXFXInfoRes(var retRes: ZXFXInfo) : RequestResult()
+
+data class JpushInfo(
+    var type: String //消息类型
+)

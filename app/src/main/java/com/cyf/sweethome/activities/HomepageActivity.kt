@@ -16,7 +16,7 @@ import com.cyf.sweethome.entity.UserInfoRes
 import com.cyf.sweethome.entity.getInterface
 import com.cyf.sweethome.fragment.CommunityFragmentMy
 import com.cyf.sweethome.fragment.HomeFragmentMy
-import com.cyf.sweethome.fragment.MineFragmentMy
+import com.cyf.sweethome.fragment.MineFragment
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_homepage.*
@@ -86,7 +86,7 @@ class HomepageActivity : MyBaseActivity() {
     private fun init(){
         fragments.add(HomeFragmentMy())
         fragments.add(CommunityFragmentMy())
-        fragments.add(MineFragmentMy())
+        fragments.add(MineFragment())
         bottomTab.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.tabHome -> {

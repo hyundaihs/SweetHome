@@ -25,7 +25,7 @@ import org.jetbrains.anko.toast
  * ChaYin
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
-class MineFragmentMy : MyBaseFragment() {
+class MineFragment : MyBaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
