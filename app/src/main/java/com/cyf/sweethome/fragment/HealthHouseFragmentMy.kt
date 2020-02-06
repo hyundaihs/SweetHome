@@ -96,35 +96,37 @@ class HealthHouseFragmentMy : MyBaseFragment(){
             Pair("page_size", "15"),
             Pair("page", page.toString())
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(TJBGJL.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    listViewSwipe.isRefreshing = false
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(TJBGJL.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        listViewSwipe.isRefreshing = false
+                        getErrorDialog(context, error, object : DialogUIListener() {
+                            override fun onPositive() {
 
-                        }
+                            }
 
-                        override fun onNegative() {
-                        }
-                    })
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val checkBodyInfoListRes = Gson().fromJson(result, CheckBodyInfoListRes::class.java)
-                    listViewSwipe.setTotalPages(checkBodyInfoListRes.retCounts, 15)
-                    if (isRefresh) {
-                        data.clear()
+                            override fun onNegative() {
+                            }
+                        })
                     }
-                    data.addAll(checkBodyInfoListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setDataMap(map)
-            postRequest()
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val checkBodyInfoListRes = Gson().fromJson(result, CheckBodyInfoListRes::class.java)
+                        listViewSwipe.setTotalPages(checkBodyInfoListRes.retCounts, 15)
+                        if (isRefresh) {
+                            data.clear()
+                        }
+                        data.addAll(checkBodyInfoListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                        listViewSwipe.isRefreshing = false
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

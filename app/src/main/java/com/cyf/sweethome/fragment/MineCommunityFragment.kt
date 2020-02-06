@@ -150,38 +150,42 @@ class MineCommunityFragment : MyBaseFragment() {
     }
 
     private fun getXQInfo(){
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(XQINFO.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val xQInfoRes = Gson().fromJson(result, XQInfoRes::class.java)
-                    fillInfo(xQInfoRes.retRes)
-                }
-            })
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(XQINFO.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error)
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val xQInfoRes = Gson().fromJson(result, XQInfoRes::class.java)
+                        fillInfo(xQInfoRes.retRes)
+                    }
+                })
+                postRequest()
+            }
         }
     }
 
     private fun getXQPF(){
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(XQPF.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val xQPFRes = Gson().fromJson(result, XQPFInfoRes::class.java)
-                    fillPF(xQPFRes.retRes)
-                }
-            })
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(XQPF.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error)
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val xQPFRes = Gson().fromJson(result, XQPFInfoRes::class.java)
+                        fillPF(xQPFRes.retRes)
+                    }
+                })
+                postRequest()
+            }
         }
     }
 }

@@ -182,7 +182,7 @@ class SubmitRepairActivity : MyBaseActivity() {
                 if (position == imageData.size && position < MAX_IMAGE) {
                     PictureSelectorStart(MAX_IMAGE - imageData.size, REQUEST_CODE_CHOOSE)
                 } else {
-                    PhotoViewActivity.setData(imageData,false,position)
+                    PhotoViewActivity.setData(imageData, false, position)
                     startActivity(Intent(view.context, PhotoViewActivity::class.java))
                 }
             }
@@ -314,6 +314,9 @@ class SubmitRepairActivity : MyBaseActivity() {
             }
             holder.itemView.uploadDelete.setOnClickListener {
                 data.removeAt(position)
+                if (submitUrl.size > position) {
+                    submitUrl.removeAt(position)
+                }
                 notifyDataSetChanged()
             }
         }

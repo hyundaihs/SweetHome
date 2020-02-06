@@ -7,6 +7,7 @@ import android.util.SparseIntArray
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import com.android.shuizu.myutillibrary.E
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
@@ -101,8 +102,8 @@ class VolunApplyActivity : MyBaseActivity() {
                 false
             }
             typeAdapter.getChecked().size <= 0 -> {
-                toast("请选择分类")
-                false
+                    toast("请选择分类")
+                    false
             }
             else -> true
         }
@@ -116,7 +117,7 @@ class VolunApplyActivity : MyBaseActivity() {
         for (pos in typeAdapter.getChecked()) {
             ids.add(typeList[pos].id)
         }
-        val map = mapOf(
+        val map = mutableMapOf<String,Any>(
             Pair("title", name.text.toString()),
             Pair("card_num", idCard.text.toString()),
             Pair("contents", info.text.toString()),

@@ -47,7 +47,7 @@ class ContactFragmentMy : MyBaseFragment() {
     }
 
     private fun getListData() {
-        context?.let {
+        activity?.let {
             KevinRequest.build(it).apply {
                 setRequestUrl(LXRLISTS.getInterface())
                 setErrorCallback(object : KevinRequest.ErrorCallback {

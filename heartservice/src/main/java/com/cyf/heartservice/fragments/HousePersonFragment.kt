@@ -61,19 +61,21 @@ class HousePersonFragment(val id: String) : MyBaseFragment() {
         val map = mapOf(
             Pair("xqfh_id", id)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(FXKH.getInterface(map))
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val jumingDetailsListRes =
-                        Gson().fromJson(result, JumingDetailsListRes::class.java)
-                    data.clear()
-                    data.addAll(jumingDetailsListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                }
-            })
-            setDataMap(map)
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(FXKH.getInterface(map))
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val jumingDetailsListRes =
+                            Gson().fromJson(result, JumingDetailsListRes::class.java)
+                        data.clear()
+                        data.addAll(jumingDetailsListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

@@ -67,16 +67,18 @@ class HousePaymentFragment(val id: String) : MyBaseFragment() {
         val map = mapOf(
             Pair("xqfh_id", id)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(DJWYF.getInterface(map))
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val actInfoRes = Gson().fromJson(result, SumPaymentRes::class.java)
-                    fillViews(actInfoRes.retRes)
-                }
-            })
-            setDataMap(map)
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(DJWYF.getInterface(map))
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val actInfoRes = Gson().fromJson(result, SumPaymentRes::class.java)
+                        fillViews(actInfoRes.retRes)
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

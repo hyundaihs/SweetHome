@@ -44,7 +44,7 @@ class MineFragmentMy : MyBaseFragment() {
             mineInfo.text = "${it.sf_title}  ${it.xq_title}"
         }
         layoutInfo.setOnClickListener {
-            it.context.toast("本小区暂无此功能")
+            //it.context.toast("本小区暂无此功能")
         }
         help.setOnClickListener {
             startActivity(Intent(activity, HelpActivity::class.java))

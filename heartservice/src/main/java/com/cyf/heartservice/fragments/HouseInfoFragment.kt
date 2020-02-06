@@ -58,18 +58,20 @@ class HouseInfoFragment(val id: String) : MyBaseFragment() {
         val map = mapOf(
             Pair("xqyz_id", id)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(YZFWXX.getInterface(map))
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val houseInfoListRes = Gson().fromJson(result, HouseInfoListRes::class.java)
-                    data.clear()
-                    data.addAll(houseInfoListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                }
-            })
-            setDataMap(map)
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(YZFWXX.getInterface(map))
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val houseInfoListRes = Gson().fromJson(result, HouseInfoListRes::class.java)
+                        data.clear()
+                        data.addAll(houseInfoListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

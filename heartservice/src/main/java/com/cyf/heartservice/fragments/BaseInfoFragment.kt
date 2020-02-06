@@ -30,16 +30,18 @@ class BaseInfoFragment(val id: String) : MyBaseFragment() {
         val map = mapOf(
             Pair("xqyz_id", id)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(JMXXXQ.getInterface(map))
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val jumingDetailsRes = Gson().fromJson(result, JumingDetailsRes::class.java)
-                    fillViews(jumingDetailsRes.retRes)
-                }
-            })
-            setDataMap(map)
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(JMXXXQ.getInterface(map))
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val jumingDetailsRes = Gson().fromJson(result, JumingDetailsRes::class.java)
+                        fillViews(jumingDetailsRes.retRes)
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

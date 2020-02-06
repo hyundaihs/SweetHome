@@ -50,6 +50,15 @@ class HomeFragmentMy : MyBaseFragment() {
         getHouseInfo()
         getBannerInfo()
         getActBannerInfo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        KevinRequest.stopLoop()
+    }
+
+    override fun onResume() {
+        super.onResume()
         getLastMessage()
     }
 
@@ -184,124 +193,132 @@ class HomeFragmentMy : MyBaseFragment() {
     }
 
     private fun getBannerInfo() {
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(DJBANNER.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(DJBANNER.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
 
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val bannerInfoListRes = Gson().fromJson(result, BannerInfoListRes::class.java)
-                    bannerInfos.clear()
-                    bannerInfos.addAll(bannerInfoListRes.retRes)
-                    initBanner()
-                }
-            })
-            postRequest()
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val bannerInfoListRes = Gson().fromJson(result, BannerInfoListRes::class.java)
+                        bannerInfos.clear()
+                        bannerInfos.addAll(bannerInfoListRes.retRes)
+                        initBanner()
+                    }
+                })
+                postRequest()
+            }
         }
     }
 
     private fun getActBannerInfo() {
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(HDBANNER.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(HDBANNER.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
 
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val bannerInfoListRes = Gson().fromJson(result, BannerInfoListRes::class.java)
-                    actBannerInfos.clear()
-                    actBannerInfos.addAll(bannerInfoListRes.retRes)
-                    initActBanner()
-                }
-            })
-            postRequest()
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val bannerInfoListRes = Gson().fromJson(result, BannerInfoListRes::class.java)
+                        actBannerInfos.clear()
+                        actBannerInfos.addAll(bannerInfoListRes.retRes)
+                        initActBanner()
+                    }
+                })
+                postRequest()
+            }
         }
     }
 
     private fun getMemberStatus() {
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(DJSQZT.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(DJSQZT.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error, object : DialogUIListener() {
+                            override fun onPositive() {
 
-                        }
+                            }
 
-                        override fun onNegative() {
-                        }
-                    })
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val houseInfoRes = Gson().fromJson(result, MemberStatusRes::class.java)
-                    when (houseInfoRes.retRes.sh_status) {
-                        0 -> {//未申请
-                            startActivity(Intent(context, MemberApplyActivity::class.java))
-                        }
-                        1 -> {//审核中
-                            getSuccessDialog(context, "您的党员认证申请还在审核中，请耐心等待！")
-                        }
-                        2 -> {//已通过
-                            startActivity(Intent(context, MemberInfoNewsActivity::class.java))
-                        }
-                        3 -> {//已拒绝
-                            getMessageDialog(
-                                context,
-                                "您的党员认证已被拒绝，需要重新申请吗？",
-                                object : DialogUIListener() {
-                                    override fun onPositive() {
-                                        startActivity(
-                                            Intent(
-                                                context,
-                                                MemberApplyActivity::class.java
+                            override fun onNegative() {
+                            }
+                        })
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val houseInfoRes = Gson().fromJson(result, MemberStatusRes::class.java)
+                        when (houseInfoRes.retRes.sh_status) {
+                            0 -> {//未申请
+                                startActivity(Intent(context, MemberApplyActivity::class.java))
+                            }
+                            1 -> {//审核中
+                                getSuccessDialog(context, "您的党员认证申请还在审核中，请耐心等待！")
+                            }
+                            2 -> {//已通过
+                                startActivity(Intent(context, MemberInfoNewsActivity::class.java))
+                            }
+                            3 -> {//已拒绝
+                                getMessageDialog(
+                                    context,
+                                    "您的党员认证已被拒绝，需要重新申请吗？",
+                                    object : DialogUIListener() {
+                                        override fun onPositive() {
+                                            startActivity(
+                                                Intent(
+                                                    context,
+                                                    MemberApplyActivity::class.java
+                                                )
                                             )
-                                        )
-                                    }
+                                        }
 
-                                    override fun onNegative() {
+                                        override fun onNegative() {
 
-                                    }
-                                })
+                                        }
+                                    })
+                            }
                         }
                     }
-                }
-            })
-            setDialog()
-            postRequest()
+                })
+                setDialog()
+                postRequest()
+            }
         }
     }
 
     private fun getHouseInfo() {
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(DQFWXX.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
-                            activity?.finish()
-                        }
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(DQFWXX.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error, object : DialogUIListener() {
+                            override fun onPositive() {
+                                activity?.finish()
+                            }
 
-                        override fun onNegative() {
-                        }
-                    })
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val houseInfoRes = Gson().fromJson(result, HouseInfoRes::class.java)
-                    SweetHome.houseInfo = houseInfoRes.retRes
-                    houseAddress.text = SweetHome.houseInfo?.fw_title
-                }
-            })
-            setDialog()
-            postRequest()
+                            override fun onNegative() {
+                            }
+                        })
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val houseInfoRes = Gson().fromJson(result, HouseInfoRes::class.java)
+                        SweetHome.houseInfo = houseInfoRes.retRes
+                        houseAddress.text = SweetHome.houseInfo?.fw_title
+                    }
+                })
+                setDialog()
+                postRequest()
+            }
         }
     }
 
@@ -311,34 +328,36 @@ class HomeFragmentMy : MyBaseFragment() {
             Pair("page", 1),
             Pair("page_size", 10)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(TZGGLISTS.getInterface(map))
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    loopMessage.text = "暂无最新消息"
-                    loopMessage.setOnClickListener(null)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val notifyListRes = Gson().fromJson(result, NotifyListRes::class.java)
-                    if (notifyListRes.retRes.size <= 0) {
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(TZGGLISTS.getInterface(map))
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
                         loopMessage.text = "暂无最新消息"
                         loopMessage.setOnClickListener(null)
-                    } else {
-                        val notify = notifyListRes.retRes[0]
-                        loopMessage.text = notify.title
-                        loopMessage.setOnClickListener {
-                            val intent = Intent(context, NotifyDetailsActivity::class.java)
-                            intent.putExtra("id", notify.id)
-                            startActivity(intent)
-                        }
                     }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val notifyListRes = Gson().fromJson(result, NotifyListRes::class.java)
+                        if (notifyListRes.retRes.size <= 0) {
+                            loopMessage.text = "暂无最新消息"
+                            loopMessage.setOnClickListener(null)
+                        } else {
+                            val notify = notifyListRes.retRes[0]
+                            loopMessage.text = notify.title
+                            loopMessage.setOnClickListener {
+                                val intent = Intent(context, NotifyDetailsActivity::class.java)
+                                intent.putExtra("id", notify.id)
+                                startActivity(intent)
+                            }
+                        }
 
-                }
-            })
-            setDataMap(map)
-            postRequest(60000)
+                    }
+                })
+                setDataMap(map)
+                postRequest(60000)
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.cyf.sweethome.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.android.shuizu.myutillibrary.E
 import com.android.shuizu.myutillibrary.MyBaseActivity
 import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
@@ -61,31 +63,68 @@ class ActInfoDetailsActivity : MyBaseActivity() {
 
     private fun init() {
         actInfoTitle.text = actInfo.title
-        actInfoTime.text = "活动时间：${CalendarUtil(actInfo.create_time, true).format(
-            CalendarUtil.YYYY_MM_DD
-        )}"
-        actInfoType.text = "活动类型：${actInfo.hd_status_title}"
+        actInfoTime.text = "活动时间：${actInfo.date_time}"
+        actInfoType.text = "活动类型：${actInfo.stype_title}"
         actInfoContent.loadLocalHtml(actInfo.app_contents)
-        layoutSubmit.visibility = if (actInfo.is_sq == 1) View.VISIBLE else View.GONE
-        if (actInfo.is_bm == 1) {
-            setSubmitStatus(true)
-        } else {
-            setSubmitStatus(false)
-        }
 
+        if(actInfo.hd_status == "3"){//已过期
+            submit.text = actInfo.hd_status_title
+            setSubmitEnable(false)
+        }else{
+            if(actInfo.sh_status == 2){
+                if (actInfo.is_bm == 0) {
+                    submit.text = "参与"
+                    setSubmitEnable(true, View.OnClickListener {
+                        submit()
+                    })
+                } else {
+                    submit.text = "已参与"
+                    setSubmitEnable(false)
+                }
+            }else if(actInfo.sh_status == 1){
+                submit.text = "审核中"
+                setSubmitEnable(false)
+            }else{
+                submit.text = "申请"
+                setSubmitEnable(true, View.OnClickListener {
+                    apply(actInfo.id,actInfo.stype_id)
+                })
+            }
+        }
     }
 
-    private fun setSubmitStatus(isAlready: Boolean) {
-        if (isAlready) {
-            submit.text = "已参与"
-            submit.setBackgroundResource(R.drawable.react_a0a0a0_corner_5)
-            submit.setOnClickListener(null)
-        } else {
-            submit.text = "参与"
+    private fun setSubmitEnable(isEnable:Boolean,clickListener: View.OnClickListener? = null){
+        if(isEnable){
             submit.setBackgroundResource(R.drawable.rect_ff4753_corner_5)
-            submit.setOnClickListener {
-                submit()
-            }
+        }else{
+            submit.setBackgroundResource(R.drawable.react_a0a0a0_corner_5)
+        }
+        submit.setOnClickListener(clickListener)
+    }
+
+    private fun apply(hdId:String,typeId:String) {
+        val ids = ArrayList<String>()
+        ids.add(typeId)
+        val map = mapOf(
+            Pair("xqhd_id", hdId),
+            Pair("stype_ids", ids)
+        )
+        KevinRequest.build(this).apply {
+            setRequestUrl(HDSQ.getInterface())
+            setErrorCallback(object : KevinRequest.ErrorCallback {
+                override fun onError(context: Context, error: String) {
+                    getErrorDialog(context, error)
+                }
+            })
+            setSuccessCallback(object : KevinRequest.SuccessCallback {
+                override fun onSuccess(context: Context, result: String) {
+                    toast("申请提交成功")
+                    getActInfoDetails()
+                }
+            })
+            setDataMap(map)
+            setDialog()
+            postRequest()
         }
     }
 
@@ -97,20 +136,14 @@ class ActInfoDetailsActivity : MyBaseActivity() {
             setRequestUrl(HDBM.getInterface())
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
-
-                        }
-
-                        override fun onNegative() {
-                        }
-                    })
+                    getErrorDialog(context, error)
                 }
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
                     toast("报名成功")
-                    setSubmitStatus(true)
+                    submit.text = "已参与"
+                    setSubmitEnable(false)
                 }
             })
             setDataMap(map)

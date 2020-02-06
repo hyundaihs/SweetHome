@@ -34,9 +34,9 @@ class WorkerFragmentMy : MyBaseFragment() {
         "居民认证",
         "志愿者认证",
         "党员认证",
-        "停车管理",
-        "管家品质巡查",
-        "品质检查",
+        //"停车管理",
+        //"管家品质巡查",
+        //"品质检查",
         "居民信息全览",
         "房屋集成视图"
     )
@@ -48,9 +48,9 @@ class WorkerFragmentMy : MyBaseFragment() {
         R.mipmap.ju_ming_ren_zheng,
         R.mipmap.zhi_yuan_zhe_ren_zheng,
         R.mipmap.dang_yuan_ren_zheng,
-        R.mipmap.ting_che_guan_li,
-        R.mipmap.guan_jia_pin_zhi,
-        R.mipmap.ping_zhi_jian_cha,
+        //R.mipmap.ting_che_guan_li,
+        //R.mipmap.guan_jia_pin_zhi,
+        //R.mipmap.ping_zhi_jian_cha,
         R.mipmap.ju_ming_xin_xi,
         R.mipmap.fang_wu_ji_cheng
     )
@@ -141,11 +141,11 @@ class WorkerFragmentMy : MyBaseFragment() {
                         val intent = Intent(context, MemberApplyListActivity::class.java)
                         startActivity(intent)
                     }
-                    10 -> {
+                    7 -> {
                         val intent = Intent(context, JumingInfoListActivity::class.java)
                         startActivity(intent)
                     }
-                    11 -> {
+                    8 -> {
                         val intent = Intent(context, ChooseRoomActivity::class.java)
                         intent.putExtra("id", HeartService.userInfo?.xq_id)
                         intent.putExtra("name", HeartService.userInfo?.xq_title)

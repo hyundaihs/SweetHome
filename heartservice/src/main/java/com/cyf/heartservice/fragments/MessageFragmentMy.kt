@@ -87,23 +87,25 @@ class MessageFragmentMy : MyBaseFragment() {
     }
 
     private fun getListData(){
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(XXZX.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val msgListRes = Gson().fromJson(result, MsgListRes::class.java)
-                    data.clear()
-                    data.addAll(msgListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                }
-            })
-            setDialog()
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(XXZX.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error)
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val msgListRes = Gson().fromJson(result, MsgListRes::class.java)
+                        data.clear()
+                        data.addAll(msgListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                    }
+                })
+                setDialog()
+                postRequest()
+            }
         }
     }
 

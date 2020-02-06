@@ -96,28 +96,30 @@ class WorkOrderListFragmentMy(val type: Int) : MyBaseFragment() {
             Pair("page", page),
             Pair("sh_status", type)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(BSBXLISTS.getInterface(map))
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val workOrderListRes = Gson().fromJson(result, WorkOrderListRes::class.java)
-                    listViewSwipe.setTotalPages(workOrderListRes.retCounts, 15)
-                    if (isRefresh) {
-                        workOrderList.clear()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(BSBXLISTS.getInterface(map))
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error)
+                        listViewSwipe.isRefreshing = false
                     }
-                    workOrderList.addAll(workOrderListRes.retRes)
-                    workOrderAdapter.notifyDataSetChanged()
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setDataMap(map)
-            postRequest()
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val workOrderListRes = Gson().fromJson(result, WorkOrderListRes::class.java)
+                        listViewSwipe.setTotalPages(workOrderListRes.retCounts, 15)
+                        if (isRefresh) {
+                            workOrderList.clear()
+                        }
+                        workOrderList.addAll(workOrderListRes.retRes)
+                        workOrderAdapter.notifyDataSetChanged()
+                        listViewSwipe.isRefreshing = false
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

@@ -87,35 +87,37 @@ class MemberListFragmentMy(val id: String) : MyBaseFragment() {
             Pair("page_size", "15"),
             Pair("page", page.toString())
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(DJLISTS.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    listViewSwipe.isRefreshing = false
-                    getErrorDialog(context, error, object : DialogUIListener() {
-                        override fun onPositive() {
-                            activity?.finish()
-                        }
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(DJLISTS.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        listViewSwipe.isRefreshing = false
+                        getErrorDialog(context, error, object : DialogUIListener() {
+                            override fun onPositive() {
+                                activity?.finish()
+                            }
 
-                        override fun onNegative() {
-                        }
-                    })
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val memberInfoListRes = Gson().fromJson(result, MemberInfoListRes::class.java)
-                    listViewSwipe.setTotalPages(memberInfoListRes.retCounts, 15)
-                    if (isRefresh) {
-                        data.clear()
+                            override fun onNegative() {
+                            }
+                        })
                     }
-                    data.addAll(memberInfoListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setDataMap(map)
-            postRequest()
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val memberInfoListRes = Gson().fromJson(result, MemberInfoListRes::class.java)
+                        listViewSwipe.setTotalPages(memberInfoListRes.retCounts, 15)
+                        if (isRefresh) {
+                            data.clear()
+                        }
+                        data.addAll(memberInfoListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                        listViewSwipe.isRefreshing = false
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

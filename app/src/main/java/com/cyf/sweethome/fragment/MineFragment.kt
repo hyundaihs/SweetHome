@@ -47,6 +47,7 @@ class MineFragment : MyBaseFragment() {
                 .error(R.mipmap.ic_launcher)
                 .into(photo)
             account.text = it.phone
+            username.text = it.title
         }
         val intent = Intent(context, WorkOrderListActivity::class.java)
         workOrder.setOnClickListener {
@@ -66,7 +67,7 @@ class MineFragment : MyBaseFragment() {
             startActivity(intent)
         }
         edit_info.setOnClickListener {
-            it.context.toast("本小区暂无此功能")
+            //it.context.toast("本小区暂无此功能")
         }
         myHouse.setOnClickListener {
             startActivityForResult(Intent(activity, MyHouseActivity::class.java), 100)
@@ -96,23 +97,25 @@ class MineFragment : MyBaseFragment() {
     }
 
     private fun getWorkOrderNum() {
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(GDSL.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    getErrorDialog(context, error)
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val workOrderNumListRes =
-                        Gson().fromJson(result, WorkOrderNumListRes::class.java)
-                    fillWorkOrder(workOrderNumListRes.retRes)
-                }
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(GDSL.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        getErrorDialog(context, error)
+                    }
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val workOrderNumListRes =
+                            Gson().fromJson(result, WorkOrderNumListRes::class.java)
+                        fillWorkOrder(workOrderNumListRes.retRes)
+                    }
 
-            })
-            setDialog()
-            postRequest()
+                })
+                setDialog()
+                postRequest()
+            }
         }
     }
 

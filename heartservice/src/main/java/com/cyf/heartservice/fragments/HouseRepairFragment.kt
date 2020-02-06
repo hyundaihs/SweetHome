@@ -59,19 +59,21 @@ class HouseRepairFragment(val id: String) : MyBaseFragment() {
         val map = mapOf(
             Pair("xqfh_id", id)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(BSBXLISTS.getInterface(map))
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val repairListRes =
-                        Gson().fromJson(result, RepairListRes::class.java)
-                    data.clear()
-                    data.addAll(repairListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                }
-            })
-            setDataMap(map)
-            postRequest()
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(BSBXLISTS.getInterface(map))
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val repairListRes =
+                            Gson().fromJson(result, RepairListRes::class.java)
+                        data.clear()
+                        data.addAll(repairListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

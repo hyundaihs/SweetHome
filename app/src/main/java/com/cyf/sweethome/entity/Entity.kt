@@ -261,7 +261,8 @@ data class ActInfo(
     var stype_title: String = "", // 分类标题（人文社区）
     var hd_status_title: String = "", // 活动状态标题（未开始）
     var is_bm: Int = 0, // 是否报名（0|1）
-    var is_sq: Int = 0 //是否申请
+    var is_sq: Int = 0, //是否申请
+    var sh_status:Int = 0 //活动申请审核状态（0：未申请，1：审核中，2：已通过，3：已拒绝）
 )
 
 data class ActInfoRes(var retRes: ActInfo) : RequestResult()
@@ -389,7 +390,7 @@ data class XQInfoRes(var retRes: XQInfo) : RequestResult()
 data class XQPFInfo(
     var counts: String, //报事总数
     var zhpf: String, //4.8（平均分）
-    var arr: Map<Int, Int> //Array（百分比）
+    var arr: Map<Int, Float> //Array（百分比）
 )
 
 data class XQPFInfoRes(var retRes: XQPFInfo) : RequestResult()

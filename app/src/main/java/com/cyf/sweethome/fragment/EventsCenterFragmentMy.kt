@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.android.shuizu.myutillibrary.E
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.adapter.RecyclerViewDivider
 import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
@@ -30,7 +31,7 @@ import kotlinx.android.synthetic.main.layout_swipe_refresh_empty_recycleview.*
  * ChaYin
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
-class EventsCenterFragmentMy : MyBaseFragment() {
+class EventsCenterFragmentMy(val wdhd : String = "") : MyBaseFragment() {
 
     private val data = ArrayList<ActInfo>()
     private val adapter = ActInfoListAdapter(data)
@@ -94,31 +95,36 @@ class EventsCenterFragmentMy : MyBaseFragment() {
 
 
     private fun getActInfo(page: Int, isRefresh: Boolean = false) {
-        val map = mapOf(
+        val map = mutableMapOf<String,Any>(
             Pair("page_size", "5"),
             Pair("page", page)
         )
-        KevinRequest.build(activity as Context).apply {
-            setRequestUrl(HDLISTS.getInterface())
-            setErrorCallback(object : KevinRequest.ErrorCallback {
-                override fun onError(context: Context, error: String) {
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setSuccessCallback(object : KevinRequest.SuccessCallback {
-                override fun onSuccess(context: Context, result: String) {
-                    val actInfoListRes = Gson().fromJson(result, ActInfoListRes::class.java)
-                    listViewSwipe.setTotalPages(actInfoListRes.retCounts, 15)
-                    if (isRefresh) {
-                        data.clear()
+        if(wdhd.isNotBlank()){
+            map["wdhd"] = wdhd
+        }
+        activity?.let {
+            KevinRequest.build(it).apply {
+                setRequestUrl(HDLISTS.getInterface())
+                setErrorCallback(object : KevinRequest.ErrorCallback {
+                    override fun onError(context: Context, error: String) {
+                        listViewSwipe.isRefreshing = false
                     }
-                    data.addAll(actInfoListRes.retRes)
-                    adapter.notifyDataSetChanged()
-                    listViewSwipe.isRefreshing = false
-                }
-            })
-            setDataMap(map)
-            postRequest()
+                })
+                setSuccessCallback(object : KevinRequest.SuccessCallback {
+                    override fun onSuccess(context: Context, result: String) {
+                        val actInfoListRes = Gson().fromJson(result, ActInfoListRes::class.java)
+                        listViewSwipe.setTotalPages(actInfoListRes.retCounts, 15)
+                        if (isRefresh) {
+                            data.clear()
+                        }
+                        data.addAll(actInfoListRes.retRes)
+                        adapter.notifyDataSetChanged()
+                        listViewSwipe.isRefreshing = false
+                    }
+                })
+                setDataMap(map)
+                postRequest()
+            }
         }
     }
 

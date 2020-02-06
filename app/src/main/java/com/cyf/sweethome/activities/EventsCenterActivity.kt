@@ -15,7 +15,7 @@ class EventsCenterActivity : MyBaseActivity() {
             .beginTransaction()
             .add(
                 R.id.fragment_container,
-                EventsCenterFragmentMy()
+                EventsCenterFragmentMy("1")
             )   // 此处的R.id.fragment_container是要盛放fragment的父容器
             .commit()
     }

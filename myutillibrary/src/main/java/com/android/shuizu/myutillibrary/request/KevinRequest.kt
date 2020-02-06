@@ -37,7 +37,7 @@ open class RequestResult(
  * ChaYin
  * Created by ${蔡雨峰} on 2019/7/31/031.
  */
-class KevinRequest private constructor(val context: Context) {
+class KevinRequest private constructor(val context: Activity) {
 
     companion object {
         var sessionId: String = ""
@@ -51,7 +51,7 @@ class KevinRequest private constructor(val context: Context) {
             flag = false
         }
 
-        fun build(c: Context): KevinRequest {
+        fun build(c: Activity): KevinRequest {
             return KevinRequest(c)
         }
 
@@ -59,8 +59,8 @@ class KevinRequest private constructor(val context: Context) {
             val httpBuilder = OkHttpClient.Builder()
             httpBuilder
                 //设置超时
-                .connectTimeout(100, TimeUnit.SECONDS)
-                .writeTimeout(150, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
                 .build()
         }
     }
