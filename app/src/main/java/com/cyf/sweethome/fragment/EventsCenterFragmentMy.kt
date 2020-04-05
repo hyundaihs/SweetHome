@@ -101,6 +101,8 @@ class EventsCenterFragmentMy(val wdhd : String = "") : MyBaseFragment() {
         )
         if(wdhd.isNotBlank()){
             map["wdhd"] = wdhd
+        }else{
+            map["hd_status"] = 4
         }
         activity?.let {
             KevinRequest.build(it).apply {

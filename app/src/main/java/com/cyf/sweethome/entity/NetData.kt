@@ -107,4 +107,6 @@ const val XQINFO = "xqinfo"//小区详情
 const val XQPF = "xqpf"//小区评分
 const val TZGGLISTS = "tzgglists"//通知公告列表
 const val TZGGINFO = "tzgginfo"//通知公告详情
+const val SETPHONE = "setphone"//设置用户手机
+const val SETFILEURL = "setfileurl"//设置用户头像
 

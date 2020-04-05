@@ -1,6 +1,7 @@
 package com.cyf.heartservice.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import com.android.shuizu.myutillibrary.request.KevinRequest
 import com.android.shuizu.myutillibrary.utils.CalendarUtil
 import com.android.shuizu.myutillibrary.utils.DisplayUtils
 import com.cyf.heartservice.R
+import com.cyf.heartservice.activities.CheckRoomDetailsActivity
+import com.cyf.heartservice.activities.WorkOrderDetailsActivity
 import com.cyf.heartservice.entity.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_house_repair.*
@@ -53,6 +56,13 @@ class HouseRepairFragment(val id: String) : MyBaseFragment() {
         )
         houseList.isNestedScrollingEnabled = false
         houseList.adapter = adapter
+        adapter.myOnItemClickListener = object :MyBaseAdapter.MyOnItemClickListener{
+            override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
+                val intent = Intent(view.context, WorkOrderDetailsActivity::class.java)
+                intent.putExtra("id", data[position].id)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun getData() {

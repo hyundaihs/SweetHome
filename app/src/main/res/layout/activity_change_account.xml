@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/color_121212"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/inputPhoneOld"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/phone_title"
+        android:padding="15dp"
+        android:drawablePadding="5dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginTop="45dp"
+        android:textSize="14sp"
+        android:enabled="false"
+        android:inputType="phone"
+        android:textColor="@color/color_121212"
+        android:background="@drawable/login_input_bg"
+        android:hint="@string/text4"/>
+
+    <EditText
+        android:id="@+id/inputMsgOld"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@id/inputPhoneOld"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:inputType="phone"
+        android:textColor="@color/color_121212"
+        android:background="@drawable/login_input_bg"
+        android:hint="@string/text3" />
+
+    <TextView
+        android:id="@+id/getYzmOld"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/inputMsgOld"
+        app:layout_constraintBottom_toBottomOf="@id/inputMsgOld"
+        app:layout_constraintRight_toRightOf="@id/inputMsgOld"
+        android:text="@string/text6"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:gravity="center"
+        android:enabled="false"
+        android:textColor="@color/yzm_text_color"/>
+
+    <EditText
+        android:id="@+id/inputPhoneNew"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/phone_title"
+        android:padding="15dp"
+        android:drawablePadding="5dp"
+        app:layout_constraintTop_toBottomOf="@id/getYzmOld"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginTop="45dp"
+        android:textSize="14sp"
+        android:inputType="phone"
+        android:textColor="@color/color_121212"
+        android:background="@drawable/login_input_bg"
+        android:hint="@string/text4"/>
+
+    <EditText
+        android:id="@+id/inputMsgNew"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@id/inputPhoneNew"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:inputType="phone"
+        android:textColor="@color/color_121212"
+        android:background="@drawable/login_input_bg"
+        android:hint="@string/text3" />
+
+    <TextView
+        android:id="@+id/getYzmNew"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/inputMsgNew"
+        app:layout_constraintBottom_toBottomOf="@id/inputMsgNew"
+        app:layout_constraintRight_toRightOf="@id/inputMsgNew"
+        android:text="@string/text6"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:gravity="center"
+        android:enabled="false"
+        android:textColor="@color/yzm_text_color"/>
+
+    <TextView
+        android:id="@+id/submit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/inputMsgNew"
+        app:layout_constraintRight_toRightOf="@id/inputMsgNew"
+        app:layout_constraintTop_toBottomOf="@id/inputMsgNew"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textSize="14sp"
+        android:textColor="@color/login_text_color"
+        android:background="@drawable/login_btn_bg"
+        android:text="提交"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

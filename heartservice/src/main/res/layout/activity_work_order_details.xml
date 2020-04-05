@@ -226,5 +226,20 @@
             android:text="拒接"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tuidan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/rect_1777fe_corner_5"
+            android:gravity="center"
+            android:paddingStart="35dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="35dp"
+            android:paddingBottom="10dp"
+            android:text="退单"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>

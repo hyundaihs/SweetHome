@@ -25,7 +25,10 @@ import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_work_order_details.*
+import kotlinx.android.synthetic.main.activity_work_order_details.line
+import kotlinx.android.synthetic.main.activity_work_order_details.time
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
+import kotlinx.android.synthetic.main.layout_work_order_operaing_record_item.*
 import kotlinx.android.synthetic.main.layout_work_order_operaing_record_item.view.*
 
 /**
@@ -40,14 +43,19 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
 
     private val operatingRecordList = java.util.ArrayList<OperatingRecord>()
     private val operatingRecordAdapter = OperatingRecordAdapter(operatingRecordList)
+    private var id = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentBaseView(R.layout.activity_work_order_details)
         setTitle("报事详情")
         initViews()
-        val id = intent.getStringExtra("id")
-        id?.let { getData(it) }
+        id = intent.getStringExtra("id")?:""
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getData(id)
     }
 
     private fun initViews() {
@@ -81,7 +89,15 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         operatingRecordAdapter.myOnItemClickListener =
             object : MyBaseAdapter.MyOnItemClickListener {
                 override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-
+                    val operatingRecord = operatingRecordList[position]
+                    if(operatingRecord.sh_status > 2){
+                        //查看详情
+                        val intent = Intent(view.context,OrderHandleActivity::class.java)
+                        val bundle = Bundle()
+                        bundle.putSerializable("record",operatingRecord)
+                        intent.putExtras(bundle)
+                        startActivity(intent)
+                    }
                 }
             }
     }
@@ -116,6 +132,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
                 jieshou.text = "接收"
                 jieshou.visibility = View.VISIBLE
                 jujue.visibility = View.VISIBLE
+                tuidan.visibility = View.GONE
                 layoutBottom.visibility = View.VISIBLE
                 line.visibility = View.VISIBLE
             }
@@ -123,6 +140,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
                 jieshou.text = "完成"
                 jieshou.visibility = View.VISIBLE
                 jujue.visibility = View.GONE
+                tuidan.visibility = View.VISIBLE
                 layoutBottom.visibility = View.VISIBLE
                 line.visibility = View.VISIBLE
             }
@@ -136,7 +154,8 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         workOrderType.text = details.xqbsbxlx_title
         workOrderStatus.text = details.sh_title
         workOrderRemark.text = details.contents
-        workOrderTime.text = CalendarUtil(details.create_time,true).format(CalendarUtil.YYYY_MM_DD_HH_MM)
+        workOrderTime.text =
+            CalendarUtil(details.create_time, true).format(CalendarUtil.YYYY_MM_DD_HH_MM)
         address.text = details.fw_title
         time.text = details.yy_time
         name.text = details.title
@@ -153,20 +172,32 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         jieshou.setOnClickListener {
             when (details.sh_status) {
                 1 -> {//待接单
-                    setStatus(details.id,2)
+                    setStatus(details.id, 2)
                 }
                 2 -> {//待处理
-                    setStatus(details.id,3)
+                    val intent = Intent(this,HandleOrderActivity::class.java)
+                    intent.putExtra("handle",3)
+                    intent.putExtra("id",details.id)
+                    startActivity(intent)
                 }
 
             }
         }
         jujue.setOnClickListener {
-            setStatus(details.id,5)
+            val intent = Intent(this,HandleOrderActivity::class.java)
+            intent.putExtra("handle",5)
+            intent.putExtra("id",details.id)
+            startActivity(intent)
+        }
+        tuidan.setOnClickListener {
+            val intent = Intent(this,HandleOrderActivity::class.java)
+            intent.putExtra("handle",7)
+            intent.putExtra("id",details.id)
+            startActivity(intent)
         }
     }
 
-    private fun setStatus(id:String,status:Int){
+    private fun setStatus(id: String, status: Int) {
         val map = mapOf(
             Pair("id", id),
             Pair("sh_status", status)
@@ -180,7 +211,7 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
             })
             setSuccessCallback(object : KevinRequest.SuccessCallback {
                 override fun onSuccess(context: Context, result: String) {
-                    getSuccessDialog(context,"操作成功",object :DialogUIListener(){
+                    getSuccessDialog(context, "操作成功", object : DialogUIListener() {
                         override fun onPositive() {
                             getData(id)
                         }
@@ -218,12 +249,20 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val operatingRecord = data[position]
+            if (operatingRecord.sh_status > 2) {
+                holder.itemView.moreItem.visibility = View.VISIBLE
+            } else {
+                holder.itemView.moreItem.visibility = View.GONE
+            }
             holder.itemView.status.text = operatingRecord.type_title
             Picasso.with(holder.itemView.context).load(operatingRecord.xqyg_file_url.getImageUrl())
                 .resize(300, 300).into(holder.itemView.photo)
             holder.itemView.contents.text = operatingRecord.title
             holder.itemView.time.text =
-                CalendarUtil(operatingRecord.create_time,true).format(CalendarUtil.YYYY_MM_DD_HH_MM)
+                CalendarUtil(
+                    operatingRecord.create_time,
+                    true
+                ).format(CalendarUtil.YYYY_MM_DD_HH_MM)
             holder.itemView.lineDot.isChecked = (position == 0)
             holder.itemView.lineTop.visibility = if (position == 0) View.GONE else View.VISIBLE
             holder.itemView.lineBottom.visibility =

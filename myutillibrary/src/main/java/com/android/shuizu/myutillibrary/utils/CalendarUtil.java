@@ -76,6 +76,14 @@ public class CalendarUtil {
         c.setTime(date);
     }
 
+    public Calendar getCalendar(){
+        return c;
+    }
+
+    public void setCalendar(Calendar c){
+        this.c = c;
+    }
+
     public void set(int year, int month, int day) {
         c.set(year, month, day);
     }

@@ -1,11 +1,10 @@
-package com.cyf.sweethome.activities
+package com.cyf.heartservice.activities
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.shuizu.myutillibrary.MyBaseActivity
@@ -13,23 +12,28 @@ import com.android.shuizu.myutillibrary.activities.PhotoViewActivity
 import com.android.shuizu.myutillibrary.adapter.GridDivider
 import com.android.shuizu.myutillibrary.adapter.MyBaseAdapter
 import com.android.shuizu.myutillibrary.dp2px
-import com.android.shuizu.myutillibrary.hideInput
 import com.android.shuizu.myutillibrary.request.KevinRequest
-import com.android.shuizu.myutillibrary.utils.*
-import com.cyf.sweethome.R
-import com.cyf.sweethome.SweetHome
-import com.cyf.sweethome.entity.*
-import com.cyf.sweethome.utils.PickerUtil
+import com.android.shuizu.myutillibrary.utils.PictureSelectorObtainMultipleResult
+import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
+import com.android.shuizu.myutillibrary.utils.getErrorDialog
+import com.android.shuizu.myutillibrary.utils.getSuccessDialog
+import com.cyf.heartservice.R
+import com.cyf.heartservice.entity.*
 import com.dou361.dialogui.listener.DialogUIListener
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_get_help.*
+import kotlinx.android.synthetic.main.activity_handle_order.*
+import kotlinx.android.synthetic.main.activity_handle_order.images
+import kotlinx.android.synthetic.main.activity_handle_order.submit
 import kotlinx.android.synthetic.main.layout_upload_image_list_item.view.*
 import org.jetbrains.anko.toast
 import java.io.File
 
-class GetHelpActivity : MyBaseActivity() {
+class HandleOrderActivity : MyBaseActivity() {
 
+    //3完成,5拒接,7退单
+    private var handle = 0
+    private var id = "0"
     private val imageData = ArrayList<String>()
     private val imageAdapter = ImageAdapter(imageData)
     private val submitUrl = ArrayList<String>()
@@ -54,32 +58,27 @@ class GetHelpActivity : MyBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentBaseView(R.layout.activity_get_help)
-        setTitle("帮帮忙")
+        setContentBaseView(R.layout.activity_handle_order)
+        handle = intent.getIntExtra("handle", 3)
+        id = intent.getStringExtra("id")?:"0"
+        when (handle) {
+            3 -> {
+                setTitle("工单处理-完成")
+            }
+            5 -> {
+                setTitle("工单处理-拒接")
+            }
+            7 -> {
+                setTitle("工单处理-退单")
+            }
+        }
         init()
     }
 
     private fun init() {
-        SweetHome.userInfo?.let {
-            contactName.setText(it.title)
-            contactPhone.setText(it.phone)
-        }
         initTypeRecyclerView()
-        time.setOnClickListener {
-            showPickTimer()
-        }
         submit.setOnClickListener {
             submit()
-        }
-    }
-
-    private fun showPickTimer() {
-        hideInput()
-        PickerUtil.showTimerPicker(this) { date, v ->
-            if (date != null) {
-                val chooseTime = CalendarUtil(date.time).format(CalendarUtil.YYYY_MM_DD_HH_MM)
-                time.text = "${chooseTime}"
-            }
         }
     }
 
@@ -126,41 +125,15 @@ class GetHelpActivity : MyBaseActivity() {
         }
     }
 
-    private fun checkEdits(): Boolean {
-        when {
-            question.text.isEmpty() -> {
-                question.error = "请填写您遇到的问题"
-                return false
-            }
-            time.text.isEmpty() -> {
-                time.error = "请填写您遇到的问题"
-                return false
-            }
-            contactName.text.isEmpty() -> {
-                contactName.error = "请填写您遇到的问题"
-                return false
-            }
-            contactPhone.text.isEmpty() -> {
-                contactPhone.error = "请填写您遇到的问题"
-                return false
-            }
-            else -> return true
-        }
-    }
-
     private fun submit() {
-        if(!checkEdits()){
-            return
-        }
         val map = mapOf(
+            Pair("id", id),
+            Pair("sh_status", handle),
             Pair("contents", question.text.toString()),
-            Pair("title", contactName.text.toString()),
-            Pair("phone", contactPhone.text.toString()),
-            Pair("yy_time", time.text.toString()),
             Pair("img_lists", submitUrl)
         )
         KevinRequest.build(this).apply {
-            setRequestUrl(TJJSBBM.getInterface(map))
+            setRequestUrl(SETBSBX.getInterface(map))
             setErrorCallback(object : KevinRequest.ErrorCallback {
                 override fun onError(context: Context, error: String) {
                     getErrorDialog(context, error)

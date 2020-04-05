@@ -130,8 +130,12 @@ class LoginActivity : MyBaseActivity() {
                         startActivity(Intent(context, HomepageActivity::class.java))
                         finish()
                     }else{
+                        toast("status = ${loginInfoRes.retRes.sh_status}")
                         if(loginInfoRes.retRes.sh_status == 0){
                             startActivity(Intent(context, JumingRenzhengActivity::class.java))
+                        }else if(loginInfoRes.retRes.sh_status == 2){
+                            startActivity(Intent(context, HomepageActivity::class.java))
+                            finish()
                         }else{
                             val intent = Intent(context, IsAuthActivity::class.java)
                             intent.putExtra("status",loginInfoRes.retRes.sh_status)

@@ -29,7 +29,7 @@ import java.util.*
  * SweetHome
  * Created by 蔡雨峰 on 2019/9/16.
  */
-class WorkOrderListFragmentMy(val type: Int) : MyBaseFragment() {
+class WorkOrderListFragment(val type: Int) : MyBaseFragment() {
 
     private val workOrderList = ArrayList<WorkOrderListItem>()
     private val workOrderAdapter = WorkOrderAdapter(workOrderList)

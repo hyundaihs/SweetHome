@@ -26,7 +26,7 @@ data class ImageInfo(
     var resize_file_url: String, // :String, // 缩略图地址
     var ext: String, // :String, // png
     var file_size: String // :String, // 112717
-)
+) : Serializable
 
 val HOUSE_STATUS = listOf("", "审核中", "审核已通过", "已拒绝")
 val HOUSE_STATUS_COLOR = listOf(0, R.color.color_FAB10B, R.color.color_1FAF51, R.color.color_FF4753)
@@ -146,8 +146,10 @@ data class OperatingRecord(//操作记录
     var xqyg_title: String, // 服务人员姓名
     var xqyg_phone: String, // 服务人员电话
     var xqyg_file_url: String, // 服务人员头像
-    var create_time: Long // 创建时间戳（1568510942）
-)
+    var create_time: Long, // 创建时间戳（1568510942）
+    var contents:String, //备注
+    var img_lists: ArrayList<ImageInfo> //图片列表
+) : Serializable
 
 data class WorkOrderDetails(
     var id: String, // 报事保修id

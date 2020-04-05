@@ -1,5 +1,6 @@
 package com.cyf.sweethome.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.shuizu.myutillibrary.fragment.MyBaseFragment
 import com.android.shuizu.myutillibrary.request.KevinRequest
+import com.android.shuizu.myutillibrary.utils.PictureSelectorObtainMultipleResult
+import com.android.shuizu.myutillibrary.utils.PictureSelectorStart
 import com.android.shuizu.myutillibrary.utils.getErrorDialog
 import com.cyf.sweethome.R
 import com.cyf.sweethome.SweetHome
@@ -26,6 +29,7 @@ import org.jetbrains.anko.toast
  * Created by ${蔡雨峰} on 2019/9/15/015.
  */
 class MineFragment : MyBaseFragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +44,8 @@ class MineFragment : MyBaseFragment() {
         getWorkOrderNum()
     }
 
-    private fun initViews() {
+    override fun onResume() {
+        super.onResume()
         SweetHome.userInfo?.let {
             Picasso.with(context).load(it.file_url.getImageUrl())
                 .resize(300, 300)
@@ -49,6 +54,10 @@ class MineFragment : MyBaseFragment() {
             account.text = it.phone
             username.text = it.title
         }
+    }
+
+    private fun initViews() {
+
         val intent = Intent(context, WorkOrderListActivity::class.java)
         workOrder.setOnClickListener {
             intent.putExtra("page", 0)
@@ -87,6 +96,7 @@ class MineFragment : MyBaseFragment() {
         about.setOnClickListener {
             startActivity(Intent(context, AboutUsActivity::class.java))
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

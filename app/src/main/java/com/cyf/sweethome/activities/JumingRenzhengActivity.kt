@@ -145,6 +145,15 @@ class JumingRenzhengActivity : MyBaseActivity() {
         }
     }
 
+    // 判断是否符合身份证号码的规范
+    fun isIDCard(IDCard: String?): Boolean {
+        if (IDCard != null) {
+            val IDCardRegex = "(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x|Y|y)$)"
+            return IDCard.matches(IDCardRegex.toRegex())
+        }
+        return false
+    }
+
     private fun check(): Boolean {
         when {
             renzhengName.text.isEmpty() -> {
@@ -153,6 +162,10 @@ class JumingRenzhengActivity : MyBaseActivity() {
             }
             renzhengCardnum.text.isEmpty() -> {
                 renzhengCardnum.error = "身份证不能为空"
+                return false
+            }
+            !isIDCard(renzhengCardnum.text.trim().toString())->{
+                renzhengCardnum.error = "身份证格式不正确"
                 return false
             }
             renzhengSex.text.isEmpty() -> {

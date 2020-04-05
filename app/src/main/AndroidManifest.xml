@@ -109,6 +109,8 @@
         <activity android:name=".activities.SecretaryActivity" />
         <activity android:name=".activities.AddHouseActivity" />
         <activity android:name=".activities.IsAuthActivity" />
+        <activity android:name=".activities.ChangeAccountActivity" />
+        <activity android:name=".activities.OrderHandleActivity" />
         <!--        <activity android:name=".ui.LoginActivity" android:launchMode="singleTask"/>-->
 
         <!-- Since JCore2.0.0 Required SDK核心功能-->

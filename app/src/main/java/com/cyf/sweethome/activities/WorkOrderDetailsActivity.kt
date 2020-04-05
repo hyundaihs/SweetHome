@@ -80,7 +80,15 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         operatingRecordAdapter.myOnItemClickListener =
             object : MyBaseAdapter.MyOnItemClickListener {
                 override fun onItemClick(parent: MyBaseAdapter, view: View, position: Int) {
-
+                    val operatingRecord = operatingRecordList[position]
+                    if(operatingRecord.sh_status > 2){
+                        //查看详情
+                        val intent = Intent(view.context,OrderHandleActivity::class.java)
+                        val bundle = Bundle()
+                        bundle.putSerializable("record",operatingRecord)
+                        intent.putExtras(bundle)
+                        startActivity(intent)
+                    }
                 }
             }
     }
@@ -167,6 +175,11 @@ class WorkOrderDetailsActivity : MyBaseActivity() {
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             super.onBindViewHolder(holder, position)
             val operatingRecord = data[position]
+            if (operatingRecord.sh_status > 2) {
+                holder.itemView.moreItem.visibility = View.VISIBLE
+            } else {
+                holder.itemView.moreItem.visibility = View.GONE
+            }
             holder.itemView.status.text = operatingRecord.type_title
             Picasso.with(holder.itemView.context).load(operatingRecord.xqyg_file_url.getImageUrl())
                 .resize(300, 300)

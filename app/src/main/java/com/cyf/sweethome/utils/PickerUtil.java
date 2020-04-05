@@ -3,6 +3,7 @@ package com.cyf.sweethome.utils;
 import android.content.Context;
 import android.graphics.Color;
 
+import com.android.shuizu.myutillibrary.utils.CalendarUtil;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -103,21 +104,30 @@ public class PickerUtil {
         pvOptions.show();
     }
 
+    //预约
     public static void showTimerPicker(final Context context, OnTimeSelectListener listener) {
+        CalendarUtil cuCurr = new CalendarUtil();
+        CalendarUtil mCurr = new CalendarUtil();
+        mCurr.set(mCurr.getYear() + 1,mCurr.getMonth(), mCurr.getDateOfMonth());
         TimePickerView pvTime = new TimePickerBuilder(context, listener)
                 .setType(new boolean[]{true, true, true, true, true, false})// 默认全部显示
                 .setTitleText("选择预约时间")
+                .setRangDate(cuCurr.getCalendar(), mCurr.getCalendar())
                 .setSubmitText("确定")
                 .setCancelText("取消")
                 .build();
         pvTime.show();
     }
 
+    //入党时间
     public static void showTimerPickerYM(final Context context, OnTimeSelectListener listener) {
+        CalendarUtil cu = new CalendarUtil(1921, 7, 23);
+        CalendarUtil cuCurr = new CalendarUtil();
         TimePickerView pvTime = new TimePickerBuilder(context, listener)
                 .setType(new boolean[]{true, true, false, false, false, false})// 默认全部显示
                 .setSubmitText("确定")
                 .setCancelText("取消")
+                .setRangDate(cu.getCalendar(), cuCurr.getCalendar())
                 .setTitleText("选择预约时间")
                 .build();
         pvTime.show();

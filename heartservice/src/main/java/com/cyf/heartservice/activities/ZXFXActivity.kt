@@ -113,6 +113,7 @@ class ZXFXActivity : MyBaseActivity(), View.OnClickListener {
         } else {
             yuanyin.text = zxfxInfo.blyy
             xingzhi.text = zxfxInfo.fwzt_title
+            yezhuCheck.text = zxfxInfo.yzqrfs
             if (zxfxInfo.file_url_jz.isBlank()) {
                 image_2.visibility = View.GONE
             } else {
